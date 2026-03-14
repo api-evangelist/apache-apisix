@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/apache-apisix/blob/main/json-schema/upstream.json",
+  "title": "Apache APISIX Upstream",
+  "description": "An Upstream is a virtual host abstraction that performs load balancing on a given set of service nodes according to configured rules.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the upstream."
+    },
+    "desc": {
+      "type": "string",
+      "description": "Description of the upstream."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["roundrobin", "chash", "least_conn", "ewma"],
+      "default": "roundrobin",
+      "description": "Load balancing algorithm."
+    },
+    "nodes": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "description": "Key-value pairs of address:port to weight."
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host": {
+                "type": "string"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "weight": {
+                "type": "integer"
+              },
+              "priority": {
+                "type": "integer",
+                "default": 0
+              }
+            }
+          },
+          "description": "List of node objects."
+        }
+      ],
+      "description": "Backend service nodes."
+    },
+    "service_name": {
+      "type": "string",
+      "description": "Service name for service discovery."
+    },
+    "discovery_type": {
+      "type": "string",
+      "description": "Type of service discovery (e.g. dns, consul, nacos, eureka)."
+    },
+    "hash_on": {
+      "type": "string",
+      "enum": ["vars", "header", "cookie", "consumer", "vars_combinations"],
+      "default": "vars",
+      "description": "Hash input for consistent hashing load balancer."
+    },
+    "key": {
+      "type": "string",
+      "description": "Hash key when using chash load balancer."
+    },
+    "checks": {
+      "type": "object",
+      "description": "Health check configuration.",
+      "properties": {
+        "active": {
+          "type": "object",
+          "description": "Active health check configuration.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["http", "https", "tcp"],
+              "default": "http"
+            },
+            "timeout": {
+              "type": "number",
+              "default": 1
+            },
+            "http_path": {
+              "type": "string",
+              "default": "/"
+            },
+            "host": {
+              "type": "string"
+            },
+            "port": {
+              "type": "integer"
+            },
+            "https_verify_certificate": {
+              "type": "boolean",
+              "default": true
+            },
+            "healthy": {
+              "type": "object",
+              "properties": {
+                "interval": {
+                  "type": "integer"
+                },
+                "successes": {
+                  "type": "integer"
+                }
+              }
+            },
+            "unhealthy": {
+              "type": "object",
+              "properties": {
+                "interval": {
+                  "type": "integer"
+                },
+                "http_failures": {
+                  "type": "integer"
+                },
+                "tcp_failures": {
+                  "type": "integer"
+                },
+                "timeouts": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "passive": {
+          "type": "object",
+          "description": "Passive health check configuration.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["http", "https", "tcp"],
+              "default": "http"
+            },
+            "healthy": {
+              "type": "object",
+              "properties": {
+                "http_statuses": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "successes": {
+                  "type": "integer"
+                }
+              }
+            },
+            "unhealthy": {
+              "type": "object",
+              "properties": {
+                "http_statuses": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "http_failures": {
+                  "type": "integer"
+                },
+                "tcp_failures": {
+                  "type": "integer"
+                },
+                "timeouts": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "retries": {
+      "type": "integer",
+      "description": "Number of retries for failed requests."
+    },
+    "retry_timeout": {
+      "type": "number",
+      "description": "Timeout in seconds for retry requests."
+    },
+    "timeout": {
+      "type": "object",
+      "description": "Timeout settings for upstream connections.",
+      "properties": {
+        "connect": {
+          "type": "number",
+          "default": 60,
+          "description": "Connection timeout in seconds."
+        },
+        "send": {
+          "type": "number",
+          "default": 60,
+          "description": "Send timeout in seconds."
+        },
+        "read": {
+          "type": "number",
+          "default": 60,
+          "description": "Read timeout in seconds."
+        }
+      }
+    },
+    "scheme": {
+      "type": "string",
+      "enum": ["http", "https", "grpc", "grpcs"],
+      "default": "http",
+      "description": "The scheme for communicating with the upstream."
+    },
+    "pass_host": {
+      "type": "string",
+      "enum": ["pass", "node", "rewrite"],
+      "default": "pass",
+      "description": "How to set the Host header when proxying to upstream."
+    },
+    "upstream_host": {
+      "type": "string",
+      "description": "Host to use when pass_host is set to rewrite."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    },
+    "keepalive_pool": {
+      "type": "object",
+      "description": "Keepalive pool configuration.",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "default": 320
+        },
+        "idle_timeout": {
+          "type": "number",
+          "default": 60
+        },
+        "requests": {
+          "type": "integer",
+          "default": 1000
+        }
+      }
+    },
+    "tls": {
+      "type": "object",
+      "description": "TLS configuration for upstream connections.",
+      "properties": {
+        "client_cert": {
+          "type": "string",
+          "description": "Client certificate for mTLS."
+        },
+        "client_key": {
+          "type": "string",
+          "description": "Client private key for mTLS."
+        }
+      }
+    }
+  }
+}

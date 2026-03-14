@@ -1,0 +1,150 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "apisix": "https://apisix.apache.org/docs/apisix/terminology/",
+    "Route": {
+      "@id": "apisix:route",
+      "@context": {
+        "uri": "https://schema.org/urlTemplate",
+        "uris": "https://schema.org/urlTemplate",
+        "name": "https://schema.org/name",
+        "desc": "https://schema.org/description",
+        "host": "https://schema.org/hostingOrganization",
+        "hosts": "https://schema.org/hostingOrganization",
+        "methods": "https://schema.org/httpMethod",
+        "remote_addr": "https://schema.org/identifier",
+        "remote_addrs": "https://schema.org/identifier",
+        "priority": "https://schema.org/position",
+        "plugins": "https://schema.org/softwareRequirements",
+        "upstream": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        },
+        "upstream_id": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        },
+        "service_id": {
+          "@id": "apisix:service",
+          "@type": "@id"
+        },
+        "plugin_config_id": {
+          "@id": "apisix:plugin-config",
+          "@type": "@id"
+        },
+        "labels": "https://schema.org/keywords",
+        "status": "https://schema.org/status",
+        "enable_websocket": "https://schema.org/actionOption"
+      }
+    },
+    "Service": {
+      "@id": "apisix:service",
+      "@context": {
+        "name": "https://schema.org/name",
+        "desc": "https://schema.org/description",
+        "plugins": "https://schema.org/softwareRequirements",
+        "upstream": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        },
+        "upstream_id": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        },
+        "labels": "https://schema.org/keywords",
+        "enable_websocket": "https://schema.org/actionOption",
+        "hosts": "https://schema.org/hostingOrganization"
+      }
+    },
+    "Upstream": {
+      "@id": "apisix:upstream",
+      "@context": {
+        "name": "https://schema.org/name",
+        "desc": "https://schema.org/description",
+        "type": "https://schema.org/category",
+        "nodes": "https://schema.org/hasPart",
+        "service_name": "https://schema.org/name",
+        "discovery_type": "https://schema.org/category",
+        "scheme": "https://schema.org/urlTemplate",
+        "pass_host": "https://schema.org/actionOption",
+        "upstream_host": "https://schema.org/hostingOrganization",
+        "labels": "https://schema.org/keywords",
+        "retries": "https://schema.org/repeatCount",
+        "retry_timeout": "https://schema.org/duration"
+      }
+    },
+    "Consumer": {
+      "@id": "apisix:consumer",
+      "@context": {
+        "username": "https://schema.org/identifier",
+        "desc": "https://schema.org/description",
+        "plugins": "https://schema.org/softwareRequirements",
+        "labels": "https://schema.org/keywords",
+        "group_id": {
+          "@id": "apisix:consumer-group",
+          "@type": "@id"
+        }
+      }
+    },
+    "ConsumerGroup": {
+      "@id": "apisix:consumer-group",
+      "@context": {
+        "desc": "https://schema.org/description",
+        "plugins": "https://schema.org/softwareRequirements",
+        "labels": "https://schema.org/keywords"
+      }
+    },
+    "SSL": {
+      "@id": "apisix:ssl",
+      "@context": {
+        "cert": "https://schema.org/text",
+        "key": "https://schema.org/text",
+        "snis": "https://schema.org/identifier",
+        "labels": "https://schema.org/keywords",
+        "status": "https://schema.org/status",
+        "type": "https://schema.org/category"
+      }
+    },
+    "GlobalRule": {
+      "@id": "apisix:global-rule",
+      "@context": {
+        "plugins": "https://schema.org/softwareRequirements"
+      }
+    },
+    "PluginConfig": {
+      "@id": "apisix:plugin-config",
+      "@context": {
+        "desc": "https://schema.org/description",
+        "plugins": "https://schema.org/softwareRequirements",
+        "labels": "https://schema.org/keywords"
+      }
+    },
+    "StreamRoute": {
+      "@id": "apisix:stream-route",
+      "@context": {
+        "desc": "https://schema.org/description",
+        "remote_addr": "https://schema.org/identifier",
+        "server_addr": "https://schema.org/identifier",
+        "server_port": "https://schema.org/identifier",
+        "sni": "https://schema.org/identifier",
+        "plugins": "https://schema.org/softwareRequirements",
+        "upstream": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        },
+        "upstream_id": {
+          "@id": "apisix:upstream",
+          "@type": "@id"
+        }
+      }
+    },
+    "Secret": {
+      "@id": "apisix:secret",
+      "@context": {
+        "uri": "https://schema.org/url",
+        "prefix": "https://schema.org/identifier",
+        "token": "https://schema.org/accessCode"
+      }
+    }
+  }
+}

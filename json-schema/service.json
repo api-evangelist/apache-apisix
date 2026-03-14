@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/apache-apisix/blob/main/json-schema/service.json",
+  "title": "Apache APISIX Service",
+  "description": "A Service is an abstraction of an API and corresponds to an upstream service. It can be shared across routes.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the service."
+    },
+    "desc": {
+      "type": "string",
+      "description": "Description of the service."
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin configuration. Key is the plugin name and value is the plugin config."
+    },
+    "upstream": {
+      "$ref": "upstream.json",
+      "description": "Inline upstream configuration."
+    },
+    "upstream_id": {
+      "type": "string",
+      "description": "ID of an existing upstream to use."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    },
+    "enable_websocket": {
+      "type": "boolean",
+      "description": "Enable WebSocket proxying."
+    },
+    "hosts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of hosts for the service."
+    }
+  }
+}

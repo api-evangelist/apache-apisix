@@ -14,6 +14,28 @@ apis:
         type: Documentation
       - url: openapi/apache-apisix-admin-api-openapi.yml
         type: OpenAPI
+      - url: json-schema/route.json
+        type: JSONSchema
+      - url: json-schema/service.json
+        type: JSONSchema
+      - url: json-schema/upstream.json
+        type: JSONSchema
+      - url: json-schema/consumer.json
+        type: JSONSchema
+      - url: json-schema/ssl.json
+        type: JSONSchema
+      - url: json-schema/plugin-config.json
+        type: JSONSchema
+      - url: json-schema/consumer-group.json
+        type: JSONSchema
+      - url: json-schema/global-rule.json
+        type: JSONSchema
+      - url: json-schema/stream-route.json
+        type: JSONSchema
+      - url: json-schema/secret.json
+        type: JSONSchema
+      - url: json-ld/apache-apisix-context.jsonld
+        type: JSONLD
     description: >-
       The Apache APISIX Admin API provides a RESTful interface to dynamically
       control and configure your deployed Apache APISIX instance. It allows

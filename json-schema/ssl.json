@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/apache-apisix/blob/main/json-schema/ssl.json",
+  "title": "Apache APISIX SSL",
+  "description": "An SSL resource stores SSL certificates and keys for HTTPS traffic.",
+  "type": "object",
+  "required": ["cert", "key", "snis"],
+  "properties": {
+    "cert": {
+      "type": "string",
+      "description": "PEM-encoded SSL certificate."
+    },
+    "key": {
+      "type": "string",
+      "description": "PEM-encoded private key."
+    },
+    "certs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional PEM-encoded certificates for multiple certificates."
+    },
+    "keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional PEM-encoded private keys."
+    },
+    "snis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Server Name Indication values to match."
+    },
+    "client": {
+      "type": "object",
+      "description": "mTLS client verification configuration.",
+      "properties": {
+        "ca": {
+          "type": "string",
+          "description": "PEM-encoded CA certificate for client verification."
+        },
+        "depth": {
+          "type": "integer",
+          "default": 1,
+          "description": "Maximum length of the client certificate chain."
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    },
+    "status": {
+      "type": "integer",
+      "enum": [0, 1],
+      "default": 1,
+      "description": "SSL status. 1 for enabled, 0 for disabled."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["server", "client"],
+      "default": "server",
+      "description": "Identifies the type of certificate."
+    }
+  }
+}
