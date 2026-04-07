@@ -21,7 +21,7 @@ paths:
   /v1/healthcheck:
     get:
       operationId: getHealthCheck
-      summary: Get all health check statuses
+      summary: Apache APISIX Get all health check statuses
       description: >-
         Returns the health check status of all upstreams that have health
         checking enabled.
@@ -39,7 +39,7 @@ paths:
   /v1/healthcheck/upstreams/{upstream_id}:
     get:
       operationId: getUpstreamHealthCheck
-      summary: Get health check for a specific upstream
+      summary: Apache APISIX Get health check for a specific upstream
       description: Returns the health check status for a specific upstream by its ID.
       tags:
         - Health Check
@@ -62,7 +62,7 @@ paths:
   /v1/healthcheck/routes/{route_id}:
     get:
       operationId: getRouteHealthCheck
-      summary: Get health check for a specific route
+      summary: Apache APISIX Get health check for a specific route
       description: Returns the health check status for a specific route by its ID.
       tags:
         - Health Check
@@ -85,7 +85,7 @@ paths:
   /v1/healthcheck/services/{service_id}:
     get:
       operationId: getServiceHealthCheck
-      summary: Get health check for a specific service
+      summary: Apache APISIX Get health check for a specific service
       description: Returns the health check status for a specific service by its ID.
       tags:
         - Health Check
@@ -108,7 +108,7 @@ paths:
   /v1/schema:
     get:
       operationId: getSchema
-      summary: Get APISIX JSON schema
+      summary: Apache APISIX Get APISIX JSON schema
       description: >-
         Returns the full JSON schema used by the APISIX instance, including
         main configuration schemas and all plugin schemas.
@@ -131,7 +131,7 @@ paths:
   /v1/schema/plugins/{plugin_name}:
     get:
       operationId: getPluginSchema
-      summary: Get a specific plugin schema
+      summary: Apache APISIX Get a specific plugin schema
       description: Returns the JSON schema for the specified plugin.
       tags:
         - Schema
@@ -154,7 +154,7 @@ paths:
   /v1/gc:
     post:
       operationId: triggerGC
-      summary: Trigger garbage collection
+      summary: Apache APISIX Trigger garbage collection
       description: Triggers a full garbage collection cycle in the Lua VM.
       tags:
         - Diagnostics
@@ -164,7 +164,7 @@ paths:
   /v1/routes:
     get:
       operationId: getControlRoutes
-      summary: Get all configured routes
+      summary: Apache APISIX Get all configured routes
       description: Returns a list of all routes with their complete runtime configuration.
       tags:
         - Introspection
@@ -180,7 +180,7 @@ paths:
   /v1/services:
     get:
       operationId: getControlServices
-      summary: Get all configured services
+      summary: Apache APISIX Get all configured services
       description: Returns a list of all services with their complete runtime configuration.
       tags:
         - Introspection
@@ -196,7 +196,7 @@ paths:
   /v1/upstreams:
     get:
       operationId: getControlUpstreams
-      summary: Get all configured upstreams
+      summary: Apache APISIX Get all configured upstreams
       description: Returns a list of all upstreams with their complete runtime configuration.
       tags:
         - Introspection
@@ -212,7 +212,7 @@ paths:
   /v1/discovery/{discovery_type}/dump:
     get:
       operationId: dumpDiscoveryNodes
-      summary: Dump service discovery nodes
+      summary: Apache APISIX Dump service discovery nodes
       description: Returns the nodes discovered by the specified service discovery type.
       tags:
         - Introspection
