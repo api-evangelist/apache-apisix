@@ -277,11 +277,11 @@ components:
                     type: integer
                     description: Number of timeout failures.
 tags:
-  - name: Health Check
-    description: Monitor the health status of upstream nodes.
-  - name: Schema
-    description: Retrieve JSON schemas used by the APISIX instance.
   - name: Diagnostics
     description: Runtime diagnostic operations.
+  - name: Health Check
+    description: Monitor the health status of upstream nodes.
   - name: Introspection
     description: Inspect the runtime configuration of the APISIX instance.
+  - name: Schema
+    description: Retrieve JSON schemas used by the APISIX instance.

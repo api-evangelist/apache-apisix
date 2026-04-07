@@ -140,8 +140,7 @@ paths:
       operationId: listServices
       summary: Apache APISIX List all services
       description: Fetches a list of all configured services.
-      tags:
-        - Services
+      tags: []
       responses:
         '200':
           description: Successful response with list of services.
@@ -153,8 +152,7 @@ paths:
       operationId: createService
       summary: Apache APISIX Create a service
       description: Creates a new service with a server-generated ID.
-      tags:
-        - Services
+      tags: []
       requestBody:
         required: true
         content:
@@ -173,8 +171,7 @@ paths:
       operationId: getService
       summary: Apache APISIX Get a service
       description: Fetches the specified service by its ID.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ServiceId'
       responses:
@@ -190,8 +187,7 @@ paths:
       operationId: createOrUpdateService
       summary: Apache APISIX Create or update a service
       description: Creates a service with the specified ID, or updates it if it already exists.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ServiceId'
       requestBody:
@@ -217,8 +213,7 @@ paths:
       operationId: patchService
       summary: Apache APISIX Patch a service
       description: Updates partial attributes of the specified service.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ServiceId'
       requestBody:
@@ -240,8 +235,7 @@ paths:
       operationId: deleteService
       summary: Apache APISIX Delete a service
       description: Removes the specified service.
-      tags:
-        - Services
+      tags: []
       parameters:
         - $ref: '#/components/parameters/ServiceId'
       responses:
@@ -1946,18 +1940,10 @@ components:
           type: integer
           description: Total count of resources.
 tags:
-  - name: Routes
-    description: Manage HTTP routes that define rules for matching client requests.
-  - name: Services
-    description: Manage services as abstractions of upstream APIs.
-  - name: Upstreams
-    description: Manage upstream backend service definitions with load balancing.
-  - name: Consumers
-    description: Manage API consumers and their credentials.
   - name: Consumer Groups
     description: Manage consumer groups for shared plugin configurations.
-  - name: SSL
-    description: Manage SSL/TLS certificate resources.
+  - name: Consumers
+    description: Manage API consumers and their credentials.
   - name: Global Rules
     description: Manage global plugin rules applied to all requests.
   - name: Plugin Configs
@@ -1968,9 +1954,15 @@ tags:
     description: Query available plugins and their schemas.
   - name: Protos
     description: Manage Protocol Buffer definition resources.
-  - name: Stream Routes
-    description: Manage Layer 4 TCP/UDP stream routes.
-  - name: Secrets
-    description: Manage secrets from external secret managers.
+  - name: Routes
+    description: Manage HTTP routes that define rules for matching client requests.
   - name: Schema
     description: Validate resource configurations against APISIX schemas.
+  - name: Secrets
+    description: Manage secrets from external secret managers.
+  - name: SSL
+    description: Manage SSL/TLS certificate resources.
+  - name: Stream Routes
+    description: Manage Layer 4 TCP/UDP stream routes.
+  - name: Upstreams
+    description: Manage upstream backend service definitions with load balancing.

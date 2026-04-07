@@ -7,8 +7,8 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API Gateway
   - Apache
+  - API Gateway
   - Cloud Native
   - Kubernetes
   - Open Source
@@ -26,8 +26,8 @@ apis:
       authentication, observability, and more.
     humanURL: https://apisix.apache.org/
     tags:
-      - API Gateway
       - Apache
+      - API Gateway
       - Cloud Native
     properties:
       - type: Documentation
@@ -49,8 +49,8 @@ apis:
     humanURL: https://apisix.apache.org/docs/apisix/admin-api/
     tags:
       - Admin
-      - Management
       - Configuration
+      - Management
       - REST
     properties:
       - type: Documentation
