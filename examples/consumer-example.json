@@ -1,0 +1,7 @@
+{
+  "username": "example-route",
+  "desc": "Example Apache APISIX resource",
+  "plugins": {},
+  "labels": {},
+  "group_id": "route-001"
+}

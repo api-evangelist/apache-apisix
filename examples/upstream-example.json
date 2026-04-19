@@ -1,0 +1,37 @@
+{
+  "name": "example-route",
+  "desc": "Example Apache APISIX resource",
+  "type": "roundrobin",
+  "nodes": "example-value",
+  "service_name": "example-route",
+  "discovery_type": "roundrobin",
+  "hash_on": "vars",
+  "key": "edd1c9f034335f136f87ad84b625c8f1",
+  "checks": {
+    "active": {
+      "type": "http",
+      "timeout": 1,
+      "http_path": "/",
+      "host": "api.example.com",
+      "port": 200
+    },
+    "passive": {
+      "type": "http",
+      "healthy": {
+        "http_statuses": [
+          {}
+        ],
+        "successes": 200
+      },
+      "unhealthy": {
+        "http_statuses": [
+          {}
+        ],
+        "http_failures": 200,
+        "tcp_failures": 200,
+        "timeouts": 200
+      }
+    }
+  },
+  "retries": 200
+}

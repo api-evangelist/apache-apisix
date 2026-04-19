@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/json-structure/stream-route-structure.json",
+  "name": "Apache APISIX Stream Route",
+  "description": "A Stream Route is used for Layer 4 (TCP/UDP) traffic proxying.",
+  "type": "object",
+  "properties": {
+    "desc": {
+      "type": "string",
+      "description": "Description of the stream route."
+    },
+    "remote_addr": {
+      "type": "string",
+      "description": "Client IP address to match."
+    },
+    "server_addr": {
+      "type": "string",
+      "description": "Server address to match."
+    },
+    "server_port": {
+      "type": "integer",
+      "description": "Server port to match."
+    },
+    "sni": {
+      "type": "string",
+      "description": "Server Name Indication value to match."
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin configuration for the stream route."
+    },
+    "upstream": {
+      "$ref": "upstream.json",
+      "description": "Inline upstream configuration."
+    },
+    "upstream_id": {
+      "type": "string",
+      "description": "ID of an existing upstream to use."
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/json-structure/route-structure.json",
+  "name": "Apache APISIX Route",
+  "description": "A Route defines rules to match client requests and specifies how to handle matched requests, including plugins and upstream configurations.",
+  "type": "object",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "description": "The request URI path. Supports path prefixes with wildcard."
+    },
+    "uris": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of URIs for the route to match."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the route."
+    },
+    "desc": {
+      "type": "string",
+      "description": "Description of the route."
+    },
+    "host": {
+      "type": "string",
+      "description": "Host to match for the route."
+    },
+    "hosts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of hosts for the route to match."
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "GET",
+          "POST",
+          "PUT",
+          "DELETE",
+          "PATCH",
+          "HEAD",
+          "OPTIONS",
+          "CONNECT",
+          "TRACE"
+        ]
+      },
+      "description": "HTTP methods to match."
+    },
+    "remote_addr": {
+      "type": "string",
+      "description": "Client IP address to match."
+    },
+    "remote_addrs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "A list of client IP addresses to match."
+    },
+    "vars": {
+      "type": "array",
+      "description": "DSL expressions for matching request attributes."
+    },
+    "priority": {
+      "type": "integer",
+      "default": 0,
+      "description": "Route priority for matching order. Higher value means higher priority."
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin configuration. Key is the plugin name and value is the plugin config."
+    },
+    "upstream": {
+      "$ref": "upstream.json",
+      "description": "Inline upstream configuration."
+    },
+    "upstream_id": {
+      "type": "string",
+      "description": "ID of an existing upstream to use."
+    },
+    "service_id": {
+      "type": "string",
+      "description": "ID of an existing service to bind to."
+    },
+    "plugin_config_id": {
+      "type": "string",
+      "description": "ID of a plugin config to bind to."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    },
+    "timeout": {
+      "type": "object",
+      "description": "Timeout settings for upstream connections.",
+      "properties": {
+        "connect": {
+          "type": "number",
+          "default": 60,
+          "description": "Connection timeout in seconds."
+        },
+        "send": {
+          "type": "number",
+          "default": 60,
+          "description": "Send timeout in seconds."
+        },
+        "read": {
+          "type": "number",
+          "default": 60,
+          "description": "Read timeout in seconds."
+        }
+      }
+    },
+    "enable_websocket": {
+      "type": "boolean",
+      "description": "Enable WebSocket proxying."
+    },
+    "status": {
+      "type": "integer",
+      "enum": [
+        0,
+        1
+      ],
+      "default": 1,
+      "description": "Route status. 1 for enabled, 0 for disabled."
+    },
+    "filter_func": {
+      "type": "string",
+      "description": "A Lua function string for custom filtering logic."
+    }
+  }
+}

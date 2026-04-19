@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/json-structure/consumer-group-structure.json",
+  "name": "Apache APISIX Consumer Group",
+  "description": "A Consumer Group is a set of plugins that can be applied to multiple consumers rather than configuring each consumer individually.",
+  "type": "object",
+  "properties": {
+    "desc": {
+      "type": "string",
+      "description": "Description of the consumer group."
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin configuration shared among consumers in this group."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    }
+  }
+}

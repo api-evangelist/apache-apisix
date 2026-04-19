@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Apache APISIX Gateway Configuration
+  description: Unified capability for configuring and managing Apache APISIX API
+    gateway resources including routes, upstreams, services, consumers, and SSL 
+    certificates. Used by platform engineers and API gateway administrators.
+  tags:
+  - Apache APISIX
+  - API Gateway
+  - Configuration
+  - Cloud Native
+  - Traffic Management
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    APISIX_ADMIN_KEY: APISIX_ADMIN_KEY
+capability:
+  consumes:
+  - import: apisix-admin
+    location: ./shared/apisix-admin.yaml
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: apisix-gateway-api
+    description: Unified REST API for APISIX gateway configuration.
+    resources:
+    - path: /v1/routes
+      name: routes
+      operations:
+      - method: GET
+        name: list-routes
+        description: List all gateway routes.
+        call: apisix-admin.list-routes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-route
+        description: Create a new gateway route.
+        call: apisix-admin.create-route
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/upstreams
+      name: upstreams
+      operations:
+      - method: GET
+        name: list-upstreams
+        description: List backend upstreams.
+        call: apisix-admin.list-upstreams
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-upstream
+        description: Create a backend upstream.
+        call: apisix-admin.create-upstream
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/consumers
+      name: consumers
+      operations:
+      - method: GET
+        name: list-consumers
+        description: List API consumers.
+        call: apisix-admin.list-consumers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-consumer
+        description: Create an API consumer.
+        call: apisix-admin.create-consumer
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: apisix-gateway-mcp
+    transport: http
+    description: MCP server for AI-assisted APISIX gateway configuration.
+    tools:
+    - name: list-routes
+      description: List all APISIX gateway routes.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: apisix-admin.list-routes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-route
+      description: Create a new APISIX route for traffic routing.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: apisix-admin.create-route
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-route
+      description: Update an existing APISIX route.
+      hints:
+        readOnly: false
+        idempotent: true
+      call: apisix-admin.update-route
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-route
+      description: Delete an APISIX route.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: apisix-admin.delete-route
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-upstreams
+      description: List all backend upstream configurations.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: apisix-admin.list-upstreams
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-upstream
+      description: Create a new backend upstream with load balancing config.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: apisix-admin.create-upstream
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-consumers
+      description: List all API consumers and their plugin configs.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: apisix-admin.list-consumers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-consumer
+      description: Create a new API consumer with authentication plugins.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: apisix-admin.create-consumer
+      outputParameters:
+      - type: object
+        mapping: $.

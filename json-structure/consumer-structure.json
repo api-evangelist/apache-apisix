@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/json-structure/consumer-structure.json",
+  "name": "Apache APISIX Consumer",
+  "description": "A Consumer is an entity that consumes API services and is identified by a username.",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "description": "Unique username for the consumer."
+    },
+    "desc": {
+      "type": "string",
+      "description": "Description of the consumer."
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin configuration bound to this consumer."
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Key-value pairs for categorization."
+    },
+    "group_id": {
+      "type": "string",
+      "description": "ID of a consumer group this consumer belongs to."
+    }
+  },
+  "required": [
+    "username"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "uri": "https://example.com/api",
+  "uris": [
+    "https://example.com/api"
+  ],
+  "name": "example-route",
+  "desc": "Example Apache APISIX resource",
+  "host": "api.example.com",
+  "hosts": [
+    "api.example.com"
+  ],
+  "methods": [
+    "GET"
+  ],
+  "remote_addr": "example-value",
+  "remote_addrs": [
+    "example-value"
+  ],
+  "vars": [
+    "example-value"
+  ]
+}

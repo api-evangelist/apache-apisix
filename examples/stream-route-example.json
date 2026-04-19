@@ -1,0 +1,10 @@
+{
+  "desc": "Example Apache APISIX resource",
+  "remote_addr": "example-value",
+  "server_addr": "example-value",
+  "server_port": 200,
+  "sni": "example-value",
+  "plugins": {},
+  "upstream": "example-value",
+  "upstream_id": "route-001"
+}

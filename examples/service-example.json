@@ -1,0 +1,12 @@
+{
+  "name": "example-route",
+  "desc": "Example Apache APISIX resource",
+  "plugins": {},
+  "upstream": "example-value",
+  "upstream_id": "route-001",
+  "labels": {},
+  "enable_websocket": true,
+  "hosts": [
+    "api.example.com"
+  ]
+}

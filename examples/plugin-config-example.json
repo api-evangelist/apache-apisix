@@ -1,0 +1,5 @@
+{
+  "desc": "Example Apache APISIX resource",
+  "plugins": {},
+  "labels": {}
+}

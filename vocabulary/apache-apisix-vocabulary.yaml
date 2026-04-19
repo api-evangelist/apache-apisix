@@ -1,0 +1,237 @@
+vocabulary: 1.0.0
+info:
+  provider: Apache APISIX
+  description: Unified taxonomy for Apache APISIX covering gateway 
+    configuration, traffic management, authentication, and observability.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - name: APISIX Admin API
+    namespace: apisix-admin
+    version: 3.x
+    baseUrl: http://localhost:9180/apisix/admin
+    status: active
+  - name: APISIX Control API
+    namespace: apisix-control
+    version: 3.x
+    baseUrl: http://localhost:9090/v1
+    status: active
+  resources:
+  - name: routes
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+    - patch
+  - name: upstreams
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: services
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: consumers
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: ssls
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: global-rules
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: plugin-configs
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: consumer-groups
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: stream-routes
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: secrets
+    api: apisix-admin
+    actions:
+    - list
+    - get
+    - create
+    - update
+    - delete
+  - name: health
+    api: apisix-control
+    actions:
+    - get
+  - name: schema
+    api: apisix-control
+    actions:
+    - get
+  actions:
+  - name: list
+    httpMethod: GET
+    pattern: read
+  - name: get
+    httpMethod: GET
+    pattern: read
+  - name: create
+    httpMethod: POST
+    pattern: write
+  - name: update
+    httpMethod: PUT
+    pattern: write
+  - name: patch
+    httpMethod: PATCH
+    pattern: write
+  - name: delete
+    httpMethod: DELETE
+    pattern: destructive
+  schemas:
+    core:
+    - Route
+    - Upstream
+    - Service
+    - Consumer
+    - SSL
+    plugins:
+    - GlobalRule
+    - PluginConfig
+    - ConsumerGroup
+    security:
+    - Secret
+  parameters:
+    pagination:
+    - page
+    - page_size
+    identifiers:
+    - id
+    - name
+    - username
+    filters:
+    - label
+    - uri
+  enums:
+    loadBalancingTypes:
+    - roundrobin
+    - chash
+    - ewma
+    - least_conn
+    hashOn:
+    - vars
+    - header
+    - cookie
+    - consumer
+  authentication:
+    schemes:
+    - name: apikey
+      type: apiKey
+      in: header
+      name_: X-API-KEY
+capability:
+  workflows:
+  - name: Apache APISIX Gateway Configuration
+    file: capabilities/apisix-gateway-config.yaml
+    description: Route, upstream, consumer, and SSL management workflow.
+    apis:
+    - apisix-admin
+    toolCount: 8
+    personas:
+    - Platform Engineer
+    - API Gateway Administrator
+  personas:
+  - id: platform-engineer
+    name: Platform Engineer
+    description: Engineers deploying and managing API gateway infrastructure.
+    workflows:
+    - apisix-gateway-config
+  - id: api-admin
+    name: API Gateway Administrator
+    description: Administrators configuring routes, consumers, and security 
+      policies.
+    workflows:
+    - apisix-gateway-config
+  domains:
+  - API Gateway
+  - Traffic Management
+  - Authentication
+  - Cloud Native
+  namespaces:
+  - name: apisix-admin
+    type: consumed
+    description: APISIX Admin API consumer namespace
+  - name: apisix-gateway-api
+    type: rest
+    port: 8080
+  - name: apisix-gateway-mcp
+    type: mcp
+    port: 9090
+  binds:
+  - APISIX_ADMIN_KEY
+crossReference:
+- resource: routes
+  operations:
+  - list
+  - create
+  - update
+  - delete
+  workflows:
+  - apisix-gateway-config
+  personas:
+  - Platform Engineer
+  - API Gateway Administrator
+- resource: upstreams
+  operations:
+  - list
+  - create
+  workflows:
+  - apisix-gateway-config
+  personas:
+  - Platform Engineer
+- resource: consumers
+  operations:
+  - list
+  - create
+  workflows:
+  - apisix-gateway-config
+  personas:
+  - API Gateway Administrator

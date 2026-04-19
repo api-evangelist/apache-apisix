@@ -15,18 +15,18 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: http://127.0.0.1:9090
-    description: Default local Control API server
+- url: http://127.0.0.1:9090
+  description: Default local Control API server
 paths:
   /v1/healthcheck:
     get:
       operationId: getHealthCheck
-      summary: Apache APISIX Get all health check statuses
+      summary: Apache APISIX Get All Health Check Statuses
       description: >-
         Returns the health check status of all upstreams that have health
         checking enabled.
       tags:
-        - Health Check
+      - Health Check
       responses:
         '200':
           description: Successful response with health check information.
@@ -39,17 +39,17 @@ paths:
   /v1/healthcheck/upstreams/{upstream_id}:
     get:
       operationId: getUpstreamHealthCheck
-      summary: Apache APISIX Get health check for a specific upstream
+      summary: Apache APISIX Get Health Check for a Specific Upstream
       description: Returns the health check status for a specific upstream by its ID.
       tags:
-        - Health Check
+      - Health Check
       parameters:
-        - name: upstream_id
-          in: path
-          required: true
-          description: The ID of the upstream resource.
-          schema:
-            type: string
+      - name: upstream_id
+        in: path
+        required: true
+        description: The ID of the upstream resource.
+        schema:
+          type: string
       responses:
         '200':
           description: Successful response with upstream health status.
@@ -62,17 +62,17 @@ paths:
   /v1/healthcheck/routes/{route_id}:
     get:
       operationId: getRouteHealthCheck
-      summary: Apache APISIX Get health check for a specific route
+      summary: Apache APISIX Get Health Check for a Specific Route
       description: Returns the health check status for a specific route by its ID.
       tags:
-        - Health Check
+      - Health Check
       parameters:
-        - name: route_id
-          in: path
-          required: true
-          description: The ID of the route resource.
-          schema:
-            type: string
+      - name: route_id
+        in: path
+        required: true
+        description: The ID of the route resource.
+        schema:
+          type: string
       responses:
         '200':
           description: Successful response with route health status.
@@ -85,17 +85,17 @@ paths:
   /v1/healthcheck/services/{service_id}:
     get:
       operationId: getServiceHealthCheck
-      summary: Apache APISIX Get health check for a specific service
+      summary: Apache APISIX Get Health Check for a Specific Service
       description: Returns the health check status for a specific service by its ID.
       tags:
-        - Health Check
+      - Health Check
       parameters:
-        - name: service_id
-          in: path
-          required: true
-          description: The ID of the service resource.
-          schema:
-            type: string
+      - name: service_id
+        in: path
+        required: true
+        description: The ID of the service resource.
+        schema:
+          type: string
       responses:
         '200':
           description: Successful response with service health status.
@@ -108,12 +108,12 @@ paths:
   /v1/schema:
     get:
       operationId: getSchema
-      summary: Apache APISIX Get APISIX JSON schema
+      summary: Apache APISIX Get APISIX JSON Schema
       description: >-
         Returns the full JSON schema used by the APISIX instance, including
         main configuration schemas and all plugin schemas.
       tags:
-        - Schema
+      - Schema
       responses:
         '200':
           description: Successful response with the complete JSON schema.
@@ -131,17 +131,17 @@ paths:
   /v1/schema/plugins/{plugin_name}:
     get:
       operationId: getPluginSchema
-      summary: Apache APISIX Get a specific plugin schema
+      summary: Apache APISIX Get a Specific Plugin Schema
       description: Returns the JSON schema for the specified plugin.
       tags:
-        - Schema
+      - Schema
       parameters:
-        - name: plugin_name
-          in: path
-          required: true
-          description: The name of the plugin.
-          schema:
-            type: string
+      - name: plugin_name
+        in: path
+        required: true
+        description: The name of the plugin.
+        schema:
+          type: string
       responses:
         '200':
           description: Successful response with the plugin schema.
@@ -154,20 +154,20 @@ paths:
   /v1/gc:
     post:
       operationId: triggerGC
-      summary: Apache APISIX Trigger garbage collection
+      summary: Apache APISIX Trigger Garbage Collection
       description: Triggers a full garbage collection cycle in the Lua VM.
       tags:
-        - Diagnostics
+      - Diagnostics
       responses:
         '200':
           description: GC triggered successfully.
   /v1/routes:
     get:
       operationId: getControlRoutes
-      summary: Apache APISIX Get all configured routes
+      summary: Apache APISIX Get All Configured Routes
       description: Returns a list of all routes with their complete runtime configuration.
       tags:
-        - Introspection
+      - Introspection
       responses:
         '200':
           description: Successful response with list of routes.
@@ -180,10 +180,10 @@ paths:
   /v1/services:
     get:
       operationId: getControlServices
-      summary: Apache APISIX Get all configured services
+      summary: Apache APISIX Get All Configured Services
       description: Returns a list of all services with their complete runtime configuration.
       tags:
-        - Introspection
+      - Introspection
       responses:
         '200':
           description: Successful response with list of services.
@@ -196,10 +196,10 @@ paths:
   /v1/upstreams:
     get:
       operationId: getControlUpstreams
-      summary: Apache APISIX Get all configured upstreams
+      summary: Apache APISIX Get All Configured Upstreams
       description: Returns a list of all upstreams with their complete runtime configuration.
       tags:
-        - Introspection
+      - Introspection
       responses:
         '200':
           description: Successful response with list of upstreams.
@@ -212,17 +212,17 @@ paths:
   /v1/discovery/{discovery_type}/dump:
     get:
       operationId: dumpDiscoveryNodes
-      summary: Apache APISIX Dump service discovery nodes
+      summary: Apache APISIX Dump Service Discovery Nodes
       description: Returns the nodes discovered by the specified service discovery type.
       tags:
-        - Introspection
+      - Introspection
       parameters:
-        - name: discovery_type
-          in: path
-          required: true
-          description: The type of service discovery (e.g. dns, consul, nacos).
-          schema:
-            type: string
+      - name: discovery_type
+        in: path
+        required: true
+        description: The type of service discovery (e.g. dns, consul, nacos).
+        schema:
+          type: string
       responses:
         '200':
           description: Successful response with discovered nodes.
@@ -258,8 +258,8 @@ components:
               status:
                 type: string
                 enum:
-                  - healthy
-                  - unhealthy
+                - healthy
+                - unhealthy
                 description: Current health status of the node.
               counter:
                 type: object
@@ -277,11 +277,11 @@ components:
                     type: integer
                     description: Number of timeout failures.
 tags:
-  - name: Diagnostics
-    description: Runtime diagnostic operations.
-  - name: Health Check
-    description: Monitor the health status of upstream nodes.
-  - name: Introspection
-    description: Inspect the runtime configuration of the APISIX instance.
-  - name: Schema
-    description: Retrieve JSON schemas used by the APISIX instance.
+- name: Diagnostics
+  description: Runtime diagnostic operations.
+- name: Health Check
+  description: Monitor the health status of upstream nodes.
+- name: Introspection
+  description: Inspect the runtime configuration of the APISIX instance.
+- name: Schema
+  description: Retrieve JSON schemas used by the APISIX instance.

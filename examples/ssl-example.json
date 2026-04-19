@@ -1,0 +1,20 @@
+{
+  "cert": "example-value",
+  "key": "edd1c9f034335f136f87ad84b625c8f1",
+  "certs": [
+    "example-value"
+  ],
+  "keys": [
+    "edd1c9f034335f136f87ad84b625c8f1"
+  ],
+  "snis": [
+    "example-value"
+  ],
+  "client": {
+    "ca": "example-value",
+    "depth": 1
+  },
+  "labels": {},
+  "status": 0,
+  "type": "server"
+}
