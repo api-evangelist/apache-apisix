@@ -1,9 +1,8 @@
-naftiko: 1.0.0-alpha1
+naftiko: 1.0.0-alpha2
 info:
   label: Apache APISIX Gateway Configuration
-  description: Unified capability for configuring and managing Apache APISIX API
-    gateway resources including routes, upstreams, services, consumers, and SSL 
-    certificates. Used by platform engineers and API gateway administrators.
+  description: Unified capability for configuring and managing Apache APISIX API gateway resources including routes, upstreams,
+    services, consumers, and SSL certificates. Used by platform engineers and API gateway administrators.
   tags:
   - Apache APISIX
   - API Gateway
@@ -11,15 +10,163 @@ info:
   - Cloud Native
   - Traffic Management
   created: '2026-04-19'
-  modified: '2026-04-19'
+  modified: '2026-05-06'
 binds:
 - namespace: env
   keys:
     APISIX_ADMIN_KEY: APISIX_ADMIN_KEY
 capability:
   consumes:
-  - import: apisix-admin
-    location: ./shared/apisix-admin.yaml
+  - type: http
+    namespace: apisix-admin
+    baseUri: http://localhost:9180/apisix/admin
+    description: Apache APISIX Admin REST API.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{APISIX_ADMIN_KEY}}'
+      placement: header
+    resources:
+    - name: routes
+      path: /routes
+      description: Manage routing rules.
+      operations:
+      - name: list-routes
+        method: GET
+        description: List all routes.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-route
+        method: POST
+        description: Create a new route.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-route
+        method: GET
+        description: Get a route by ID.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-route
+        method: PUT
+        description: Update a route.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-route
+        method: DELETE
+        description: Delete a route.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upstreams
+      path: /upstreams
+      description: Manage upstream backend services.
+      operations:
+      - name: list-upstreams
+        method: GET
+        description: List all upstreams.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-upstream
+        method: POST
+        description: Create a new upstream.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services
+      path: /services
+      description: Manage service abstractions.
+      operations:
+      - name: list-services
+        method: GET
+        description: List all services.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-service
+        method: POST
+        description: Create a new service.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: consumers
+      path: /consumers
+      description: Manage API consumers.
+      operations:
+      - name: list-consumers
+        method: GET
+        description: List all consumers.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-consumer
+        method: POST
+        description: Create a new consumer.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ssls
+      path: /ssls
+      description: Manage SSL certificates.
+      operations:
+      - name: list-ssls
+        method: GET
+        description: List all SSL certificates.
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
   - type: rest
     port: 8080
