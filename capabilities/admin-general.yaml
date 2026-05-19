@@ -1,0 +1,233 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API
+  description: 'Apache APISIX Admin API. 6 operations. Lead operation: Apache APISIX List All Services. Self-contained Naftiko
+    capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-general
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API business capability. Self-contained, no shared references.
+    resources:
+    - name: services
+      path: /services
+      operations:
+      - name: listservices
+        method: GET
+        description: Apache APISIX List All Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createservice
+        method: POST
+        description: Apache APISIX Create a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: services-service_id
+      path: /services/{service_id}
+      operations:
+      - name: getservice
+        method: GET
+        description: Apache APISIX Get a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateservice
+        method: PUT
+        description: Apache APISIX Create or Update a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchservice
+        method: PATCH
+        description: Apache APISIX Patch a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteservice
+        method: DELETE
+        description: Apache APISIX Delete a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-general-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/services
+      name: services
+      description: REST surface for services.
+      operations:
+      - method: GET
+        name: listservices
+        description: Apache APISIX List All Services
+        call: admin-general.listservices
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createservice
+        description: Apache APISIX Create a Service
+        call: admin-general.createservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services/{service-id}
+      name: services-service-id
+      description: REST surface for services-service_id.
+      operations:
+      - method: GET
+        name: getservice
+        description: Apache APISIX Get a Service
+        call: admin-general.getservice
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateservice
+        description: Apache APISIX Create or Update a Service
+        call: admin-general.createorupdateservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchservice
+        description: Apache APISIX Patch a Service
+        call: admin-general.patchservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteservice
+        description: Apache APISIX Delete a Service
+        call: admin-general.deleteservice
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: apache-apisix-list-all-services
+      description: Apache APISIX List All Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-general.listservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-service
+      description: Apache APISIX Create a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-general.createservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-service
+      description: Apache APISIX Get a Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-general.getservice
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-service
+      description: Apache APISIX Create or Update a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-general.createorupdateservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-service
+      description: Apache APISIX Patch a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-general.patchservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-service
+      description: Apache APISIX Delete a Service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-general.deleteservice
+      outputParameters:
+      - type: object
+        mapping: $.

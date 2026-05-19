@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Control API — Diagnostics
+  description: 'Apache APISIX Control API — Diagnostics. 1 operations. Lead operation: Apache APISIX Trigger Garbage Collection.
+    Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Diagnostics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: control-diagnostics
+    baseUri: http://127.0.0.1:9090
+    description: Apache APISIX Control API — Diagnostics business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-gc
+      path: /v1/gc
+      operations:
+      - name: triggergc
+        method: POST
+        description: Apache APISIX Trigger Garbage Collection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: control-diagnostics-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Control API — Diagnostics. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/gc
+      name: v1-gc
+      description: REST surface for v1-gc.
+      operations:
+      - method: POST
+        name: triggergc
+        description: Apache APISIX Trigger Garbage Collection
+        call: control-diagnostics.triggergc
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: control-diagnostics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Control API — Diagnostics. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-apisix-trigger-garbage-collection
+      description: Apache APISIX Trigger Garbage Collection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: control-diagnostics.triggergc
+      outputParameters:
+      - type: object
+        mapping: $.

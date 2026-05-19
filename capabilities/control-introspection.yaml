@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Control API — Introspection
+  description: 'Apache APISIX Control API — Introspection. 4 operations. Lead operation: Apache APISIX Dump Service Discovery
+    Nodes. Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Introspection
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: control-introspection
+    baseUri: http://127.0.0.1:9090
+    description: Apache APISIX Control API — Introspection business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-discovery-discovery_type-dump
+      path: /v1/discovery/{discovery_type}/dump
+      operations:
+      - name: dumpdiscoverynodes
+        method: GET
+        description: Apache APISIX Dump Service Discovery Nodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: discovery_type
+          in: path
+          type: string
+          description: The type of service discovery (e.g. dns, consul, nacos).
+          required: true
+    - name: v1-routes
+      path: /v1/routes
+      operations:
+      - name: getcontrolroutes
+        method: GET
+        description: Apache APISIX Get All Configured Routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-services
+      path: /v1/services
+      operations:
+      - name: getcontrolservices
+        method: GET
+        description: Apache APISIX Get All Configured Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-upstreams
+      path: /v1/upstreams
+      operations:
+      - name: getcontrolupstreams
+        method: GET
+        description: Apache APISIX Get All Configured Upstreams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: control-introspection-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Control API — Introspection. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/discovery/{discovery-type}/dump
+      name: v1-discovery-discovery-type-dump
+      description: REST surface for v1-discovery-discovery_type-dump.
+      operations:
+      - method: GET
+        name: dumpdiscoverynodes
+        description: Apache APISIX Dump Service Discovery Nodes
+        call: control-introspection.dumpdiscoverynodes
+        with:
+          discovery_type: rest.discovery_type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/routes
+      name: v1-routes
+      description: REST surface for v1-routes.
+      operations:
+      - method: GET
+        name: getcontrolroutes
+        description: Apache APISIX Get All Configured Routes
+        call: control-introspection.getcontrolroutes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/services
+      name: v1-services
+      description: REST surface for v1-services.
+      operations:
+      - method: GET
+        name: getcontrolservices
+        description: Apache APISIX Get All Configured Services
+        call: control-introspection.getcontrolservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/upstreams
+      name: v1-upstreams
+      description: REST surface for v1-upstreams.
+      operations:
+      - method: GET
+        name: getcontrolupstreams
+        description: Apache APISIX Get All Configured Upstreams
+        call: control-introspection.getcontrolupstreams
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: control-introspection-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Control API — Introspection. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-apisix-dump-service-discovery
+      description: Apache APISIX Dump Service Discovery Nodes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-introspection.dumpdiscoverynodes
+      with:
+        discovery_type: tools.discovery_type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-all-configured
+      description: Apache APISIX Get All Configured Routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-introspection.getcontrolroutes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-all-configured-2
+      description: Apache APISIX Get All Configured Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-introspection.getcontrolservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-all-configured-3
+      description: Apache APISIX Get All Configured Upstreams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-introspection.getcontrolupstreams
+      outputParameters:
+      - type: object
+        mapping: $.

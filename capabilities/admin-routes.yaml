@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — Routes
+  description: 'Apache APISIX Admin API — Routes. 6 operations. Lead operation: Apache APISIX List All Routes. Self-contained
+    Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Routes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-routes
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — Routes business capability. Self-contained, no shared references.
+    resources:
+    - name: routes
+      path: /routes
+      operations:
+      - name: listroutes
+        method: GET
+        description: Apache APISIX List All Routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createroute
+        method: POST
+        description: Apache APISIX Create a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes-route_id
+      path: /routes/{route_id}
+      operations:
+      - name: getroute
+        method: GET
+        description: Apache APISIX Get a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateroute
+        method: PUT
+        description: Apache APISIX Create or Update a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchroute
+        method: PATCH
+        description: Apache APISIX Patch a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteroute
+        method: DELETE
+        description: Apache APISIX Delete a Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-routes-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — Routes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/routes
+      name: routes
+      description: REST surface for routes.
+      operations:
+      - method: GET
+        name: listroutes
+        description: Apache APISIX List All Routes
+        call: admin-routes.listroutes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createroute
+        description: Apache APISIX Create a Route
+        call: admin-routes.createroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routes/{route-id}
+      name: routes-route-id
+      description: REST surface for routes-route_id.
+      operations:
+      - method: GET
+        name: getroute
+        description: Apache APISIX Get a Route
+        call: admin-routes.getroute
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateroute
+        description: Apache APISIX Create or Update a Route
+        call: admin-routes.createorupdateroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchroute
+        description: Apache APISIX Patch a Route
+        call: admin-routes.patchroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteroute
+        description: Apache APISIX Delete a Route
+        call: admin-routes.deleteroute
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-routes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — Routes. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-routes
+      description: Apache APISIX List All Routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-routes.listroutes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-route
+      description: Apache APISIX Create a Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-routes.createroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-route
+      description: Apache APISIX Get a Route
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-routes.getroute
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-route
+      description: Apache APISIX Create or Update a Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-routes.createorupdateroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-route
+      description: Apache APISIX Patch a Route
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-routes.patchroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-route
+      description: Apache APISIX Delete a Route
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-routes.deleteroute
+      outputParameters:
+      - type: object
+        mapping: $.

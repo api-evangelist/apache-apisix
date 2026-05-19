@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — Protos
+  description: 'Apache APISIX Admin API — Protos. 4 operations. Lead operation: Apache APISIX List All Protos. Self-contained
+    Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Protos
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-protos
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — Protos business capability. Self-contained, no shared references.
+    resources:
+    - name: protos
+      path: /protos
+      operations:
+      - name: listprotos
+        method: GET
+        description: Apache APISIX List All Protos
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: protos-proto_id
+      path: /protos/{proto_id}
+      operations:
+      - name: getproto
+        method: GET
+        description: Apache APISIX Get a Proto
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateproto
+        method: PUT
+        description: Apache APISIX Create or Update a Proto
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteproto
+        method: DELETE
+        description: Apache APISIX Delete a Proto
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-protos-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — Protos. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/protos
+      name: protos
+      description: REST surface for protos.
+      operations:
+      - method: GET
+        name: listprotos
+        description: Apache APISIX List All Protos
+        call: admin-protos.listprotos
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/protos/{proto-id}
+      name: protos-proto-id
+      description: REST surface for protos-proto_id.
+      operations:
+      - method: GET
+        name: getproto
+        description: Apache APISIX Get a Proto
+        call: admin-protos.getproto
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateproto
+        description: Apache APISIX Create or Update a Proto
+        call: admin-protos.createorupdateproto
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteproto
+        description: Apache APISIX Delete a Proto
+        call: admin-protos.deleteproto
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-protos-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — Protos. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-protos
+      description: Apache APISIX List All Protos
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-protos.listprotos
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-proto
+      description: Apache APISIX Get a Proto
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-protos.getproto
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-proto
+      description: Apache APISIX Create or Update a Proto
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-protos.createorupdateproto
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-proto
+      description: Apache APISIX Delete a Proto
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-protos.deleteproto
+      outputParameters:
+      - type: object
+        mapping: $.

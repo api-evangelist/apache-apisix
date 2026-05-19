@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — SSL
+  description: 'Apache APISIX Admin API — SSL. 5 operations. Lead operation: Apache APISIX List All SSL Certificates. Self-contained
+    Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - SSL
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-ssl
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — SSL business capability. Self-contained, no shared references.
+    resources:
+    - name: ssls
+      path: /ssls
+      operations:
+      - name: listssls
+        method: GET
+        description: Apache APISIX List All SSL Certificates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ssls-ssl_id
+      path: /ssls/{ssl_id}
+      operations:
+      - name: getssl
+        method: GET
+        description: Apache APISIX Get an SSL Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdatessl
+        method: PUT
+        description: Apache APISIX Create or Update an SSL Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchssl
+        method: PATCH
+        description: Apache APISIX Patch an SSL Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletessl
+        method: DELETE
+        description: Apache APISIX Delete an SSL Certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-ssl-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — SSL. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/ssls
+      name: ssls
+      description: REST surface for ssls.
+      operations:
+      - method: GET
+        name: listssls
+        description: Apache APISIX List All SSL Certificates
+        call: admin-ssl.listssls
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ssls/{ssl-id}
+      name: ssls-ssl-id
+      description: REST surface for ssls-ssl_id.
+      operations:
+      - method: GET
+        name: getssl
+        description: Apache APISIX Get an SSL Certificate
+        call: admin-ssl.getssl
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdatessl
+        description: Apache APISIX Create or Update an SSL Certificate
+        call: admin-ssl.createorupdatessl
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchssl
+        description: Apache APISIX Patch an SSL Certificate
+        call: admin-ssl.patchssl
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletessl
+        description: Apache APISIX Delete an SSL Certificate
+        call: admin-ssl.deletessl
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-ssl-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — SSL. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-ssl
+      description: Apache APISIX List All SSL Certificates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-ssl.listssls
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-ssl-certificate
+      description: Apache APISIX Get an SSL Certificate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-ssl.getssl
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-ssl
+      description: Apache APISIX Create or Update an SSL Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-ssl.createorupdatessl
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-ssl-certificate
+      description: Apache APISIX Patch an SSL Certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-ssl.patchssl
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-ssl-certificate
+      description: Apache APISIX Delete an SSL Certificate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-ssl.deletessl
+      outputParameters:
+      - type: object
+        mapping: $.

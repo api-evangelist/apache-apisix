@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — Consumer Groups
+  description: 'Apache APISIX Admin API — Consumer Groups. 5 operations. Lead operation: Apache APISIX List All Consumer Groups.
+    Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Consumer Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-consumer-groups
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — Consumer Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: consumer_groups
+      path: /consumer_groups
+      operations:
+      - name: listconsumergroups
+        method: GET
+        description: Apache APISIX List All Consumer Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: consumer_groups-group_id
+      path: /consumer_groups/{group_id}
+      operations:
+      - name: getconsumergroup
+        method: GET
+        description: Apache APISIX Get a Consumer Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateconsumergroup
+        method: PUT
+        description: Apache APISIX Create or Update a Consumer Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchconsumergroup
+        method: PATCH
+        description: Apache APISIX Patch a Consumer Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteconsumergroup
+        method: DELETE
+        description: Apache APISIX Delete a Consumer Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-consumer-groups-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — Consumer Groups. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/consumer-groups
+      name: consumer-groups
+      description: REST surface for consumer_groups.
+      operations:
+      - method: GET
+        name: listconsumergroups
+        description: Apache APISIX List All Consumer Groups
+        call: admin-consumer-groups.listconsumergroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/consumer-groups/{group-id}
+      name: consumer-groups-group-id
+      description: REST surface for consumer_groups-group_id.
+      operations:
+      - method: GET
+        name: getconsumergroup
+        description: Apache APISIX Get a Consumer Group
+        call: admin-consumer-groups.getconsumergroup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateconsumergroup
+        description: Apache APISIX Create or Update a Consumer Group
+        call: admin-consumer-groups.createorupdateconsumergroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchconsumergroup
+        description: Apache APISIX Patch a Consumer Group
+        call: admin-consumer-groups.patchconsumergroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconsumergroup
+        description: Apache APISIX Delete a Consumer Group
+        call: admin-consumer-groups.deleteconsumergroup
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-consumer-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — Consumer Groups. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-consumer
+      description: Apache APISIX List All Consumer Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-consumer-groups.listconsumergroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-consumer-group
+      description: Apache APISIX Get a Consumer Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-consumer-groups.getconsumergroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-consumer
+      description: Apache APISIX Create or Update a Consumer Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-consumer-groups.createorupdateconsumergroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-consumer-group
+      description: Apache APISIX Patch a Consumer Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-consumer-groups.patchconsumergroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-consumer-group
+      description: Apache APISIX Delete a Consumer Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-consumer-groups.deleteconsumergroup
+      outputParameters:
+      - type: object
+        mapping: $.

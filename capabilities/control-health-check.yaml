@@ -1,0 +1,193 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Control API — Health Check
+  description: 'Apache APISIX Control API — Health Check. 4 operations. Lead operation: Apache APISIX Get All Health Check
+    Statuses. Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Health Check
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: control-health-check
+    baseUri: http://127.0.0.1:9090
+    description: Apache APISIX Control API — Health Check business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-healthcheck
+      path: /v1/healthcheck
+      operations:
+      - name: gethealthcheck
+        method: GET
+        description: Apache APISIX Get All Health Check Statuses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-healthcheck-routes-route_id
+      path: /v1/healthcheck/routes/{route_id}
+      operations:
+      - name: getroutehealthcheck
+        method: GET
+        description: Apache APISIX Get Health Check for a Specific Route
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: The ID of the route resource.
+          required: true
+    - name: v1-healthcheck-services-service_id
+      path: /v1/healthcheck/services/{service_id}
+      operations:
+      - name: getservicehealthcheck
+        method: GET
+        description: Apache APISIX Get Health Check for a Specific Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_id
+          in: path
+          type: string
+          description: The ID of the service resource.
+          required: true
+    - name: v1-healthcheck-upstreams-upstream_id
+      path: /v1/healthcheck/upstreams/{upstream_id}
+      operations:
+      - name: getupstreamhealthcheck
+        method: GET
+        description: Apache APISIX Get Health Check for a Specific Upstream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upstream_id
+          in: path
+          type: string
+          description: The ID of the upstream resource.
+          required: true
+  exposes:
+  - type: rest
+    namespace: control-health-check-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Control API — Health Check. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/healthcheck
+      name: v1-healthcheck
+      description: REST surface for v1-healthcheck.
+      operations:
+      - method: GET
+        name: gethealthcheck
+        description: Apache APISIX Get All Health Check Statuses
+        call: control-health-check.gethealthcheck
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/healthcheck/routes/{route-id}
+      name: v1-healthcheck-routes-route-id
+      description: REST surface for v1-healthcheck-routes-route_id.
+      operations:
+      - method: GET
+        name: getroutehealthcheck
+        description: Apache APISIX Get Health Check for a Specific Route
+        call: control-health-check.getroutehealthcheck
+        with:
+          route_id: rest.route_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/healthcheck/services/{service-id}
+      name: v1-healthcheck-services-service-id
+      description: REST surface for v1-healthcheck-services-service_id.
+      operations:
+      - method: GET
+        name: getservicehealthcheck
+        description: Apache APISIX Get Health Check for a Specific Service
+        call: control-health-check.getservicehealthcheck
+        with:
+          service_id: rest.service_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/healthcheck/upstreams/{upstream-id}
+      name: v1-healthcheck-upstreams-upstream-id
+      description: REST surface for v1-healthcheck-upstreams-upstream_id.
+      operations:
+      - method: GET
+        name: getupstreamhealthcheck
+        description: Apache APISIX Get Health Check for a Specific Upstream
+        call: control-health-check.getupstreamhealthcheck
+        with:
+          upstream_id: rest.upstream_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: control-health-check-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Control API — Health Check. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-apisix-get-all-health
+      description: Apache APISIX Get All Health Check Statuses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-health-check.gethealthcheck
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-health-check
+      description: Apache APISIX Get Health Check for a Specific Route
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-health-check.getroutehealthcheck
+      with:
+        route_id: tools.route_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-health-check-2
+      description: Apache APISIX Get Health Check for a Specific Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-health-check.getservicehealthcheck
+      with:
+        service_id: tools.service_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-health-check-3
+      description: Apache APISIX Get Health Check for a Specific Upstream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: control-health-check.getupstreamhealthcheck
+      with:
+        upstream_id: tools.upstream_id
+      outputParameters:
+      - type: object
+        mapping: $.

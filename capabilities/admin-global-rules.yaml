@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — Global Rules
+  description: 'Apache APISIX Admin API — Global Rules. 5 operations. Lead operation: Apache APISIX List All Global Rules.
+    Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Global Rules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-global-rules
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — Global Rules business capability. Self-contained, no shared references.
+    resources:
+    - name: global_rules
+      path: /global_rules
+      operations:
+      - name: listglobalrules
+        method: GET
+        description: Apache APISIX List All Global Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: global_rules-rule_id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: getglobalrule
+        method: GET
+        description: Apache APISIX Get a Global Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Apache APISIX Create or Update a Global Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchglobalrule
+        method: PATCH
+        description: Apache APISIX Patch a Global Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteglobalrule
+        method: DELETE
+        description: Apache APISIX Delete a Global Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-global-rules-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — Global Rules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/global-rules
+      name: global-rules
+      description: REST surface for global_rules.
+      operations:
+      - method: GET
+        name: listglobalrules
+        description: Apache APISIX List All Global Rules
+        call: admin-global-rules.listglobalrules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/global-rules/{rule-id}
+      name: global-rules-rule-id
+      description: REST surface for global_rules-rule_id.
+      operations:
+      - method: GET
+        name: getglobalrule
+        description: Apache APISIX Get a Global Rule
+        call: admin-global-rules.getglobalrule
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdateglobalrule
+        description: Apache APISIX Create or Update a Global Rule
+        call: admin-global-rules.createorupdateglobalrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchglobalrule
+        description: Apache APISIX Patch a Global Rule
+        call: admin-global-rules.patchglobalrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteglobalrule
+        description: Apache APISIX Delete a Global Rule
+        call: admin-global-rules.deleteglobalrule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-global-rules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — Global Rules. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-global
+      description: Apache APISIX List All Global Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-global-rules.listglobalrules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-global-rule
+      description: Apache APISIX Get a Global Rule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-global-rules.getglobalrule
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-global
+      description: Apache APISIX Create or Update a Global Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-global-rules.createorupdateglobalrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-global-rule
+      description: Apache APISIX Patch a Global Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-global-rules.patchglobalrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-global-rule
+      description: Apache APISIX Delete a Global Rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-global-rules.deleteglobalrule
+      outputParameters:
+      - type: object
+        mapping: $.

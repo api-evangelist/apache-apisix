@@ -1,0 +1,199 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apache APISIX Admin API — Plugin Configs
+  description: 'Apache APISIX Admin API — Plugin Configs. 5 operations. Lead operation: Apache APISIX List All Plugin Configs.
+    Self-contained Naftiko capability covering one Apache Apisix business surface.'
+  tags:
+  - Apache Apisix
+  - Plugin Configs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-plugin-configs
+    baseUri: http://127.0.0.1:9180/apisix/admin
+    description: Apache APISIX Admin API — Plugin Configs business capability. Self-contained, no shared references.
+    resources:
+    - name: plugin_configs
+      path: /plugin_configs
+      operations:
+      - name: listpluginconfigs
+        method: GET
+        description: Apache APISIX List All Plugin Configs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: plugin_configs-config_id
+      path: /plugin_configs/{config_id}
+      operations:
+      - name: getpluginconfig
+        method: GET
+        description: Apache APISIX Get a Plugin Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createorupdatepluginconfig
+        method: PUT
+        description: Apache APISIX Create or Update a Plugin Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchpluginconfig
+        method: PATCH
+        description: Apache APISIX Patch a Plugin Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepluginconfig
+        method: DELETE
+        description: Apache APISIX Delete a Plugin Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-API-KEY
+      value: '{{env.APACHE_APISIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: admin-plugin-configs-rest
+    port: 8080
+    description: REST adapter for Apache APISIX Admin API — Plugin Configs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/plugin-configs
+      name: plugin-configs
+      description: REST surface for plugin_configs.
+      operations:
+      - method: GET
+        name: listpluginconfigs
+        description: Apache APISIX List All Plugin Configs
+        call: admin-plugin-configs.listpluginconfigs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/plugin-configs/{config-id}
+      name: plugin-configs-config-id
+      description: REST surface for plugin_configs-config_id.
+      operations:
+      - method: GET
+        name: getpluginconfig
+        description: Apache APISIX Get a Plugin Config
+        call: admin-plugin-configs.getpluginconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createorupdatepluginconfig
+        description: Apache APISIX Create or Update a Plugin Config
+        call: admin-plugin-configs.createorupdatepluginconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchpluginconfig
+        description: Apache APISIX Patch a Plugin Config
+        call: admin-plugin-configs.patchpluginconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepluginconfig
+        description: Apache APISIX Delete a Plugin Config
+        call: admin-plugin-configs.deletepluginconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-plugin-configs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apache APISIX Admin API — Plugin Configs. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apache-apisix-list-all-plugin
+      description: Apache APISIX List All Plugin Configs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-plugin-configs.listpluginconfigs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-get-plugin-config
+      description: Apache APISIX Get a Plugin Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-plugin-configs.getpluginconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-create-update-plugin
+      description: Apache APISIX Create or Update a Plugin Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-plugin-configs.createorupdatepluginconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-patch-plugin-config
+      description: Apache APISIX Patch a Plugin Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-plugin-configs.patchpluginconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apache-apisix-delete-plugin-config
+      description: Apache APISIX Delete a Plugin Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-plugin-configs.deletepluginconfig
+      outputParameters:
+      - type: object
+        mapping: $.
