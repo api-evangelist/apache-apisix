@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: GitOps push of Apache APISIX route definitions from GitHub
+  description: On every push to a GitHub repo containing APISIX route YAML, reconcile the Admin API so routes, services, and upstreams in the gateway match the repo state.
+  tags:
+  - Apache APISIX
+  - Integration
+  - GitOps
+  - github
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    GITHUB_API_KEY: GITHUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes
+      path: /routes
+      operations:
+      - name: listroutes
+        method: GET
+        description: List existing APISIX routes to diff against the GitHub repo state.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: createorupdateroute
+        method: PUT
+        description: Apply a route definition pulled from GitHub.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: upstreams-upstream-id
+      path: /upstreams/{upstream_id}
+      operations:
+      - name: createorupdateupstream
+        method: PUT
+        description: Apply an upstream definition pulled from GitHub.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upstream_id
+          in: path
+          type: string
+          description: Path parameter upstream_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: deleteroute
+        method: DELETE
+        description: Remove APISIX routes that were deleted from the GitHub repo.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+  - type: http
+    namespace: github
+    baseUri: https://api.github.com
+    description: GitHub REST API operations consumed by this integration.
+    resources:
+    - name: repos-owner-repo-contents-path
+      path: /repos/{owner}/{repo}/contents/{path}
+      operations:
+      - name: getcontent
+        method: GET
+        description: 'GitHub REST API: getContent'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: owner
+          in: path
+          type: string
+          description: Path parameter owner.
+          required: true
+        - name: repo
+          in: path
+          type: string
+          description: Path parameter repo.
+          required: true
+        - name: path
+          in: path
+          type: string
+          description: Path parameter path.
+          required: true
+    - name: repos-owner-repo-commits
+      path: /repos/{owner}/{repo}/commits
+      operations:
+      - name: listcommits
+        method: GET
+        description: 'GitHub REST API: listCommits'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: owner
+          in: path
+          type: string
+          description: Path parameter owner.
+          required: true
+        - name: repo
+          in: path
+          type: string
+          description: Path parameter repo.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-github-mcp
+    description: MCP adapter for the apache-apisix-github integration.
+    tools:
+    - name: apache_apisix_github
+      description: Execute the apache apisix github integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-github-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-github integration.
+    resources:
+    - path: /apache-apisix-github
+      name: apache-apisix-github
+      description: REST surface for the apache-apisix-github integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-github integration.
+        call: apache_apisix_github
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

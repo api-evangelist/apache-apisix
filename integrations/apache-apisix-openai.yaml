@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Proxy LLM traffic through Apache APISIX to OpenAI
+  description: Configure an APISIX route with the ai-proxy plugin pointing at api.openai.com so the gateway centralizes API-key management, per-consumer quotas, and prompt logging for OpenAI-bound traffic.
+  tags:
+  - Apache APISIX
+  - Integration
+  - AI Gateway
+  - openai
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    OPENAI_API_KEY: OPENAI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: createorupdateroute
+        method: PUT
+        description: Create or update an APISIX route with the ai-proxy plugin targeting OpenAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: upstreams-upstream-id
+      path: /upstreams/{upstream_id}
+      operations:
+      - name: createorupdateupstream
+        method: PUT
+        description: Create or update the upstream for api.openai.com with retry and timeout settings.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upstream_id
+          in: path
+          type: string
+          description: Path parameter upstream_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: plugin-configs-config-id
+      path: /plugin_configs/{config_id}
+      operations:
+      - name: createorupdatepluginconfig
+        method: PUT
+        description: Reuse a plugin config bundling ai-proxy + limit-count + http-logger for any OpenAI-bound route.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: config_id
+          in: path
+          type: string
+          description: Path parameter config_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: openai
+    baseUri: https://api.openai.com
+    description: OpenAI REST API operations consumed by this integration.
+    resources:
+    - name: v1-chat-completions
+      path: /v1/chat/completions
+      operations:
+      - name: createchatcompletion
+        method: POST
+        description: 'OpenAI REST API: createChatCompletion'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-models
+      path: /v1/models
+      operations:
+      - name: listmodels
+        method: GET
+        description: 'OpenAI REST API: listModels'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-openai-mcp
+    description: MCP adapter for the apache-apisix-openai integration.
+    tools:
+    - name: apache_apisix_openai
+      description: Execute the apache apisix openai integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-openai-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-openai integration.
+    resources:
+    - path: /apache-apisix-openai
+      name: apache-apisix-openai
+      description: REST surface for the apache-apisix-openai integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-openai integration.
+        call: apache_apisix_openai
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

@@ -1,0 +1,328 @@
+# Curated Apache APISIX integrations. Each entry becomes one Naftiko capability YAML in integrations/.
+# Apache APISIX is a cloud-native, etcd-backed API gateway with a plugin-driven
+# control plane, ingress controller deployments, and a growing AI-gateway surface
+# (ai-proxy, prompt-guard, openai/anthropic plugin proxies).
+# APISIX-side paths use real Admin API endpoints from temp/apache-apisix/openapi/.
+
+# Observability (4)
+- partner: prometheus
+  name: Scrape Apache APISIX metrics into Prometheus
+  category: Observability
+  use_case: Configure the APISIX prometheus plugin globally so per-route request counts, latency histograms, and upstream health status are scraped by Prometheus for SRE dashboards.
+  partner_baseUri: https://prometheus.example.com
+  partner_api: Prometheus HTTP API
+  provider_ops:
+    - method: GET
+      path: /global_rules
+      name: listGlobalRules
+      description: List APISIX global rules so the prometheus plugin can be enabled gateway-wide.
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Enable or update the prometheus plugin globally on the APISIX gateway.
+    - method: GET
+      path: /plugins/{plugin_name}
+      name: getPluginSchema
+      description: Fetch the prometheus plugin schema to validate configuration.
+  partner_ops:
+    - method: GET
+      path: /api/v1/targets
+      name: listTargets
+    - method: POST
+      path: /api/v1/query
+      name: query
+
+- partner: opentelemetry
+  name: Export Apache APISIX traces to an OpenTelemetry collector
+  category: Observability
+  use_case: Enable the APISIX opentelemetry plugin per-route to emit OTLP trace spans to a downstream OTel collector so API request latency stitches into end-to-end traces across upstream services.
+  partner_baseUri: https://otel-collector.example.com
+  partner_api: OpenTelemetry Collector OTLP/HTTP
+  provider_ops:
+    - method: GET
+      path: /routes
+      name: listRoutes
+      description: List APISIX routes to select which receive opentelemetry instrumentation.
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch an APISIX route to enable the opentelemetry plugin with collector endpoint and sampling rate.
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Apply the opentelemetry plugin gateway-wide via a global rule.
+  partner_ops:
+    - method: POST
+      path: /v1/traces
+      name: exportTraces
+    - method: POST
+      path: /v1/metrics
+      name: exportMetrics
+
+- partner: datadog
+  name: Stream Apache APISIX gateway metrics into Datadog
+  category: Observability
+  use_case: Use the APISIX datadog plugin to push request counts, latency, and upstream errors to a Datadog Agent over StatsD, then surface them as custom metrics for unified API observability.
+  partner_baseUri: https://api.datadoghq.com
+  partner_api: Datadog Metrics API
+  provider_ops:
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Enable the APISIX datadog plugin gateway-wide with StatsD host and namespace.
+    - method: GET
+      path: /routes
+      name: listRoutes
+      description: List APISIX routes to label datadog metric series by route ID.
+  partner_ops:
+    - method: POST
+      path: /api/v2/series
+      name: submitMetrics
+    - method: POST
+      path: /api/v1/events
+      name: postEvent
+
+- partner: skywalking
+  name: Trace Apache APISIX requests with Apache SkyWalking
+  category: Observability
+  use_case: Enable the APISIX skywalking plugin so per-request spans are reported to a SkyWalking OAP backend, giving operators distributed traces from the gateway through upstream microservices.
+  partner_baseUri: https://skywalking-oap.example.com:12800
+  partner_api: SkyWalking OAP HTTP/gRPC API
+  provider_ops:
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Enable the skywalking plugin gateway-wide pointing at the OAP endpoint.
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch a route to enable skywalking with a per-route sample ratio.
+  partner_ops:
+    - method: POST
+      path: /v3/segments
+      name: reportSegments
+    - method: GET
+      path: /graphql
+      name: queryServices
+
+# Logging / streaming (1)
+- partner: kafka
+  name: Ship Apache APISIX access logs to Apache Kafka
+  category: Logging
+  use_case: Configure the APISIX kafka-logger plugin to publish per-request access logs to a Kafka topic so downstream consumers (security analytics, billing, data warehouse) can subscribe.
+  partner_baseUri: https://kafka-rest.example.com
+  partner_api: Confluent REST Proxy / Kafka REST
+  provider_ops:
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Enable the kafka-logger plugin gateway-wide with broker list, topic, and producer batching.
+    - method: GET
+      path: /plugins/{plugin_name}
+      name: getPluginSchema
+      description: Fetch the kafka-logger plugin schema to validate broker config.
+  partner_ops:
+    - method: POST
+      path: /topics/{topic_name}
+      name: produceRecords
+    - method: GET
+      path: /topics
+      name: listTopics
+
+# GitOps / config push (1)
+- partner: github
+  name: GitOps push of Apache APISIX route definitions from GitHub
+  category: GitOps
+  use_case: On every push to a GitHub repo containing APISIX route YAML, reconcile the Admin API so routes, services, and upstreams in the gateway match the repo state.
+  partner_baseUri: https://api.github.com
+  partner_api: GitHub REST API
+  provider_ops:
+    - method: GET
+      path: /routes
+      name: listRoutes
+      description: List existing APISIX routes to diff against the GitHub repo state.
+    - method: PUT
+      path: /routes/{route_id}
+      name: createOrUpdateRoute
+      description: Apply a route definition pulled from GitHub.
+    - method: PUT
+      path: /upstreams/{upstream_id}
+      name: createOrUpdateUpstream
+      description: Apply an upstream definition pulled from GitHub.
+    - method: DELETE
+      path: /routes/{route_id}
+      name: deleteRoute
+      description: Remove APISIX routes that were deleted from the GitHub repo.
+  partner_ops:
+    - method: GET
+      path: /repos/{owner}/{repo}/contents/{path}
+      name: getContent
+    - method: GET
+      path: /repos/{owner}/{repo}/commits
+      name: listCommits
+
+# Policy / governance (1)
+- partner: opa
+  name: Gate Apache APISIX requests through Open Policy Agent
+  category: Policy
+  use_case: Enable the APISIX opa plugin on protected routes so each request is evaluated against a Rego policy in an OPA sidecar, and only allowed requests reach the upstream.
+  partner_baseUri: https://opa.example.com:8181
+  partner_api: Open Policy Agent REST API
+  provider_ops:
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch a route to enable the opa plugin with policy bundle URL and decision path.
+    - method: PUT
+      path: /global_rules/{rule_id}
+      name: createOrUpdateGlobalRule
+      description: Apply OPA enforcement gateway-wide for sensitive APIs.
+    - method: GET
+      path: /plugins/{plugin_name}
+      name: getPluginSchema
+      description: Fetch the opa plugin schema to validate bundle config.
+  partner_ops:
+    - method: POST
+      path: /v1/data/{policy_path}
+      name: evaluatePolicy
+    - method: PUT
+      path: /v1/policies/{id}
+      name: createOrUpdatePolicy
+
+# Identity (2)
+- partner: keycloak
+  name: Authenticate Apache APISIX consumers with Keycloak OIDC
+  category: Identity
+  use_case: Enable the APISIX openid-connect plugin on protected routes to delegate authentication to a Keycloak realm and map Keycloak users into APISIX consumers for per-consumer rate limiting.
+  partner_baseUri: https://keycloak.example.com
+  partner_api: Keycloak Admin REST API
+  provider_ops:
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch a route to enable openid-connect with Keycloak issuer, client ID, and client secret.
+    - method: GET
+      path: /consumers
+      name: listConsumers
+      description: List APISIX consumers to reconcile against Keycloak users.
+    - method: PUT
+      path: /consumers/{username}
+      name: createOrUpdateConsumer
+      description: Create or update an APISIX consumer mapped to a Keycloak user.
+  partner_ops:
+    - method: GET
+      path: /admin/realms/{realm}/users
+      name: listUsers
+    - method: POST
+      path: /admin/realms/{realm}/clients
+      name: createClient
+
+- partner: auth0
+  name: Authenticate Apache APISIX routes with Auth0 JWT
+  category: Identity
+  use_case: Enable the APISIX jwt-auth plugin pointing at the Auth0 JWKS endpoint so Auth0-issued access tokens are validated at the gateway edge before traffic reaches upstreams.
+  partner_baseUri: https://yourdomain.auth0.com
+  partner_api: Auth0 Management API
+  provider_ops:
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch a route to enable jwt-auth with the Auth0 JWKS URL and required audience.
+    - method: PUT
+      path: /consumers/{username}
+      name: createOrUpdateConsumer
+      description: Create or update an APISIX consumer keyed to an Auth0 user.
+    - method: PUT
+      path: /consumers/{username}/credentials/{credential_id}
+      name: createOrUpdateConsumerCredential
+      description: Attach an Auth0 client credential to an APISIX consumer.
+  partner_ops:
+    - method: POST
+      path: /api/v2/clients
+      name: createClient
+    - method: GET
+      path: /api/v2/users
+      name: listUsers
+
+# AI gateway (2)
+- partner: anthropic
+  name: Proxy LLM traffic through Apache APISIX to Anthropic Claude
+  category: AI Gateway
+  use_case: Configure an APISIX route with the ai-proxy plugin in front of api.anthropic.com so prompts, retries, and observability are unified across multiple LLM backends behind one gateway URL.
+  partner_baseUri: https://api.anthropic.com
+  partner_api: Anthropic Messages API
+  provider_ops:
+    - method: PUT
+      path: /routes/{route_id}
+      name: createOrUpdateRoute
+      description: Create or update an APISIX route with the ai-proxy plugin targeting Anthropic.
+    - method: PUT
+      path: /upstreams/{upstream_id}
+      name: createOrUpdateUpstream
+      description: Create or update the upstream object pointing at api.anthropic.com with TLS verification.
+    - method: PATCH
+      path: /routes/{route_id}
+      name: patchRoute
+      description: Patch the AI route to swap models or adjust rate-limiting plugins.
+  partner_ops:
+    - method: POST
+      path: /v1/messages
+      name: createMessage
+    - method: GET
+      path: /v1/models
+      name: listModels
+
+- partner: openai
+  name: Proxy LLM traffic through Apache APISIX to OpenAI
+  category: AI Gateway
+  use_case: Configure an APISIX route with the ai-proxy plugin pointing at api.openai.com so the gateway centralizes API-key management, per-consumer quotas, and prompt logging for OpenAI-bound traffic.
+  partner_baseUri: https://api.openai.com
+  partner_api: OpenAI REST API
+  provider_ops:
+    - method: PUT
+      path: /routes/{route_id}
+      name: createOrUpdateRoute
+      description: Create or update an APISIX route with the ai-proxy plugin targeting OpenAI.
+    - method: PUT
+      path: /upstreams/{upstream_id}
+      name: createOrUpdateUpstream
+      description: Create or update the upstream for api.openai.com with retry and timeout settings.
+    - method: PUT
+      path: /plugin_configs/{config_id}
+      name: createOrUpdatePluginConfig
+      description: Reuse a plugin config bundling ai-proxy + limit-count + http-logger for any OpenAI-bound route.
+  partner_ops:
+    - method: POST
+      path: /v1/chat/completions
+      name: createChatCompletion
+    - method: GET
+      path: /v1/models
+      name: listModels
+
+# Serverless upstream (1)
+- partner: aws-lambda
+  name: Route Apache APISIX traffic to AWS Lambda upstreams
+  category: Serverless
+  use_case: Use the APISIX aws-lambda plugin to invoke AWS Lambda functions as upstreams so a single APISIX gateway URL can front both containerized and serverless workloads with shared auth and rate-limiting.
+  partner_baseUri: https://lambda.us-east-1.amazonaws.com
+  partner_api: AWS Lambda API
+  provider_ops:
+    - method: PUT
+      path: /routes/{route_id}
+      name: createOrUpdateRoute
+      description: Create or update an APISIX route configured with the aws-lambda plugin and target function ARN.
+    - method: PUT
+      path: /upstreams/{upstream_id}
+      name: createOrUpdateUpstream
+      description: Create or update the synthetic upstream representing the Lambda endpoint.
+    - method: PUT
+      path: /secrets/{secret_manager}/{secret_id}
+      name: createOrUpdateSecret
+      description: Store the AWS access key ID and secret used to sign Lambda invocations as an APISIX secret reference.
+  partner_ops:
+    - method: POST
+      path: /2015-03-31/functions/{FunctionName}/invocations
+      name: invokeFunction
+    - method: GET
+      path: /2015-03-31/functions
+      name: listFunctions

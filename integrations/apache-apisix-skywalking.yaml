@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Trace Apache APISIX requests with Apache SkyWalking
+  description: Enable the APISIX skywalking plugin so per-request spans are reported to a SkyWalking OAP backend, giving operators distributed traces from the gateway through upstream microservices.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Observability
+  - skywalking
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    SKYWALKING_API_KEY: SKYWALKING_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Enable the skywalking plugin gateway-wide pointing at the OAP endpoint.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch a route to enable skywalking with a per-route sample ratio.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: skywalking
+    baseUri: https://skywalking-oap.example.com:12800
+    description: SkyWalking OAP HTTP/gRPC API operations consumed by this integration.
+    resources:
+    - name: v3-segments
+      path: /v3/segments
+      operations:
+      - name: reportsegments
+        method: POST
+        description: 'SkyWalking OAP HTTP/gRPC API: reportSegments'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: graphql
+      path: /graphql
+      operations:
+      - name: queryservices
+        method: GET
+        description: 'SkyWalking OAP HTTP/gRPC API: queryServices'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-skywalking-mcp
+    description: MCP adapter for the apache-apisix-skywalking integration.
+    tools:
+    - name: apache_apisix_skywalking
+      description: Execute the apache apisix skywalking integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-skywalking-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-skywalking integration.
+    resources:
+    - path: /apache-apisix-skywalking
+      name: apache-apisix-skywalking
+      description: REST surface for the apache-apisix-skywalking integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-skywalking integration.
+        call: apache_apisix_skywalking
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

@@ -1,0 +1,161 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Authenticate Apache APISIX routes with Auth0 JWT
+  description: Enable the APISIX jwt-auth plugin pointing at the Auth0 JWKS endpoint so Auth0-issued access tokens are validated at the gateway edge before traffic reaches upstreams.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Identity
+  - auth0
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    AUTH0_API_KEY: AUTH0_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch a route to enable jwt-auth with the Auth0 JWKS URL and required audience.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: consumers-username
+      path: /consumers/{username}
+      operations:
+      - name: createorupdateconsumer
+        method: PUT
+        description: Create or update an APISIX consumer keyed to an Auth0 user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          description: Path parameter username.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: consumers-username-credentials-credential-id
+      path: /consumers/{username}/credentials/{credential_id}
+      operations:
+      - name: createorupdateconsumercredential
+        method: PUT
+        description: Attach an Auth0 client credential to an APISIX consumer.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          description: Path parameter username.
+          required: true
+        - name: credential_id
+          in: path
+          type: string
+          description: Path parameter credential_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: auth0
+    baseUri: https://yourdomain.auth0.com
+    description: Auth0 Management API operations consumed by this integration.
+    resources:
+    - name: api-v2-clients
+      path: /api/v2/clients
+      operations:
+      - name: createclient
+        method: POST
+        description: 'Auth0 Management API: createClient'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v2-users
+      path: /api/v2/users
+      operations:
+      - name: listusers
+        method: GET
+        description: 'Auth0 Management API: listUsers'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-auth0-mcp
+    description: MCP adapter for the apache-apisix-auth0 integration.
+    tools:
+    - name: apache_apisix_auth0
+      description: Execute the apache apisix auth0 integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-auth0-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-auth0 integration.
+    resources:
+    - path: /apache-apisix-auth0
+      name: apache-apisix-auth0
+      description: REST surface for the apache-apisix-auth0 integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-auth0 integration.
+        call: apache_apisix_auth0
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

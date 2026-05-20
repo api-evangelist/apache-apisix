@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gate Apache APISIX requests through Open Policy Agent
+  description: Enable the APISIX opa plugin on protected routes so each request is evaluated against a Rego policy in an OPA sidecar, and only allowed requests reach the upstream.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Policy
+  - opa
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    OPA_API_KEY: OPA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch a route to enable the opa plugin with policy bundle URL and decision path.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Apply OPA enforcement gateway-wide for sensitive APIs.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: plugins-plugin-name
+      path: /plugins/{plugin_name}
+      operations:
+      - name: getpluginschema
+        method: GET
+        description: Fetch the opa plugin schema to validate bundle config.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: plugin_name
+          in: path
+          type: string
+          description: Path parameter plugin_name.
+          required: true
+  - type: http
+    namespace: opa
+    baseUri: https://opa.example.com:8181
+    description: Open Policy Agent REST API operations consumed by this integration.
+    resources:
+    - name: v1-data-policy-path
+      path: /v1/data/{policy_path}
+      operations:
+      - name: evaluatepolicy
+        method: POST
+        description: 'Open Policy Agent REST API: evaluatePolicy'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy_path
+          in: path
+          type: string
+          description: Path parameter policy_path.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-policies-id
+      path: /v1/policies/{id}
+      operations:
+      - name: createorupdatepolicy
+        method: PUT
+        description: 'Open Policy Agent REST API: createOrUpdatePolicy'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Path parameter id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-opa-mcp
+    description: MCP adapter for the apache-apisix-opa integration.
+    tools:
+    - name: apache_apisix_opa
+      description: Execute the apache apisix opa integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-opa-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-opa integration.
+    resources:
+    - path: /apache-apisix-opa
+      name: apache-apisix-opa
+      description: REST surface for the apache-apisix-opa integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-opa integration.
+        call: apache_apisix_opa
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

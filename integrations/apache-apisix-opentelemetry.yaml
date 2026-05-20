@@ -1,0 +1,151 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Export Apache APISIX traces to an OpenTelemetry collector
+  description: Enable the APISIX opentelemetry plugin per-route to emit OTLP trace spans to a downstream OTel collector so API request latency stitches into end-to-end traces across upstream services.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Observability
+  - opentelemetry
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    OPENTELEMETRY_API_KEY: OPENTELEMETRY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes
+      path: /routes
+      operations:
+      - name: listroutes
+        method: GET
+        description: List APISIX routes to select which receive opentelemetry instrumentation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch an APISIX route to enable the opentelemetry plugin with collector endpoint and sampling rate.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Apply the opentelemetry plugin gateway-wide via a global rule.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: opentelemetry
+    baseUri: https://otel-collector.example.com
+    description: OpenTelemetry Collector OTLP/HTTP operations consumed by this integration.
+    resources:
+    - name: v1-traces
+      path: /v1/traces
+      operations:
+      - name: exporttraces
+        method: POST
+        description: 'OpenTelemetry Collector OTLP/HTTP: exportTraces'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-metrics
+      path: /v1/metrics
+      operations:
+      - name: exportmetrics
+        method: POST
+        description: 'OpenTelemetry Collector OTLP/HTTP: exportMetrics'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-opentelemetry-mcp
+    description: MCP adapter for the apache-apisix-opentelemetry integration.
+    tools:
+    - name: apache_apisix_opentelemetry
+      description: Execute the apache apisix opentelemetry integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-opentelemetry-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-opentelemetry integration.
+    resources:
+    - path: /apache-apisix-opentelemetry
+      name: apache-apisix-opentelemetry
+      description: REST surface for the apache-apisix-opentelemetry integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-opentelemetry integration.
+        call: apache_apisix_opentelemetry
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

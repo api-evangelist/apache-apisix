@@ -1,0 +1,60 @@
+- slug: apache-apisix-prometheus
+  label: Scrape Apache APISIX metrics into Prometheus
+  partner: prometheus
+  category: Observability
+  use_case: Configure the APISIX prometheus plugin globally so per-route request counts, latency histograms, and upstream health status are scraped by Prometheus for SRE dashboards.
+- slug: apache-apisix-opentelemetry
+  label: Export Apache APISIX traces to an OpenTelemetry collector
+  partner: opentelemetry
+  category: Observability
+  use_case: Enable the APISIX opentelemetry plugin per-route to emit OTLP trace spans to a downstream OTel collector so API request latency stitches into end-to-end traces across upstream services.
+- slug: apache-apisix-datadog
+  label: Stream Apache APISIX gateway metrics into Datadog
+  partner: datadog
+  category: Observability
+  use_case: Use the APISIX datadog plugin to push request counts, latency, and upstream errors to a Datadog Agent over StatsD, then surface them as custom metrics for unified API observability.
+- slug: apache-apisix-skywalking
+  label: Trace Apache APISIX requests with Apache SkyWalking
+  partner: skywalking
+  category: Observability
+  use_case: Enable the APISIX skywalking plugin so per-request spans are reported to a SkyWalking OAP backend, giving operators distributed traces from the gateway through upstream microservices.
+- slug: apache-apisix-kafka
+  label: Ship Apache APISIX access logs to Apache Kafka
+  partner: kafka
+  category: Logging
+  use_case: Configure the APISIX kafka-logger plugin to publish per-request access logs to a Kafka topic so downstream consumers (security analytics, billing, data warehouse) can subscribe.
+- slug: apache-apisix-github
+  label: GitOps push of Apache APISIX route definitions from GitHub
+  partner: github
+  category: GitOps
+  use_case: On every push to a GitHub repo containing APISIX route YAML, reconcile the Admin API so routes, services, and upstreams in the gateway match the repo state.
+- slug: apache-apisix-opa
+  label: Gate Apache APISIX requests through Open Policy Agent
+  partner: opa
+  category: Policy
+  use_case: Enable the APISIX opa plugin on protected routes so each request is evaluated against a Rego policy in an OPA sidecar, and only allowed requests reach the upstream.
+- slug: apache-apisix-keycloak
+  label: Authenticate Apache APISIX consumers with Keycloak OIDC
+  partner: keycloak
+  category: Identity
+  use_case: Enable the APISIX openid-connect plugin on protected routes to delegate authentication to a Keycloak realm and map Keycloak users into APISIX consumers for per-consumer rate limiting.
+- slug: apache-apisix-auth0
+  label: Authenticate Apache APISIX routes with Auth0 JWT
+  partner: auth0
+  category: Identity
+  use_case: Enable the APISIX jwt-auth plugin pointing at the Auth0 JWKS endpoint so Auth0-issued access tokens are validated at the gateway edge before traffic reaches upstreams.
+- slug: apache-apisix-anthropic
+  label: Proxy LLM traffic through Apache APISIX to Anthropic Claude
+  partner: anthropic
+  category: AI Gateway
+  use_case: Configure an APISIX route with the ai-proxy plugin in front of api.anthropic.com so prompts, retries, and observability are unified across multiple LLM backends behind one gateway URL.
+- slug: apache-apisix-openai
+  label: Proxy LLM traffic through Apache APISIX to OpenAI
+  partner: openai
+  category: AI Gateway
+  use_case: Configure an APISIX route with the ai-proxy plugin pointing at api.openai.com so the gateway centralizes API-key management, per-consumer quotas, and prompt logging for OpenAI-bound traffic.
+- slug: apache-apisix-aws-lambda
+  label: Route Apache APISIX traffic to AWS Lambda upstreams
+  partner: aws-lambda
+  category: Serverless
+  use_case: Use the APISIX aws-lambda plugin to invoke AWS Lambda functions as upstreams so a single APISIX gateway URL can front both containerized and serverless workloads with shared auth and rate-limiting.

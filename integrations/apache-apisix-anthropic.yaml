@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Proxy LLM traffic through Apache APISIX to Anthropic Claude
+  description: Configure an APISIX route with the ai-proxy plugin in front of api.anthropic.com so prompts, retries, and observability are unified across multiple LLM backends behind one gateway URL.
+  tags:
+  - Apache APISIX
+  - Integration
+  - AI Gateway
+  - anthropic
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    ANTHROPIC_API_KEY: ANTHROPIC_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: createorupdateroute
+        method: PUT
+        description: Create or update an APISIX route with the ai-proxy plugin targeting Anthropic.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: upstreams-upstream-id
+      path: /upstreams/{upstream_id}
+      operations:
+      - name: createorupdateupstream
+        method: PUT
+        description: Create or update the upstream object pointing at api.anthropic.com with TLS verification.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upstream_id
+          in: path
+          type: string
+          description: Path parameter upstream_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch the AI route to swap models or adjust rate-limiting plugins.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: anthropic
+    baseUri: https://api.anthropic.com
+    description: Anthropic Messages API operations consumed by this integration.
+    resources:
+    - name: v1-messages
+      path: /v1/messages
+      operations:
+      - name: createmessage
+        method: POST
+        description: 'Anthropic Messages API: createMessage'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-models
+      path: /v1/models
+      operations:
+      - name: listmodels
+        method: GET
+        description: 'Anthropic Messages API: listModels'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-anthropic-mcp
+    description: MCP adapter for the apache-apisix-anthropic integration.
+    tools:
+    - name: apache_apisix_anthropic
+      description: Execute the apache apisix anthropic integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-anthropic-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-anthropic integration.
+    resources:
+    - path: /apache-apisix-anthropic
+      name: apache-apisix-anthropic
+      description: REST surface for the apache-apisix-anthropic integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-anthropic integration.
+        call: apache_apisix_anthropic
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

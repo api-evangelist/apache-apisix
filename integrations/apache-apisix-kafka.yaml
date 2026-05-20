@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ship Apache APISIX access logs to Apache Kafka
+  description: Configure the APISIX kafka-logger plugin to publish per-request access logs to a Kafka topic so downstream consumers (security analytics, billing, data warehouse) can subscribe.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Logging
+  - kafka
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    KAFKA_API_KEY: KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Enable the kafka-logger plugin gateway-wide with broker list, topic, and producer batching.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: plugins-plugin-name
+      path: /plugins/{plugin_name}
+      operations:
+      - name: getpluginschema
+        method: GET
+        description: Fetch the kafka-logger plugin schema to validate broker config.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: plugin_name
+          in: path
+          type: string
+          description: Path parameter plugin_name.
+          required: true
+  - type: http
+    namespace: kafka
+    baseUri: https://kafka-rest.example.com
+    description: Confluent REST Proxy / Kafka REST operations consumed by this integration.
+    resources:
+    - name: topics-topic-name
+      path: /topics/{topic_name}
+      operations:
+      - name: producerecords
+        method: POST
+        description: 'Confluent REST Proxy / Kafka REST: produceRecords'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: topic_name
+          in: path
+          type: string
+          description: Path parameter topic_name.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: topics
+      path: /topics
+      operations:
+      - name: listtopics
+        method: GET
+        description: 'Confluent REST Proxy / Kafka REST: listTopics'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-kafka-mcp
+    description: MCP adapter for the apache-apisix-kafka integration.
+    tools:
+    - name: apache_apisix_kafka
+      description: Execute the apache apisix kafka integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-kafka-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-kafka integration.
+    resources:
+    - path: /apache-apisix-kafka
+      name: apache-apisix-kafka
+      description: REST surface for the apache-apisix-kafka integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-kafka integration.
+        call: apache_apisix_kafka
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

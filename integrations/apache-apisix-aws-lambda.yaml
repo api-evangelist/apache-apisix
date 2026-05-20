@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Route Apache APISIX traffic to AWS Lambda upstreams
+  description: Use the APISIX aws-lambda plugin to invoke AWS Lambda functions as upstreams so a single APISIX gateway URL can front both containerized and serverless workloads with shared auth and rate-limiting.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Serverless
+  - aws-lambda
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    AWS_LAMBDA_API_KEY: AWS_LAMBDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: createorupdateroute
+        method: PUT
+        description: Create or update an APISIX route configured with the aws-lambda plugin and target function ARN.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: upstreams-upstream-id
+      path: /upstreams/{upstream_id}
+      operations:
+      - name: createorupdateupstream
+        method: PUT
+        description: Create or update the synthetic upstream representing the Lambda endpoint.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: upstream_id
+          in: path
+          type: string
+          description: Path parameter upstream_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: secrets-secret-manager-secret-id
+      path: /secrets/{secret_manager}/{secret_id}
+      operations:
+      - name: createorupdatesecret
+        method: PUT
+        description: Store the AWS access key ID and secret used to sign Lambda invocations as an APISIX secret reference.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: secret_manager
+          in: path
+          type: string
+          description: Path parameter secret_manager.
+          required: true
+        - name: secret_id
+          in: path
+          type: string
+          description: Path parameter secret_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: aws-lambda
+    baseUri: https://lambda.us-east-1.amazonaws.com
+    description: AWS Lambda API operations consumed by this integration.
+    resources:
+    - name: 2015-03-31-functions-functionname-invocations
+      path: /2015-03-31/functions/{FunctionName}/invocations
+      operations:
+      - name: invokefunction
+        method: POST
+        description: 'AWS Lambda API: invokeFunction'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: FunctionName
+          in: path
+          type: string
+          description: Path parameter FunctionName.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: 2015-03-31-functions
+      path: /2015-03-31/functions
+      operations:
+      - name: listfunctions
+        method: GET
+        description: 'AWS Lambda API: listFunctions'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-aws-lambda-mcp
+    description: MCP adapter for the apache-apisix-aws-lambda integration.
+    tools:
+    - name: apache_apisix_aws_lambda
+      description: Execute the apache apisix aws lambda integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-aws-lambda-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-aws-lambda integration.
+    resources:
+    - path: /apache-apisix-aws-lambda
+      name: apache-apisix-aws-lambda
+      description: REST surface for the apache-apisix-aws-lambda integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-aws-lambda integration.
+        call: apache_apisix_aws_lambda
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

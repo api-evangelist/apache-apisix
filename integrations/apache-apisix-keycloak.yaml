@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Authenticate Apache APISIX consumers with Keycloak OIDC
+  description: Enable the APISIX openid-connect plugin on protected routes to delegate authentication to a Keycloak realm and map Keycloak users into APISIX consumers for per-consumer rate limiting.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Identity
+  - keycloak
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    KEYCLOAK_API_KEY: KEYCLOAK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: routes-route-id
+      path: /routes/{route_id}
+      operations:
+      - name: patchroute
+        method: PATCH
+        description: Patch a route to enable openid-connect with Keycloak issuer, client ID, and client secret.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: route_id
+          in: path
+          type: string
+          description: Path parameter route_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: consumers
+      path: /consumers
+      operations:
+      - name: listconsumers
+        method: GET
+        description: List APISIX consumers to reconcile against Keycloak users.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: consumers-username
+      path: /consumers/{username}
+      operations:
+      - name: createorupdateconsumer
+        method: PUT
+        description: Create or update an APISIX consumer mapped to a Keycloak user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          description: Path parameter username.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: keycloak
+    baseUri: https://keycloak.example.com
+    description: Keycloak Admin REST API operations consumed by this integration.
+    resources:
+    - name: admin-realms-realm-users
+      path: /admin/realms/{realm}/users
+      operations:
+      - name: listusers
+        method: GET
+        description: 'Keycloak Admin REST API: listUsers'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: realm
+          in: path
+          type: string
+          description: Path parameter realm.
+          required: true
+    - name: admin-realms-realm-clients
+      path: /admin/realms/{realm}/clients
+      operations:
+      - name: createclient
+        method: POST
+        description: 'Keycloak Admin REST API: createClient'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: realm
+          in: path
+          type: string
+          description: Path parameter realm.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-keycloak-mcp
+    description: MCP adapter for the apache-apisix-keycloak integration.
+    tools:
+    - name: apache_apisix_keycloak
+      description: Execute the apache apisix keycloak integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-keycloak-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-keycloak integration.
+    resources:
+    - path: /apache-apisix-keycloak
+      name: apache-apisix-keycloak
+      description: REST surface for the apache-apisix-keycloak integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-keycloak integration.
+        call: apache_apisix_keycloak
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

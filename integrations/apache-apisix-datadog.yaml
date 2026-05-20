@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Stream Apache APISIX gateway metrics into Datadog
+  description: Use the APISIX datadog plugin to push request counts, latency, and upstream errors to a Datadog Agent over StatsD, then surface them as custom metrics for unified API observability.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Observability
+  - datadog
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    DATADOG_API_KEY: DATADOG_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Enable the APISIX datadog plugin gateway-wide with StatsD host and namespace.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: routes
+      path: /routes
+      operations:
+      - name: listroutes
+        method: GET
+        description: List APISIX routes to label datadog metric series by route ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+  - type: http
+    namespace: datadog
+    baseUri: https://api.datadoghq.com
+    description: Datadog Metrics API operations consumed by this integration.
+    resources:
+    - name: api-v2-series
+      path: /api/v2/series
+      operations:
+      - name: submitmetrics
+        method: POST
+        description: 'Datadog Metrics API: submitMetrics'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-events
+      path: /api/v1/events
+      operations:
+      - name: postevent
+        method: POST
+        description: 'Datadog Metrics API: postEvent'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-datadog-mcp
+    description: MCP adapter for the apache-apisix-datadog integration.
+    tools:
+    - name: apache_apisix_datadog
+      description: Execute the apache apisix datadog integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-datadog-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-datadog integration.
+    resources:
+    - path: /apache-apisix-datadog
+      name: apache-apisix-datadog
+      description: REST surface for the apache-apisix-datadog integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-datadog integration.
+        call: apache_apisix_datadog
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

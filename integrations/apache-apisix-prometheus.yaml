@@ -1,0 +1,141 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Scrape Apache APISIX metrics into Prometheus
+  description: Configure the APISIX prometheus plugin globally so per-route request counts, latency histograms, and upstream health status are scraped by Prometheus for SRE dashboards.
+  tags:
+  - Apache APISIX
+  - Integration
+  - Observability
+  - prometheus
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    APACHE_APISIX_API_KEY: APACHE_APISIX_API_KEY
+    PROMETHEUS_API_KEY: PROMETHEUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apache-apisix
+    baseUri: https://apisix.example.com:9180/apisix/admin
+    description: Apache APISIX API operations consumed by this integration.
+    resources:
+    - name: global-rules
+      path: /global_rules
+      operations:
+      - name: listglobalrules
+        method: GET
+        description: List APISIX global rules so the prometheus plugin can be enabled gateway-wide.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: global-rules-rule-id
+      path: /global_rules/{rule_id}
+      operations:
+      - name: createorupdateglobalrule
+        method: PUT
+        description: Enable or update the prometheus plugin globally on the APISIX gateway.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_id
+          in: path
+          type: string
+          description: Path parameter rule_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: plugins-plugin-name
+      path: /plugins/{plugin_name}
+      operations:
+      - name: getpluginschema
+        method: GET
+        description: Fetch the prometheus plugin schema to validate configuration.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: plugin_name
+          in: path
+          type: string
+          description: Path parameter plugin_name.
+          required: true
+  - type: http
+    namespace: prometheus
+    baseUri: https://prometheus.example.com
+    description: Prometheus HTTP API operations consumed by this integration.
+    resources:
+    - name: api-v1-targets
+      path: /api/v1/targets
+      operations:
+      - name: listtargets
+        method: GET
+        description: 'Prometheus HTTP API: listTargets'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: api-v1-query
+      path: /api/v1/query
+      operations:
+      - name: query
+        method: POST
+        description: 'Prometheus HTTP API: query'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: apache-apisix-prometheus-mcp
+    description: MCP adapter for the apache-apisix-prometheus integration.
+    tools:
+    - name: apache_apisix_prometheus
+      description: Execute the apache apisix prometheus integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: apache-apisix-prometheus-rest
+    port: 8080
+    description: REST adapter for the apache-apisix-prometheus integration.
+    resources:
+    - path: /apache-apisix-prometheus
+      name: apache-apisix-prometheus
+      description: REST surface for the apache-apisix-prometheus integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the apache-apisix-prometheus integration.
+        call: apache_apisix_prometheus
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
