@@ -1,0 +1,1413 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes"
+          },
+          "docs": "Fetches a list of all configured routes."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new route with a server-generated ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the route."
+              }
+            ]
+          },
+          "docs": "Fetches the specified route by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the route."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a route with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the route."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified route."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the route."
+              }
+            ]
+          },
+          "docs": "Removes the specified route."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/services"
+          },
+          "docs": "Fetches a list of all configured services."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/services",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new service with a server-generated ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the service."
+              }
+            ]
+          },
+          "docs": "Fetches the specified service by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the service."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a service with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the service."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified service."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the service."
+              }
+            ]
+          },
+          "docs": "Removes the specified service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Upstreams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Upstreams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams"
+          },
+          "docs": "Fetches a list of all configured upstreams."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new upstream with a server-generated ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ]
+          },
+          "docs": "Fetches the specified upstream by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an upstream with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified upstream."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ]
+          },
+          "docs": "Removes the specified upstream."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consumers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Consumers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers"
+          },
+          "docs": "Fetches a list of all configured consumers."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Fetches the specified consumer by username."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a consumer with the specified username, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Removes the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX List Consumer Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Fetches all credentials for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ]
+          },
+          "docs": "Fetches a specific credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of a credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ]
+          },
+          "docs": "Removes a specific credential for the specified consumer."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consumer Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Consumer Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups"
+          },
+          "docs": "Fetches a list of all configured consumer groups."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ]
+          },
+          "docs": "Fetches the specified consumer group by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a consumer group with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified consumer group."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ]
+          },
+          "docs": "Removes the specified consumer group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All SSL Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls"
+          },
+          "docs": "Fetches a list of all configured SSL certificate resources."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ]
+          },
+          "docs": "Fetches the specified SSL certificate resource by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an SSL certificate with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified SSL certificate."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ]
+          },
+          "docs": "Removes the specified SSL certificate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Global Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Global Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules"
+          },
+          "docs": "Fetches a list of all configured global plugin rules."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ]
+          },
+          "docs": "Fetches the specified global rule by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a global rule with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified global rule."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ]
+          },
+          "docs": "Removes the specified global rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugin Configs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Plugin Configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_configs"
+          },
+          "docs": "Fetches a list of all configured plugin config resources."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Plugin Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the plugin config."
+              }
+            ]
+          },
+          "docs": "Fetches the specified plugin config by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Plugin Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the plugin config."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a plugin config with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Plugin Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the plugin config."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified plugin config."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Plugin Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_configs/:config_id",
+            "params": [
+              {
+                "name": "config_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the plugin config."
+              }
+            ]
+          },
+          "docs": "Removes the specified plugin config."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugin Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Fetches metadata for the specified plugin."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates metadata for the specified plugin."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Removes metadata for the specified plugin."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugins",
+            "params": [
+              {
+                "name": "subsystem",
+                "value": "",
+                "type": "query",
+                "description": "Filter plugins by subsystem (http or stream)."
+              }
+            ]
+          },
+          "docs": "Fetches a list of all available plugins on the APISIX instance."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Plugin Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugins/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Fetches the JSON Schema of the specified plugin."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Protos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Protos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/protos"
+          },
+          "docs": "Fetches a list of all configured Protocol Buffer definition resources."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Proto",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/protos/:proto_id",
+            "params": [
+              {
+                "name": "proto_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the proto resource."
+              }
+            ]
+          },
+          "docs": "Fetches the specified Protocol Buffer definition by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Proto",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/protos/:proto_id",
+            "params": [
+              {
+                "name": "proto_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the proto resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a proto with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Proto",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/protos/:proto_id",
+            "params": [
+              {
+                "name": "proto_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the proto resource."
+              }
+            ]
+          },
+          "docs": "Removes the specified Protocol Buffer definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stream Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Stream Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes"
+          },
+          "docs": "Fetches a list of all configured stream (Layer 4) routes."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ]
+          },
+          "docs": "Fetches the specified stream route by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a stream route with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ]
+          },
+          "docs": "Removes the specified stream route."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/secrets/:secret_manager/:secret_id",
+            "params": [
+              {
+                "name": "secret_manager",
+                "value": "",
+                "type": "path",
+                "description": "The secret manager type (e.g. vault, aws)."
+              },
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the secret."
+              }
+            ]
+          },
+          "docs": "Fetches the specified secret resource from the given secret manager."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/secrets/:secret_manager/:secret_id",
+            "params": [
+              {
+                "name": "secret_manager",
+                "value": "",
+                "type": "path",
+                "description": "The secret manager type (e.g. vault, aws)."
+              },
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a secret with the specified ID in the given manager, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/secrets/:secret_manager/:secret_id",
+            "params": [
+              {
+                "name": "secret_manager",
+                "value": "",
+                "type": "path",
+                "description": "The secret manager type (e.g. vault, aws)."
+              },
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the secret."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified secret."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/secrets/:secret_manager/:secret_id",
+            "params": [
+              {
+                "name": "secret_manager",
+                "value": "",
+                "type": "path",
+                "description": "The secret manager type (e.g. vault, aws)."
+              },
+              {
+                "name": "secret_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the secret."
+              }
+            ]
+          },
+          "docs": "Removes the specified secret resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Validate Resource Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/schema/validate/:resource",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path",
+                "description": "The resource type to validate against (e.g. routes, services, upstreams)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates the given request body against the schema of the specified resource type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

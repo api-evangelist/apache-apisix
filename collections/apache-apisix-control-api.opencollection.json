@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Control API",
+    "version": "3.14.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health Check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get All Health Check Statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/healthcheck"
+          },
+          "docs": "Returns the health check status of all upstreams that have health checking enabled."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/healthcheck/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the upstream resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific upstream by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/healthcheck/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the route resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific route by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/healthcheck/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific service by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get APISIX JSON Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/schema"
+          },
+          "docs": "Returns the full JSON schema used by the APISIX instance, including main configuration schemas and all plugin schemas."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Specific Plugin Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/schema/plugins/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the plugin."
+              }
+            ]
+          },
+          "docs": "Returns the JSON schema for the specified plugin."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Diagnostics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Trigger Garbage Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9090/v1/gc"
+          },
+          "docs": "Triggers a full garbage collection cycle in the Lua VM."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Introspection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/routes"
+          },
+          "docs": "Returns a list of all routes with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/services"
+          },
+          "docs": "Returns a list of all services with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Upstreams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/upstreams"
+          },
+          "docs": "Returns a list of all upstreams with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Dump Service Discovery Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9090/v1/discovery/:discovery_type/dump",
+            "params": [
+              {
+                "name": "discovery_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of service discovery (e.g. dns, consul, nacos)."
+              }
+            ]
+          },
+          "docs": "Returns the nodes discovered by the specified service discovery type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
