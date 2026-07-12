@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/apache-apisix-admin-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  description: Admin API key for authentication.
+  sources:
+  - openapi/apache-apisix-admin-api-openapi.yml
