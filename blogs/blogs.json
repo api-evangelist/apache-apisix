@@ -2,13 +2,14 @@
   "repo": "apache-apisix",
   "feeds": [
     {
-      "source": "https://apisix.apache.org/blog/",
-      "feed_url": "",
+      "source": "https://apisix.apache.org/docs/apisix/getting-started/",
+      "feed_url": "https://apisix.apache.org/docs/apisix/getting-started/",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "post_count": 23,
-  "fetched": "2026-06-27T12:23:40Z",
+  "post_count": 24,
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
