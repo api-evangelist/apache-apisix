@@ -1,0 +1,158 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Protos API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Protos
+  description: Manage Protocol Buffer definition resources.
+paths:
+  /protos:
+    get:
+      operationId: listProtos
+      summary: Apache APISIX List All Protos
+      description: Fetches a list of all configured Protocol Buffer definition resources.
+      tags:
+      - Protos
+      responses:
+        '200':
+          description: Successful response with list of protos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /protos/{proto_id}:
+    get:
+      operationId: getProto
+      summary: Apache APISIX Get a Proto
+      description: Fetches the specified Protocol Buffer definition by its ID.
+      tags:
+      - Protos
+      parameters:
+      - $ref: '#/components/parameters/ProtoId'
+      responses:
+        '200':
+          description: Successful response with proto details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Proto not found.
+    put:
+      operationId: createOrUpdateProto
+      summary: Apache APISIX Create or Update a Proto
+      description: Creates a proto with the specified ID, or updates it if it already exists.
+      tags:
+      - Protos
+      parameters:
+      - $ref: '#/components/parameters/ProtoId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Proto'
+      responses:
+        '200':
+          description: Proto updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Proto created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    delete:
+      operationId: deleteProto
+      summary: Apache APISIX Delete a Proto
+      description: Removes the specified Protocol Buffer definition.
+      tags:
+      - Protos
+      parameters:
+      - $ref: '#/components/parameters/ProtoId'
+      responses:
+        '200':
+          description: Proto deleted successfully.
+        '404':
+          description: Proto not found.
+components:
+  schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+    Proto:
+      type: object
+      description: A Proto resource stores Protocol Buffer definitions used by the grpc-transcode plugin.
+      required:
+      - content
+      properties:
+        desc:
+          type: string
+          description: Description of the proto resource.
+        content:
+          type: string
+          description: The Protocol Buffer definition content.
+  parameters:
+    ProtoId:
+      name: proto_id
+      in: path
+      required: true
+      description: Unique identifier of the proto resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

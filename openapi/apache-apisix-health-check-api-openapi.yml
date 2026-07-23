@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Health Check API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Health Check
+  description: Monitor the health status of upstream nodes.
+paths:
+  /v1/healthcheck:
+    get:
+      operationId: getHealthCheck
+      summary: Apache APISIX Get All Health Check Statuses
+      description: Returns the health check status of all upstreams that have health checking enabled.
+      tags:
+      - Health Check
+      responses:
+        '200':
+          description: Successful response with health check information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HealthCheckStatus'
+  /v1/healthcheck/upstreams/{upstream_id}:
+    get:
+      operationId: getUpstreamHealthCheck
+      summary: Apache APISIX Get Health Check for a Specific Upstream
+      description: Returns the health check status for a specific upstream by its ID.
+      tags:
+      - Health Check
+      parameters:
+      - name: upstream_id
+        in: path
+        required: true
+        description: The ID of the upstream resource.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with upstream health status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckStatus'
+        '404':
+          description: Upstream not found or health check not configured.
+  /v1/healthcheck/routes/{route_id}:
+    get:
+      operationId: getRouteHealthCheck
+      summary: Apache APISIX Get Health Check for a Specific Route
+      description: Returns the health check status for a specific route by its ID.
+      tags:
+      - Health Check
+      parameters:
+      - name: route_id
+        in: path
+        required: true
+        description: The ID of the route resource.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with route health status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckStatus'
+        '404':
+          description: Route not found or health check not configured.
+  /v1/healthcheck/services/{service_id}:
+    get:
+      operationId: getServiceHealthCheck
+      summary: Apache APISIX Get Health Check for a Specific Service
+      description: Returns the health check status for a specific service by its ID.
+      tags:
+      - Health Check
+      parameters:
+      - name: service_id
+        in: path
+        required: true
+        description: The ID of the service resource.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with service health status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckStatus'
+        '404':
+          description: Service not found or health check not configured.
+components:
+  schemas:
+    HealthCheckStatus:
+      type: object
+      description: Health check status for an upstream or route.
+      properties:
+        name:
+          type: string
+          description: Identifier of the health-checked resource.
+        type:
+          type: string
+          description: The source type (upstreams, routes, services).
+        nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              ip:
+                type: string
+                description: IP address of the node.
+              port:
+                type: integer
+                description: Port number of the node.
+              status:
+                type: string
+                enum:
+                - healthy
+                - unhealthy
+                description: Current health status of the node.
+              counter:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: Number of successful health checks.
+                  http_failure:
+                    type: integer
+                    description: Number of HTTP health check failures.
+                  tcp_failure:
+                    type: integer
+                    description: Number of TCP health check failures.
+                  timeout_failure:
+                    type: integer
+                    description: Number of timeout failures.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

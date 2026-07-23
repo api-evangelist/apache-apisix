@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Plugin Metadata API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Plugin Metadata
+  description: Manage metadata for individual plugins.
+paths:
+  /plugin_metadata/{plugin_name}:
+    get:
+      operationId: getPluginMetadata
+      summary: Apache APISIX Get Plugin Metadata
+      description: Fetches metadata for the specified plugin.
+      tags:
+      - Plugin Metadata
+      parameters:
+      - $ref: '#/components/parameters/PluginName'
+      responses:
+        '200':
+          description: Successful response with plugin metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Plugin metadata not found.
+    put:
+      operationId: createOrUpdatePluginMetadata
+      summary: Apache APISIX Create or Update Plugin Metadata
+      description: Creates or updates metadata for the specified plugin.
+      tags:
+      - Plugin Metadata
+      parameters:
+      - $ref: '#/components/parameters/PluginName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Plugin-specific metadata configuration.
+      responses:
+        '200':
+          description: Plugin metadata updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Plugin metadata created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    delete:
+      operationId: deletePluginMetadata
+      summary: Apache APISIX Delete Plugin Metadata
+      description: Removes metadata for the specified plugin.
+      tags:
+      - Plugin Metadata
+      parameters:
+      - $ref: '#/components/parameters/PluginName'
+      responses:
+        '200':
+          description: Plugin metadata deleted successfully.
+        '404':
+          description: Plugin metadata not found.
+components:
+  parameters:
+    PluginName:
+      name: plugin_name
+      in: path
+      required: true
+      description: Name of the plugin.
+      schema:
+        type: string
+  schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

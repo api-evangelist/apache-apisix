@@ -1,0 +1,226 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups SSL API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: SSL
+  description: Manage SSL/TLS certificate resources.
+paths:
+  /ssls:
+    get:
+      operationId: listSSLs
+      summary: Apache APISIX List All SSL Certificates
+      description: Fetches a list of all configured SSL certificate resources.
+      tags:
+      - SSL
+      responses:
+        '200':
+          description: Successful response with list of SSL certificates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /ssls/{ssl_id}:
+    get:
+      operationId: getSSL
+      summary: Apache APISIX Get an SSL Certificate
+      description: Fetches the specified SSL certificate resource by its ID.
+      tags:
+      - SSL
+      parameters:
+      - $ref: '#/components/parameters/SSLId'
+      responses:
+        '200':
+          description: Successful response with SSL certificate details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: SSL certificate not found.
+    put:
+      operationId: createOrUpdateSSL
+      summary: Apache APISIX Create or Update an SSL Certificate
+      description: Creates an SSL certificate with the specified ID, or updates it if it already exists.
+      tags:
+      - SSL
+      parameters:
+      - $ref: '#/components/parameters/SSLId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSL'
+      responses:
+        '200':
+          description: SSL certificate updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: SSL certificate created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    patch:
+      operationId: patchSSL
+      summary: Apache APISIX Patch an SSL Certificate
+      description: Updates partial attributes of the specified SSL certificate.
+      tags:
+      - SSL
+      parameters:
+      - $ref: '#/components/parameters/SSLId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SSL'
+      responses:
+        '200':
+          description: SSL certificate patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    delete:
+      operationId: deleteSSL
+      summary: Apache APISIX Delete an SSL Certificate
+      description: Removes the specified SSL certificate.
+      tags:
+      - SSL
+      parameters:
+      - $ref: '#/components/parameters/SSLId'
+      responses:
+        '200':
+          description: SSL certificate deleted successfully.
+        '404':
+          description: SSL certificate not found.
+components:
+  schemas:
+    SSL:
+      type: object
+      description: An SSL resource stores SSL certificates and keys for HTTPS traffic.
+      required:
+      - cert
+      - key
+      - snis
+      properties:
+        cert:
+          type: string
+          description: PEM-encoded SSL certificate.
+        key:
+          type: string
+          description: PEM-encoded private key.
+        certs:
+          type: array
+          items:
+            type: string
+          description: Additional PEM-encoded certificates for multiple certificates.
+        keys:
+          type: array
+          items:
+            type: string
+          description: Additional PEM-encoded private keys.
+        snis:
+          type: array
+          items:
+            type: string
+          description: Server Name Indication values to match.
+        client:
+          type: object
+          description: mTLS client verification configuration.
+          properties:
+            ca:
+              type: string
+              description: PEM-encoded CA certificate for client verification.
+            depth:
+              type: integer
+              default: 1
+              description: Maximum length of the client certificate chain.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+        status:
+          type: integer
+          enum:
+          - 0
+          - 1
+          default: 1
+          description: SSL status. 1 for enabled, 0 for disabled.
+        type:
+          type: string
+          enum:
+          - server
+          - client
+          default: server
+          description: Identifies the type of certificate.
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+  parameters:
+    SSLId:
+      name: ssl_id
+      in: path
+      required: true
+      description: Unique identifier of the SSL certificate resource.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

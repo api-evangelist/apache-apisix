@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Plugins API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Plugins
+  description: Query available plugins and their schemas.
+paths:
+  /plugins:
+    get:
+      operationId: listPlugins
+      summary: Apache APISIX List All Plugins
+      description: Fetches a list of all available plugins on the APISIX instance.
+      tags:
+      - Plugins
+      parameters:
+      - name: subsystem
+        in: query
+        description: Filter plugins by subsystem (http or stream).
+        schema:
+          type: string
+          enum:
+          - http
+          - stream
+      responses:
+        '200':
+          description: Successful response with list of plugin names.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /plugins/{plugin_name}:
+    get:
+      operationId: getPluginSchema
+      summary: Apache APISIX Get Plugin Schema
+      description: Fetches the JSON Schema of the specified plugin.
+      tags:
+      - Plugins
+      parameters:
+      - $ref: '#/components/parameters/PluginName'
+      responses:
+        '200':
+          description: Successful response with plugin JSON Schema.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Plugin not found.
+components:
+  parameters:
+    PluginName:
+      name: plugin_name
+      in: path
+      required: true
+      description: Name of the plugin.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

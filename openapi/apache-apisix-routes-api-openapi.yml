@@ -1,0 +1,488 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Routes API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Routes
+  description: Manage HTTP routes that define rules for matching client requests.
+paths:
+  /routes:
+    get:
+      operationId: listRoutes
+      summary: Apache APISIX List All Routes
+      description: Fetches a list of all configured routes.
+      tags:
+      - Routes
+      responses:
+        '200':
+          description: Successful response with list of routes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+    post:
+      operationId: createRoute
+      summary: Apache APISIX Create a Route
+      description: Creates a new route with a server-generated ID.
+      tags:
+      - Routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '201':
+          description: Route created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+  /routes/{route_id}:
+    get:
+      operationId: getRoute
+      summary: Apache APISIX Get a Route
+      description: Fetches the specified route by its ID.
+      tags:
+      - Routes
+      parameters:
+      - $ref: '#/components/parameters/RouteId'
+      responses:
+        '200':
+          description: Successful response with route details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Route not found.
+    put:
+      operationId: createOrUpdateRoute
+      summary: Apache APISIX Create or Update a Route
+      description: Creates a route with the specified ID, or updates it if it already exists.
+      tags:
+      - Routes
+      parameters:
+      - $ref: '#/components/parameters/RouteId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Route updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Route created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    patch:
+      operationId: patchRoute
+      summary: Apache APISIX Patch a Route
+      description: Updates partial attributes of the specified route.
+      tags:
+      - Routes
+      parameters:
+      - $ref: '#/components/parameters/RouteId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      responses:
+        '200':
+          description: Route patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Route not found.
+    delete:
+      operationId: deleteRoute
+      summary: Apache APISIX Delete a Route
+      description: Removes the specified route.
+      tags:
+      - Routes
+      parameters:
+      - $ref: '#/components/parameters/RouteId'
+      responses:
+        '200':
+          description: Route deleted successfully.
+        '404':
+          description: Route not found.
+components:
+  schemas:
+    Route:
+      type: object
+      description: A Route defines rules to match client requests and specifies how to handle matched requests, including plugins and upstream configurations.
+      properties:
+        uri:
+          type: string
+          description: The request URI path. Supports path prefixes with wildcard.
+        uris:
+          type: array
+          items:
+            type: string
+          description: A list of URIs for the route to match.
+        name:
+          type: string
+          description: Human-readable name for the route.
+        desc:
+          type: string
+          description: Description of the route.
+        host:
+          type: string
+          description: Host to match for the route.
+        hosts:
+          type: array
+          items:
+            type: string
+          description: A list of hosts for the route to match.
+        methods:
+          type: array
+          items:
+            type: string
+            enum:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - PATCH
+            - HEAD
+            - OPTIONS
+            - CONNECT
+            - TRACE
+          description: HTTP methods to match.
+        remote_addr:
+          type: string
+          description: Client IP address to match.
+        remote_addrs:
+          type: array
+          items:
+            type: string
+          description: A list of client IP addresses to match.
+        vars:
+          type: array
+          description: DSL expressions for matching request attributes.
+        priority:
+          type: integer
+          default: 0
+          description: Route priority for matching order. Higher value means higher priority.
+        plugins:
+          type: object
+          description: Plugin configuration. Key is the plugin name and value is the plugin config.
+        upstream:
+          $ref: '#/components/schemas/Upstream'
+        upstream_id:
+          type: string
+          description: ID of an existing upstream to use.
+        service_id:
+          type: string
+          description: ID of an existing service to bind to.
+        plugin_config_id:
+          type: string
+          description: ID of a plugin config to bind to.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+        timeout:
+          $ref: '#/components/schemas/Timeout'
+        enable_websocket:
+          type: boolean
+          description: Enable WebSocket proxying.
+        status:
+          type: integer
+          enum:
+          - 0
+          - 1
+          default: 1
+          description: Route status. 1 for enabled, 0 for disabled.
+        filter_func:
+          type: string
+          description: A Lua function string for custom filtering logic.
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    Timeout:
+      type: object
+      description: Timeout settings for upstream connections.
+      properties:
+        connect:
+          type: number
+          default: 60
+          description: Connection timeout in seconds.
+        send:
+          type: number
+          default: 60
+          description: Send timeout in seconds.
+        read:
+          type: number
+          default: 60
+          description: Read timeout in seconds.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+    Upstream:
+      type: object
+      description: An Upstream is a virtual host abstraction that performs load balancing on a given set of service nodes according to configured rules.
+      properties:
+        name:
+          type: string
+          description: Human-readable name for the upstream.
+        desc:
+          type: string
+          description: Description of the upstream.
+        type:
+          type: string
+          enum:
+          - roundrobin
+          - chash
+          - least_conn
+          - ewma
+          default: roundrobin
+          description: Load balancing algorithm.
+        nodes:
+          oneOf:
+          - type: object
+            additionalProperties:
+              type: integer
+            description: Key-value pairs of address:port to weight.
+          - type: array
+            items:
+              type: object
+              properties:
+                host:
+                  type: string
+                port:
+                  type: integer
+                weight:
+                  type: integer
+                priority:
+                  type: integer
+                  default: 0
+            description: List of node objects.
+          description: Backend service nodes.
+        service_name:
+          type: string
+          description: Service name for service discovery.
+        discovery_type:
+          type: string
+          description: Type of service discovery (e.g. dns, consul, nacos, eureka).
+        hash_on:
+          type: string
+          enum:
+          - vars
+          - header
+          - cookie
+          - consumer
+          - vars_combinations
+          default: vars
+          description: Hash input for consistent hashing load balancer.
+        key:
+          type: string
+          description: Hash key when using chash load balancer.
+        checks:
+          type: object
+          description: Health check configuration.
+          properties:
+            active:
+              type: object
+              description: Active health check configuration.
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - http
+                  - https
+                  - tcp
+                  default: http
+                timeout:
+                  type: number
+                  default: 1
+                http_path:
+                  type: string
+                  default: /
+                host:
+                  type: string
+                port:
+                  type: integer
+                https_verify_certificate:
+                  type: boolean
+                  default: true
+                healthy:
+                  type: object
+                  properties:
+                    interval:
+                      type: integer
+                    successes:
+                      type: integer
+                unhealthy:
+                  type: object
+                  properties:
+                    interval:
+                      type: integer
+                    http_failures:
+                      type: integer
+                    tcp_failures:
+                      type: integer
+                    timeouts:
+                      type: integer
+            passive:
+              type: object
+              description: Passive health check configuration.
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - http
+                  - https
+                  - tcp
+                  default: http
+                healthy:
+                  type: object
+                  properties:
+                    http_statuses:
+                      type: array
+                      items:
+                        type: integer
+                    successes:
+                      type: integer
+                unhealthy:
+                  type: object
+                  properties:
+                    http_statuses:
+                      type: array
+                      items:
+                        type: integer
+                    http_failures:
+                      type: integer
+                    tcp_failures:
+                      type: integer
+                    timeouts:
+                      type: integer
+        retries:
+          type: integer
+          description: Number of retries for failed requests.
+        retry_timeout:
+          type: number
+          description: Timeout in seconds for retry requests.
+        timeout:
+          $ref: '#/components/schemas/Timeout'
+        scheme:
+          type: string
+          enum:
+          - http
+          - https
+          - grpc
+          - grpcs
+          default: http
+          description: The scheme for communicating with the upstream.
+        pass_host:
+          type: string
+          enum:
+          - pass
+          - node
+          - rewrite
+          default: pass
+          description: How to set the Host header when proxying to upstream.
+        upstream_host:
+          type: string
+          description: Host to use when pass_host is set to rewrite.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+        keepalive_pool:
+          type: object
+          description: Keepalive pool configuration.
+          properties:
+            size:
+              type: integer
+              default: 320
+            idle_timeout:
+              type: number
+              default: 60
+            requests:
+              type: integer
+              default: 1000
+        tls:
+          type: object
+          description: TLS configuration for upstream connections.
+          properties:
+            client_cert:
+              type: string
+              description: Client certificate for mTLS.
+            client_key:
+              type: string
+              description: Client private key for mTLS.
+  parameters:
+    RouteId:
+      name: route_id
+      in: path
+      required: true
+      description: Unique identifier of the route.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

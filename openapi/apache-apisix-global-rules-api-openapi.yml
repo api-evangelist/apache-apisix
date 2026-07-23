@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Global Rules API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Global Rules
+  description: Manage global plugin rules applied to all requests.
+paths:
+  /global_rules:
+    get:
+      operationId: listGlobalRules
+      summary: Apache APISIX List All Global Rules
+      description: Fetches a list of all configured global plugin rules.
+      tags:
+      - Global Rules
+      responses:
+        '200':
+          description: Successful response with list of global rules.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /global_rules/{rule_id}:
+    get:
+      operationId: getGlobalRule
+      summary: Apache APISIX Get a Global Rule
+      description: Fetches the specified global rule by its ID.
+      tags:
+      - Global Rules
+      parameters:
+      - $ref: '#/components/parameters/GlobalRuleId'
+      responses:
+        '200':
+          description: Successful response with global rule details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Global rule not found.
+    put:
+      operationId: createOrUpdateGlobalRule
+      summary: Apache APISIX Create or Update a Global Rule
+      description: Creates a global rule with the specified ID, or updates it if it already exists.
+      tags:
+      - Global Rules
+      parameters:
+      - $ref: '#/components/parameters/GlobalRuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalRule'
+      responses:
+        '200':
+          description: Global rule updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Global rule created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    patch:
+      operationId: patchGlobalRule
+      summary: Apache APISIX Patch a Global Rule
+      description: Updates partial attributes of the specified global rule.
+      tags:
+      - Global Rules
+      parameters:
+      - $ref: '#/components/parameters/GlobalRuleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalRule'
+      responses:
+        '200':
+          description: Global rule patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    delete:
+      operationId: deleteGlobalRule
+      summary: Apache APISIX Delete a Global Rule
+      description: Removes the specified global rule.
+      tags:
+      - Global Rules
+      parameters:
+      - $ref: '#/components/parameters/GlobalRuleId'
+      responses:
+        '200':
+          description: Global rule deleted successfully.
+        '404':
+          description: Global rule not found.
+components:
+  parameters:
+    GlobalRuleId:
+      name: rule_id
+      in: path
+      required: true
+      description: Unique identifier of the global rule.
+      schema:
+        type: string
+  schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+    GlobalRule:
+      type: object
+      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
+      properties:
+        plugins:
+          type: object
+          description: Plugin configuration to apply globally.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

@@ -1,0 +1,98 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Introspection API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Introspection
+  description: Inspect the runtime configuration of the APISIX instance.
+paths:
+  /v1/routes:
+    get:
+      operationId: getControlRoutes
+      summary: Apache APISIX Get All Configured Routes
+      description: Returns a list of all routes with their complete runtime configuration.
+      tags:
+      - Introspection
+      responses:
+        '200':
+          description: Successful response with list of routes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /v1/services:
+    get:
+      operationId: getControlServices
+      summary: Apache APISIX Get All Configured Services
+      description: Returns a list of all services with their complete runtime configuration.
+      tags:
+      - Introspection
+      responses:
+        '200':
+          description: Successful response with list of services.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /v1/upstreams:
+    get:
+      operationId: getControlUpstreams
+      summary: Apache APISIX Get All Configured Upstreams
+      description: Returns a list of all upstreams with their complete runtime configuration.
+      tags:
+      - Introspection
+      responses:
+        '200':
+          description: Successful response with list of upstreams.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /v1/discovery/{discovery_type}/dump:
+    get:
+      operationId: dumpDiscoveryNodes
+      summary: Apache APISIX Dump Service Discovery Nodes
+      description: Returns the nodes discovered by the specified service discovery type.
+      tags:
+      - Introspection
+      parameters:
+      - name: discovery_type
+        in: path
+        required: true
+        description: The type of service discovery (e.g. dns, consul, nacos).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with discovered nodes.
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: Discovery type not found.
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

@@ -1,0 +1,290 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Consumers API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Consumers
+  description: Manage API consumers and their credentials.
+paths:
+  /consumers:
+    get:
+      operationId: listConsumers
+      summary: Apache APISIX List All Consumers
+      description: Fetches a list of all configured consumers.
+      tags:
+      - Consumers
+      responses:
+        '200':
+          description: Successful response with list of consumers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /consumers/{username}:
+    get:
+      operationId: getConsumer
+      summary: Apache APISIX Get a Consumer
+      description: Fetches the specified consumer by username.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      responses:
+        '200':
+          description: Successful response with consumer details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Consumer not found.
+    put:
+      operationId: createOrUpdateConsumer
+      summary: Apache APISIX Create or Update a Consumer
+      description: Creates a consumer with the specified username, or updates it if it already exists.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consumer'
+      responses:
+        '200':
+          description: Consumer updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Consumer created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    delete:
+      operationId: deleteConsumer
+      summary: Apache APISIX Delete a Consumer
+      description: Removes the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      responses:
+        '200':
+          description: Consumer deleted successfully.
+        '404':
+          description: Consumer not found.
+  /consumers/{username}/credentials:
+    get:
+      operationId: listConsumerCredentials
+      summary: Apache APISIX List Consumer Credentials
+      description: Fetches all credentials for the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      responses:
+        '200':
+          description: Successful response with list of credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /consumers/{username}/credentials/{credential_id}:
+    get:
+      operationId: getConsumerCredential
+      summary: Apache APISIX Get a Consumer Credential
+      description: Fetches a specific credential for the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      - $ref: '#/components/parameters/CredentialId'
+      responses:
+        '200':
+          description: Successful response with credential details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Credential not found.
+    put:
+      operationId: createOrUpdateConsumerCredential
+      summary: Apache APISIX Create or Update a Consumer Credential
+      description: Creates or updates a credential for the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      - $ref: '#/components/parameters/CredentialId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credential'
+      responses:
+        '200':
+          description: Credential updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Credential created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    patch:
+      operationId: patchConsumerCredential
+      summary: Apache APISIX Patch a Consumer Credential
+      description: Updates partial attributes of a credential for the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      - $ref: '#/components/parameters/CredentialId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credential'
+      responses:
+        '200':
+          description: Credential patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    delete:
+      operationId: deleteConsumerCredential
+      summary: Apache APISIX Delete a Consumer Credential
+      description: Removes a specific credential for the specified consumer.
+      tags:
+      - Consumers
+      parameters:
+      - $ref: '#/components/parameters/ConsumerUsername'
+      - $ref: '#/components/parameters/CredentialId'
+      responses:
+        '200':
+          description: Credential deleted successfully.
+        '404':
+          description: Credential not found.
+components:
+  schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    Credential:
+      type: object
+      description: A Credential contains authentication plugin configurations bound to a consumer.
+      properties:
+        desc:
+          type: string
+          description: Description of the credential.
+        plugins:
+          type: object
+          description: Authentication plugin configuration.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    Consumer:
+      type: object
+      description: A Consumer is an entity that consumes API services and is identified by a username.
+      required:
+      - username
+      properties:
+        username:
+          type: string
+          description: Unique username for the consumer.
+        desc:
+          type: string
+          description: Description of the consumer.
+        plugins:
+          type: object
+          description: Plugin configuration bound to this consumer.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+        group_id:
+          type: string
+          description: ID of a consumer group this consumer belongs to.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+  parameters:
+    ConsumerUsername:
+      name: username
+      in: path
+      required: true
+      description: Username of the consumer.
+      schema:
+        type: string
+    CredentialId:
+      name: credential_id
+      in: path
+      required: true
+      description: Unique identifier of the credential.
+      schema:
+        type: string
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.

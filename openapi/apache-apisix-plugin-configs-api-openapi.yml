@@ -1,0 +1,182 @@
+openapi: 3.1.0
+info:
+  title: Apache APISIX Admin Consumer Groups Plugin Configs API
+  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  version: 3.14.0
+  contact:
+    name: Apache APISIX
+    url: https://apisix.apache.org
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: http://127.0.0.1:9180/apisix/admin
+  description: Default local Admin API server
+security:
+- apiKey: []
+tags:
+- name: Plugin Configs
+  description: Manage reusable plugin configuration sets.
+paths:
+  /plugin_configs:
+    get:
+      operationId: listPluginConfigs
+      summary: Apache APISIX List All Plugin Configs
+      description: Fetches a list of all configured plugin config resources.
+      tags:
+      - Plugin Configs
+      responses:
+        '200':
+          description: Successful response with list of plugin configs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceList'
+  /plugin_configs/{config_id}:
+    get:
+      operationId: getPluginConfig
+      summary: Apache APISIX Get a Plugin Config
+      description: Fetches the specified plugin config by its ID.
+      tags:
+      - Plugin Configs
+      parameters:
+      - $ref: '#/components/parameters/PluginConfigId'
+      responses:
+        '200':
+          description: Successful response with plugin config details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '404':
+          description: Plugin config not found.
+    put:
+      operationId: createOrUpdatePluginConfig
+      summary: Apache APISIX Create or Update a Plugin Config
+      description: Creates a plugin config with the specified ID, or updates it if it already exists.
+      tags:
+      - Plugin Configs
+      parameters:
+      - $ref: '#/components/parameters/PluginConfigId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PluginConfig'
+      responses:
+        '200':
+          description: Plugin config updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '201':
+          description: Plugin config created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreated'
+    patch:
+      operationId: patchPluginConfig
+      summary: Apache APISIX Patch a Plugin Config
+      description: Updates partial attributes of the specified plugin config.
+      tags:
+      - Plugin Configs
+      parameters:
+      - $ref: '#/components/parameters/PluginConfigId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PluginConfig'
+      responses:
+        '200':
+          description: Plugin config patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+    delete:
+      operationId: deletePluginConfig
+      summary: Apache APISIX Delete a Plugin Config
+      description: Removes the specified plugin config.
+      tags:
+      - Plugin Configs
+      parameters:
+      - $ref: '#/components/parameters/PluginConfigId'
+      responses:
+        '200':
+          description: Plugin config deleted successfully.
+        '404':
+          description: Plugin config not found.
+components:
+  parameters:
+    PluginConfigId:
+      name: config_id
+      in: path
+      required: true
+      description: Unique identifier of the plugin config.
+      schema:
+        type: string
+  schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    PluginConfig:
+      type: object
+      description: A Plugin Config is a reusable set of plugin configurations that can be bound to routes.
+      properties:
+        desc:
+          type: string
+          description: Description of the plugin config.
+        plugins:
+          type: object
+          description: Plugin configuration.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Admin API key for authentication.
