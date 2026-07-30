@@ -6,9 +6,22 @@ description: >-
   observability, and security. APISIX provides a RESTful Admin API for dynamic configuration of routes, upstreams,
   services, consumers, SSL certificates, and plugins, and a Control API for health monitoring and schema introspection.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-apisix.png
 tags:
   - Apache
   - API Gateway
@@ -23,58 +36,277 @@ created: '2026-03-18'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: apache-apisix:apache-apisix-gateway
-    name: Apache APISIX Gateway
-    description: >-
-      Apache APISIX provides rich traffic management features including load balancing, dynamic upstream configuration,
-      canary releases, circuit breaking, authentication, observability plugins, and more. It is built on NGINX for high
-      performance with etcd for distributed configuration.
-    humanURL: https://apisix.apache.org/
-    tags:
-      - API Gateway
-      - Apache
-      - Cloud Native
-    properties:
-      - type: Documentation
-        url: https://apisix.apache.org/docs/apisix/getting-started/
-      - type: GettingStarted
-        url: https://apisix.apache.org/docs/apisix/getting-started/README/
-  - aid: apache-apisix:apache-apisix-admin-api
-    name: Apache APISIX Admin API
-    description: >-
-      The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure a running APISIX
-      instance. It supports management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin
-      configurations, consumer groups, and secrets, and listens by default on port 9180 with API key authentication.
-    humanURL: https://apisix.apache.org/docs/apisix/admin-api/
-    tags:
-      - Admin
-      - Configuration
-      - Management
-      - REST
-    properties:
-      - type: Documentation
-        url: https://apisix.apache.org/docs/apisix/admin-api/
-      - type: OpenAPI
-        url: openapi/apache-apisix-admin-api-openapi.yml
-      - type: Authentication
-        url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
-  - aid: apache-apisix:apache-apisix-control-api
-    name: Apache APISIX Control API
-    description: >-
-      The Apache APISIX Control API provides internal status and health check endpoints for monitoring and introspecting
-      a running APISIX instance. It listens by default on port 9090, is accessible only from localhost, and exposes
-      endpoints for health checking, schema retrieval, and runtime diagnostics.
-    humanURL: https://apisix.apache.org/docs/apisix/control-api/
-    tags:
-      - Control
-      - Health Check
-      - Monitoring
-      - Observability
-    properties:
-      - type: Documentation
-        url: https://apisix.apache.org/docs/apisix/control-api/
-      - type: OpenAPI
-        url: openapi/apache-apisix-control-api-openapi.yml
+- aid: apache-apisix:apache-apisix-gateway
+  name: Apache APISIX Gateway
+  description: >-
+    Apache APISIX provides rich traffic management features including load balancing, dynamic upstream
+    configuration, canary releases, circuit breaking, authentication, observability plugins, and more.
+    It is built on NGINX for high performance with etcd for distributed configuration.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - API Gateway
+  - Apache
+  - Cloud Native
+  properties:
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/getting-started/
+  - type: GettingStarted
+    url: https://apisix.apache.org/docs/apisix/getting-started/README/
+- aid: apache-apisix:apache-apisix-consumer-groups-api
+  name: Apache APISIX Consumer Groups API
+  description: Manage consumer groups for shared plugin configurations.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Consumer Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-consumer-groups-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-consumers-api
+  name: Apache APISIX Consumers API
+  description: Manage API consumers and their credentials.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Consumers
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-consumers-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-diagnostics-api
+  name: Apache APISIX Diagnostics API
+  description: Runtime diagnostic operations.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Diagnostics
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-diagnostics-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-global-rules-api
+  name: Apache APISIX Global Rules API
+  description: Manage global plugin rules applied to all requests.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Global Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-global-rules-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-health-check-api
+  name: Apache APISIX Health Check API
+  description: Monitor the health status of upstream nodes.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-health-check-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-introspection-api
+  name: Apache APISIX Introspection API
+  description: Inspect the runtime configuration of the APISIX instance.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Introspection
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-introspection-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-plugin-configs-api
+  name: Apache APISIX Plugin Configs API
+  description: Manage reusable plugin configuration sets.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Plugin Configs
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-plugin-configs-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-plugin-metadata-api
+  name: Apache APISIX Plugin Metadata API
+  description: Manage metadata for individual plugins.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Plugin Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-plugin-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-plugins-api
+  name: Apache APISIX Plugins API
+  description: Query available plugins and their schemas.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-plugins-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-protos-api
+  name: Apache APISIX Protos API
+  description: Manage Protocol Buffer definition resources.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Protos
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-protos-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-routes-api
+  name: Apache APISIX Routes API
+  description: Manage HTTP routes that define rules for matching client requests.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-routes-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-schema-api
+  name: Apache APISIX Schema API
+  description: Validate resource configurations against APISIX schemas.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Schema
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-schema-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-secrets-api
+  name: Apache APISIX Secrets API
+  description: Manage secrets from external secret managers.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-services-api
+  name: Apache APISIX Services API
+  description: The Services API from Apache APISIX — 2 operation(s) for services.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-services-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-ssl-api
+  name: Apache APISIX SSL API
+  description: Manage SSL/TLS certificate resources.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - SSL
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-ssl-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-stream-routes-api
+  name: Apache APISIX Stream Routes API
+  description: Manage Layer 4 TCP/UDP stream routes.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Stream Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-stream-routes-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
+- aid: apache-apisix:apache-apisix-upstreams-api
+  name: Apache APISIX Upstreams API
+  description: Manage upstream backend service definitions with load balancing.
+  humanURL: https://apisix.apache.org/
+  tags:
+  - Upstreams
+  properties:
+  - type: OpenAPI
+    url: openapi/apache-apisix-upstreams-api-openapi.yml
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/admin-api/
+  - type: Authentication
+    url: https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api
+  - type: Documentation
+    url: https://apisix.apache.org/docs/apisix/control-api/
 common:
   - type: AgenticAccess
     url: agentic-access/apache-apisix-agentic-access.yml
