@@ -6,6 +6,19 @@ description: >-
   observability, and security. APISIX provides a RESTful Admin API for dynamic configuration of routes, upstreams,
   services, consumers, SSL certificates, and plugins, and a Control API for health monitoring and schema introspection.
 type: Index
+deliveryModel:
+  model: self-hosted
+  license: Apache-2.0
+  open_source: true
+  commercial: false
+  callable_host: false
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  - openapi
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -308,6 +321,17 @@ apis:
   - type: Documentation
     url: https://apisix.apache.org/docs/apisix/control-api/
 common:
+  - type: IssueTracker
+    url: https://github.com/apache/apisix/issues
+  - type: SecurityPolicy
+    url: https://github.com/apache/apisix/blob/master/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/apache/apisix/blob/master/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/apache/apisix/blob/master/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/apache/apisix/blob/master/LICENSE
   - type: Security
     url: https://www.apache.org/security/
   - type: AgenticAccess
