@@ -308,6 +308,8 @@ apis:
   - type: Documentation
     url: https://apisix.apache.org/docs/apisix/control-api/
 common:
+  - type: Security
+    url: https://www.apache.org/security/
   - type: AgenticAccess
     url: agentic-access/apache-apisix-agentic-access.yml
   - type: VulnerabilityDisclosure
