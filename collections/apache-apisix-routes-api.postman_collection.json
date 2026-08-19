@@ -1,0 +1,854 @@
+{
+  "item": [
+    {
+      "id": "4adc7991-89a0-4458-b5b9-54c9d82d1fbd",
+      "name": "Routes",
+      "description": {
+        "content": "Manage HTTP routes that define rules for matching client requests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b3a220e6-0c22-4158-bc32-835633046e77",
+          "name": "Apache APISIX List All Routes",
+          "request": {
+            "name": "Apache APISIX List All Routes",
+            "description": {
+              "content": "Fetches a list of all configured routes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d66e411-bd87-4007-885c-b0d3b5c04d1f",
+              "name": "Successful response with list of routes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 505,\n      \"createdIndex\": 230\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 5516,\n      \"createdIndex\": 1224\n    }\n  ],\n  \"total\": 3418\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5edb3f0c-6335-4203-b36a-ab7f2ed5461d",
+          "name": "Apache APISIX Create a Route",
+          "request": {
+            "name": "Apache APISIX Create a Route",
+            "description": {
+              "content": "Creates a new route with a server-generated ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98a672ff-a679-475d-871a-2f2548f587f2",
+              "name": "Route created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 4907,\n      \"key_1\": 7995,\n      \"key_2\": 8531\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 5433,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 987,\n          \"successes\": 8819\n        },\n        \"unhealthy\": {\n          \"interval\": 3973,\n          \"http_failures\": 1451,\n          \"tcp_failures\": 2519,\n          \"timeouts\": 4720\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1974,\n            7603\n          ],\n          \"successes\": 696\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            8314,\n            8293\n          ],\n          \"http_failures\": 8343,\n          \"tcp_failures\": 1424,\n          \"timeouts\": 7526\n        }\n      }\n    },\n    \"retries\": 2072,\n    \"retry_timeout\": 4189.320209287563,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0167eb4c-520e-4f2b-a7e0-e473864597fe",
+          "name": "Apache APISIX Get a Route",
+          "request": {
+            "name": "Apache APISIX Get a Route",
+            "description": {
+              "content": "Fetches the specified route by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes",
+                ":route_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "route_id",
+                  "description": "(Required) Unique identifier of the route."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "945435b5-2b7b-413e-b22e-b433cee68c54",
+              "name": "Successful response with route details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 2468,\n  \"createdIndex\": 9439\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcc7a506-9502-4ef1-b588-1f6fc4cef11d",
+              "name": "Route not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a43405c-c222-4c76-ba4d-6e4a55412509",
+          "name": "Apache APISIX Create or Update a Route",
+          "request": {
+            "name": "Apache APISIX Create or Update a Route",
+            "description": {
+              "content": "Creates a route with the specified ID, or updates it if it already exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes",
+                ":route_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "route_id",
+                  "description": "(Required) Unique identifier of the route."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d47301f-8728-4f38-aba4-70a99743a9d1",
+              "name": "Route updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 4907,\n      \"key_1\": 7995,\n      \"key_2\": 8531\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 5433,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 987,\n          \"successes\": 8819\n        },\n        \"unhealthy\": {\n          \"interval\": 3973,\n          \"http_failures\": 1451,\n          \"tcp_failures\": 2519,\n          \"timeouts\": 4720\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1974,\n            7603\n          ],\n          \"successes\": 696\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            8314,\n            8293\n          ],\n          \"http_failures\": 8343,\n          \"tcp_failures\": 1424,\n          \"timeouts\": 7526\n        }\n      }\n    },\n    \"retries\": 2072,\n    \"retry_timeout\": 4189.320209287563,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 2468,\n  \"createdIndex\": 9439\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ecbaf42-3475-408c-abf6-c1e4be779d0a",
+              "name": "Route created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 4907,\n      \"key_1\": 7995,\n      \"key_2\": 8531\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 5433,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 987,\n          \"successes\": 8819\n        },\n        \"unhealthy\": {\n          \"interval\": 3973,\n          \"http_failures\": 1451,\n          \"tcp_failures\": 2519,\n          \"timeouts\": 4720\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1974,\n            7603\n          ],\n          \"successes\": 696\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            8314,\n            8293\n          ],\n          \"http_failures\": 8343,\n          \"tcp_failures\": 1424,\n          \"timeouts\": 7526\n        }\n      }\n    },\n    \"retries\": 2072,\n    \"retry_timeout\": 4189.320209287563,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf4eaa29-714c-4f52-968c-876134858640",
+          "name": "Apache APISIX Patch a Route",
+          "request": {
+            "name": "Apache APISIX Patch a Route",
+            "description": {
+              "content": "Updates partial attributes of the specified route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes",
+                ":route_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "route_id",
+                  "description": "(Required) Unique identifier of the route."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f01dfa0-aa47-42b8-a36c-3547b2f1c179",
+              "name": "Route patched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 4907,\n      \"key_1\": 7995,\n      \"key_2\": 8531\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 5433,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 987,\n          \"successes\": 8819\n        },\n        \"unhealthy\": {\n          \"interval\": 3973,\n          \"http_failures\": 1451,\n          \"tcp_failures\": 2519,\n          \"timeouts\": 4720\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1974,\n            7603\n          ],\n          \"successes\": 696\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            8314,\n            8293\n          ],\n          \"http_failures\": 8343,\n          \"tcp_failures\": 1424,\n          \"timeouts\": 7526\n        }\n      }\n    },\n    \"retries\": 2072,\n    \"retry_timeout\": 4189.320209287563,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 2468,\n  \"createdIndex\": 9439\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c330862-f6e0-43f0-89ea-1128ac4fbb7d",
+              "name": "Route not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uri\": \"<string>\",\n  \"uris\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"host\": \"<string>\",\n  \"hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"methods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remote_addr\": \"<string>\",\n  \"remote_addrs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vars\": \"<array>\",\n  \"priority\": 0,\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 4907,\n      \"key_1\": 7995,\n      \"key_2\": 8531\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 5433,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 987,\n          \"successes\": 8819\n        },\n        \"unhealthy\": {\n          \"interval\": 3973,\n          \"http_failures\": 1451,\n          \"tcp_failures\": 2519,\n          \"timeouts\": 4720\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1974,\n            7603\n          ],\n          \"successes\": 696\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            8314,\n            8293\n          ],\n          \"http_failures\": 8343,\n          \"tcp_failures\": 1424,\n          \"timeouts\": 7526\n        }\n      }\n    },\n    \"retries\": 2072,\n    \"retry_timeout\": 4189.320209287563,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"plugin_config_id\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"enable_websocket\": \"<boolean>\",\n  \"status\": 1,\n  \"filter_func\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3167f40-67aa-4a52-ad72-81b5f5660025",
+          "name": "Apache APISIX Delete a Route",
+          "request": {
+            "name": "Apache APISIX Delete a Route",
+            "description": {
+              "content": "Removes the specified route.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "routes",
+                ":route_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "route_id",
+                  "description": "(Required) Unique identifier of the route."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "643bb202-45aa-4853-8c18-1f0650a5227f",
+              "name": "Route deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d848307-e2e8-4810-8b16-77f7c2f5e041",
+              "name": "Route not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) Unique identifier of the route."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://127.0.0.1:9180/apisix/admin",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9005c18e-0f0e-4932-a8d6-73e0ce6bf479",
+    "name": "Apache APISIX Admin Consumer Groups Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,455 @@
+{
+  "item": [
+    {
+      "id": "37f46460-9e59-405e-86b6-ac0eb0651b10",
+      "name": "Schema",
+      "description": {
+        "content": "Validate resource configurations against APISIX schemas.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdc05c7b-68bd-4284-bb24-b5d1800e11b8",
+          "name": "Apache APISIX Validate Resource Schema",
+          "request": {
+            "name": "Apache APISIX Validate Resource Schema",
+            "description": {
+              "content": "Validates the given request body against the schema of the specified resource type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "schema",
+                "validate",
+                ":resource"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resource",
+                  "description": "(Required) The resource type to validate against (e.g. routes, services, upstreams)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf9cd457-025d-4840-9dba-5c7cdb8f0cd1",
+              "name": "Validation successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schema",
+                    "validate",
+                    ":resource"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource",
+                      "description": "(Required) The resource type to validate against (e.g. routes, services, upstreams)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d29c1247-cd4b-474a-8737-029f22941c74",
+              "name": "Validation failed with error details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schema",
+                    "validate",
+                    ":resource"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resource",
+                      "description": "(Required) The resource type to validate against (e.g. routes, services, upstreams)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6ec2346-9e49-4ca0-a163-d8f898f5808d",
+          "name": "Apache APISIX Get APISIX JSON Schema",
+          "request": {
+            "name": "Apache APISIX Get APISIX JSON Schema",
+            "description": {
+              "content": "Returns the full JSON schema used by the APISIX instance, including main configuration schemas and all plugin schemas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f466167f-86cb-475f-aecc-1b0ea51e19f6",
+              "name": "Successful response with the complete JSON schema.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"main\": {},\n  \"plugins\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f8cff8f-f80e-411b-9729-1d2a49ee936f",
+          "name": "Apache APISIX Get a Specific Plugin Schema",
+          "request": {
+            "name": "Apache APISIX Get a Specific Plugin Schema",
+            "description": {
+              "content": "Returns the JSON schema for the specified plugin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "schema",
+                "plugins",
+                ":plugin_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "plugin_name",
+                  "description": "(Required) The name of the plugin."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "269a46a6-cc8d-45f3-8ad0-abb716fa3734",
+              "name": "Successful response with the plugin schema.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "schema",
+                    "plugins",
+                    ":plugin_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plugin_name",
+                      "description": "(Required) The name of the plugin."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c078cb25-d877-413a-bf66-ae944430ff59",
+              "name": "Plugin not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "schema",
+                    "plugins",
+                    ":plugin_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "plugin_name",
+                      "description": "(Required) The name of the plugin."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://127.0.0.1:9180/apisix/admin",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7fdbad8f-16d5-45ed-a6e2-51e1de573c6d",
+    "name": "Apache APISIX Admin Consumer Groups Schema API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+      "type": "text/plain"
+    }
+  }
+}

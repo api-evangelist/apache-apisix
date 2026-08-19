@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Stream Routes API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stream Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Stream Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes"
+          },
+          "docs": "Fetches a list of all configured stream (Layer 4) routes."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ]
+          },
+          "docs": "Fetches the specified stream route by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a stream route with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Stream Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/stream_routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the stream route."
+              }
+            ]
+          },
+          "docs": "Removes the specified stream route."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

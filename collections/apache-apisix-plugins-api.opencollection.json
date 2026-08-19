@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Plugins API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugins",
+            "params": [
+              {
+                "name": "subsystem",
+                "value": "",
+                "type": "query",
+                "description": "Filter plugins by subsystem (http or stream)."
+              }
+            ]
+          },
+          "docs": "Fetches a list of all available plugins on the APISIX instance."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Plugin Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugins/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Fetches the JSON Schema of the specified plugin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

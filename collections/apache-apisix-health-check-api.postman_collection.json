@@ -1,0 +1,579 @@
+{
+  "item": [
+    {
+      "id": "8c4c6d8f-25f0-4b3e-accf-569934f289d1",
+      "name": "Health Check",
+      "description": {
+        "content": "Monitor the health status of upstream nodes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4617c69a-32bf-421a-9505-f7be0715a681",
+          "name": "Apache APISIX Get All Health Check Statuses",
+          "request": {
+            "name": "Apache APISIX Get All Health Check Statuses",
+            "description": {
+              "content": "Returns the health check status of all upstreams that have health checking enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b7c1bfa-ee6c-4e73-8685-27690cfbb655",
+              "name": "Successful response with health check information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"nodes\": [\n      {\n        \"ip\": \"string\",\n        \"port\": 4153,\n        \"status\": \"unhealthy\",\n        \"counter\": {\n          \"success\": 903,\n          \"http_failure\": 4468,\n          \"tcp_failure\": 1057,\n          \"timeout_failure\": 1079\n        }\n      },\n      {\n        \"ip\": \"string\",\n        \"port\": 8405,\n        \"status\": \"healthy\",\n        \"counter\": {\n          \"success\": 8183,\n          \"http_failure\": 7838,\n          \"tcp_failure\": 7161,\n          \"timeout_failure\": 3532\n        }\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"nodes\": [\n      {\n        \"ip\": \"string\",\n        \"port\": 7495,\n        \"status\": \"unhealthy\",\n        \"counter\": {\n          \"success\": 6743,\n          \"http_failure\": 5252,\n          \"tcp_failure\": 3175,\n          \"timeout_failure\": 7508\n        }\n      },\n      {\n        \"ip\": \"string\",\n        \"port\": 6535,\n        \"status\": \"unhealthy\",\n        \"counter\": {\n          \"success\": 5771,\n          \"http_failure\": 3550,\n          \"tcp_failure\": 2208,\n          \"timeout_failure\": 9688\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1155f4fb-309a-4c85-a6f9-ca64a501cf8a",
+          "name": "Apache APISIX Get Health Check for a Specific Upstream",
+          "request": {
+            "name": "Apache APISIX Get Health Check for a Specific Upstream",
+            "description": {
+              "content": "Returns the health check status for a specific upstream by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "healthcheck",
+                "upstreams",
+                ":upstream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upstream_id",
+                  "description": "(Required) The ID of the upstream resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01b59088-2992-4311-9e6a-14051501caf1",
+              "name": "Successful response with upstream health status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) The ID of the upstream resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"nodes\": [\n    {\n      \"ip\": \"string\",\n      \"port\": 789,\n      \"status\": \"healthy\",\n      \"counter\": {\n        \"success\": 5092,\n        \"http_failure\": 5809,\n        \"tcp_failure\": 5690,\n        \"timeout_failure\": 8920\n      }\n    },\n    {\n      \"ip\": \"string\",\n      \"port\": 6797,\n      \"status\": \"unhealthy\",\n      \"counter\": {\n        \"success\": 2785,\n        \"http_failure\": 2012,\n        \"tcp_failure\": 6415,\n        \"timeout_failure\": 843\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cb34a2a-9d71-4b86-b2d9-9e5a481c0b68",
+              "name": "Upstream not found or health check not configured.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) The ID of the upstream resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5823adc-3af3-423c-a617-bbb977639b74",
+          "name": "Apache APISIX Get Health Check for a Specific Route",
+          "request": {
+            "name": "Apache APISIX Get Health Check for a Specific Route",
+            "description": {
+              "content": "Returns the health check status for a specific route by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "healthcheck",
+                "routes",
+                ":route_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "route_id",
+                  "description": "(Required) The ID of the route resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "124dcd2f-7e81-4b63-adb5-bc10a0fe3348",
+              "name": "Successful response with route health status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) The ID of the route resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"nodes\": [\n    {\n      \"ip\": \"string\",\n      \"port\": 789,\n      \"status\": \"healthy\",\n      \"counter\": {\n        \"success\": 5092,\n        \"http_failure\": 5809,\n        \"tcp_failure\": 5690,\n        \"timeout_failure\": 8920\n      }\n    },\n    {\n      \"ip\": \"string\",\n      \"port\": 6797,\n      \"status\": \"unhealthy\",\n      \"counter\": {\n        \"success\": 2785,\n        \"http_failure\": 2012,\n        \"tcp_failure\": 6415,\n        \"timeout_failure\": 843\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1ba8c21-b942-4f94-bd81-92bb76843975",
+              "name": "Route not found or health check not configured.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "routes",
+                    ":route_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "route_id",
+                      "description": "(Required) The ID of the route resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31dfc6e5-1d82-40f0-b1ee-f1fa7d2bd135",
+          "name": "Apache APISIX Get Health Check for a Specific Service",
+          "request": {
+            "name": "Apache APISIX Get Health Check for a Specific Service",
+            "description": {
+              "content": "Returns the health check status for a specific service by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "healthcheck",
+                "services",
+                ":service_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "service_id",
+                  "description": "(Required) The ID of the service resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59ab4db1-6f4d-4924-8ef9-1c6ed90acd5f",
+              "name": "Successful response with service health status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "services",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) The ID of the service resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"nodes\": [\n    {\n      \"ip\": \"string\",\n      \"port\": 789,\n      \"status\": \"healthy\",\n      \"counter\": {\n        \"success\": 5092,\n        \"http_failure\": 5809,\n        \"tcp_failure\": 5690,\n        \"timeout_failure\": 8920\n      }\n    },\n    {\n      \"ip\": \"string\",\n      \"port\": 6797,\n      \"status\": \"unhealthy\",\n      \"counter\": {\n        \"success\": 2785,\n        \"http_failure\": 2012,\n        \"tcp_failure\": 6415,\n        \"timeout_failure\": 843\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d52febe2-933f-4eed-b047-cb5477d26ece",
+              "name": "Service not found or health check not configured.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "healthcheck",
+                    "services",
+                    ":service_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "service_id",
+                      "description": "(Required) The ID of the service resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://127.0.0.1:9180/apisix/admin",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "38aefc37-92b8-4881-b0fc-ee6aba6c87be",
+    "name": "Apache APISIX Admin Consumer Groups Health Check API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+      "type": "text/plain"
+    }
+  }
+}

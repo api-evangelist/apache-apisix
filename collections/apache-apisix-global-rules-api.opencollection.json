@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Global Rules API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Global Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Global Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules"
+          },
+          "docs": "Fetches a list of all configured global plugin rules."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ]
+          },
+          "docs": "Fetches the specified global rule by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a global rule with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified global rule."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Global Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/global_rules/:rule_id",
+            "params": [
+              {
+                "name": "rule_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the global rule."
+              }
+            ]
+          },
+          "docs": "Removes the specified global rule."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

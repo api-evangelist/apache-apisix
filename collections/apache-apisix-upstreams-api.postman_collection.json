@@ -1,0 +1,854 @@
+{
+  "item": [
+    {
+      "id": "f4ffd78b-7038-4bd0-beeb-f42d1c83fcc0",
+      "name": "Upstreams",
+      "description": {
+        "content": "Manage upstream backend service definitions with load balancing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6d3174d-13e4-46b9-becb-bd2ae0852f25",
+          "name": "Apache APISIX List All Upstreams",
+          "request": {
+            "name": "Apache APISIX List All Upstreams",
+            "description": {
+              "content": "Fetches a list of all configured upstreams.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "930c9cff-cdba-42f8-8d3c-01044cb7b60f",
+              "name": "Successful response with list of upstreams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 6590,\n      \"createdIndex\": 914\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 1100,\n      \"createdIndex\": 239\n    }\n  ],\n  \"total\": 6388\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5fb68cee-9dd3-4cfb-97cb-c461f7f25967",
+          "name": "Apache APISIX Create an Upstream",
+          "request": {
+            "name": "Apache APISIX Create an Upstream",
+            "description": {
+              "content": "Creates a new upstream with a server-generated ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "06d623c0-ebe3-4087-b918-b2fba1fb9bf2",
+              "name": "Upstream created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ea6784e-125e-4d61-b8c7-d6b47c03c36d",
+          "name": "Apache APISIX Get an Upstream",
+          "request": {
+            "name": "Apache APISIX Get an Upstream",
+            "description": {
+              "content": "Fetches the specified upstream by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams",
+                ":upstream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upstream_id",
+                  "description": "(Required) Unique identifier of the upstream."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e064cb4e-83cf-4f25-b842-230b39ba9fae",
+              "name": "Successful response with upstream details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 5720,\n  \"createdIndex\": 6513\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7ac0e1f-758b-4f06-bd0e-f5fd012929cb",
+              "name": "Upstream not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ca6ba3d-efe2-41d0-b3cf-f7dba7e31884",
+          "name": "Apache APISIX Create or Update an Upstream",
+          "request": {
+            "name": "Apache APISIX Create or Update an Upstream",
+            "description": {
+              "content": "Creates an upstream with the specified ID, or updates it if it already exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams",
+                ":upstream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upstream_id",
+                  "description": "(Required) Unique identifier of the upstream."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d505298-5ea9-4f9b-aa38-b4762f4023d8",
+              "name": "Upstream updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 5720,\n  \"createdIndex\": 6513\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ba68983-9484-4c8c-b536-e623d43d59f5",
+              "name": "Upstream created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e81b9f7-a1c7-4363-976b-04fb8144d435",
+          "name": "Apache APISIX Patch an Upstream",
+          "request": {
+            "name": "Apache APISIX Patch an Upstream",
+            "description": {
+              "content": "Updates partial attributes of the specified upstream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams",
+                ":upstream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upstream_id",
+                  "description": "(Required) Unique identifier of the upstream."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3518c83f-e9cf-4e51-9d9d-348e45e53a42",
+              "name": "Upstream patched successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 5720,\n  \"createdIndex\": 6513\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7b79e66-1db9-4fbc-8ee0-20ec1ebd4806",
+              "name": "Upstream not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"type\": \"roundrobin\",\n  \"nodes\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"service_name\": \"<string>\",\n  \"discovery_type\": \"<string>\",\n  \"hash_on\": \"vars\",\n  \"key\": \"<string>\",\n  \"checks\": {\n    \"active\": {\n      \"type\": \"http\",\n      \"timeout\": 1,\n      \"http_path\": \"/\",\n      \"host\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"https_verify_certificate\": true,\n      \"healthy\": {\n        \"interval\": \"<integer>\",\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"interval\": \"<integer>\",\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    },\n    \"passive\": {\n      \"type\": \"http\",\n      \"healthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"successes\": \"<integer>\"\n      },\n      \"unhealthy\": {\n        \"http_statuses\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"http_failures\": \"<integer>\",\n        \"tcp_failures\": \"<integer>\",\n        \"timeouts\": \"<integer>\"\n      }\n    }\n  },\n  \"retries\": \"<integer>\",\n  \"retry_timeout\": \"<number>\",\n  \"timeout\": {\n    \"connect\": 60,\n    \"send\": 60,\n    \"read\": 60\n  },\n  \"scheme\": \"http\",\n  \"pass_host\": \"pass\",\n  \"upstream_host\": \"<string>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"keepalive_pool\": {\n    \"size\": 320,\n    \"idle_timeout\": 60,\n    \"requests\": 1000\n  },\n  \"tls\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abe8f95a-5a37-450e-8451-4b7b5c003eb7",
+          "name": "Apache APISIX Delete an Upstream",
+          "request": {
+            "name": "Apache APISIX Delete an Upstream",
+            "description": {
+              "content": "Removes the specified upstream.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upstreams",
+                ":upstream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "upstream_id",
+                  "description": "(Required) Unique identifier of the upstream."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "582bdfa1-2409-45cd-b78a-98e2ef7806ed",
+              "name": "Upstream deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "492fbbc7-6152-4c3e-af04-8fb94949bcbe",
+              "name": "Upstream not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upstreams",
+                    ":upstream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "upstream_id",
+                      "description": "(Required) Unique identifier of the upstream."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://127.0.0.1:9180/apisix/admin",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c745f25-3269-48bd-9111-27c4ec636077",
+    "name": "Apache APISIX Admin Consumer Groups Upstreams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+      "type": "text/plain"
+    }
+  }
+}

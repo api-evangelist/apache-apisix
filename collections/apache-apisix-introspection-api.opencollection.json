@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Introspection API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Introspection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/routes"
+          },
+          "docs": "Returns a list of all routes with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/services"
+          },
+          "docs": "Returns a list of all services with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get All Configured Upstreams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/upstreams"
+          },
+          "docs": "Returns a list of all upstreams with their complete runtime configuration."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Dump Service Discovery Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/discovery/:discovery_type/dump",
+            "params": [
+              {
+                "name": "discovery_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of service discovery (e.g. dns, consul, nacos)."
+              }
+            ]
+          },
+          "docs": "Returns the nodes discovered by the specified service discovery type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

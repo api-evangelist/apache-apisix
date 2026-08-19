@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Health Check API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health Check",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get All Health Check Statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/healthcheck"
+          },
+          "docs": "Returns the health check status of all upstreams that have health checking enabled."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/healthcheck/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the upstream resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific upstream by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/healthcheck/routes/:route_id",
+            "params": [
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the route resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific route by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get Health Check for a Specific Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/healthcheck/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service resource."
+              }
+            ]
+          },
+          "docs": "Returns the health check status for a specific service by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

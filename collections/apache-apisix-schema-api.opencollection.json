@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Schema API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Validate Resource Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/schema/validate/:resource",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path",
+                "description": "The resource type to validate against (e.g. routes, services, upstreams)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates the given request body against the schema of the specified resource type."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get APISIX JSON Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/schema"
+          },
+          "docs": "Returns the full JSON schema used by the APISIX instance, including main configuration schemas and all plugin schemas."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Specific Plugin Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/schema/plugins/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the plugin."
+              }
+            ]
+          },
+          "docs": "Returns the JSON schema for the specified plugin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

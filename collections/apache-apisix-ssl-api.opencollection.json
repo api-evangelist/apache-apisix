@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups SSL API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All SSL Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls"
+          },
+          "docs": "Fetches a list of all configured SSL certificate resources."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ]
+          },
+          "docs": "Fetches the specified SSL certificate resource by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an SSL certificate with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified SSL certificate."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete an SSL Certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/ssls/:ssl_id",
+            "params": [
+              {
+                "name": "ssl_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the SSL certificate resource."
+              }
+            ]
+          },
+          "docs": "Removes the specified SSL certificate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

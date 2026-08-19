@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Consumers API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consumers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Consumers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers"
+          },
+          "docs": "Fetches a list of all configured consumers."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Fetches the specified consumer by username."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a consumer with the specified username, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Removes the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX List Consumer Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              }
+            ]
+          },
+          "docs": "Fetches all credentials for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ]
+          },
+          "docs": "Fetches a specific credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of a credential for the specified consumer."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer Credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumers/:username/credentials/:credential_id",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "Username of the consumer."
+              },
+              {
+                "name": "credential_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the credential."
+              }
+            ]
+          },
+          "docs": "Removes a specific credential for the specified consumer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

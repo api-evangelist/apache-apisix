@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consumer Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Consumer Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups"
+          },
+          "docs": "Fetches a list of all configured consumer groups."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ]
+          },
+          "docs": "Fetches the specified consumer group by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a consumer group with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified consumer group."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete a Consumer Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/consumer_groups/:group_id",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the consumer group."
+              }
+            ]
+          },
+          "docs": "Removes the specified consumer group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

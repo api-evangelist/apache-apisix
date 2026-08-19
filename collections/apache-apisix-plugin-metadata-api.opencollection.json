@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Plugin Metadata API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plugin Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Get Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Fetches metadata for the specified plugin."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates metadata for the specified plugin."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete Plugin Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/plugin_metadata/:plugin_name",
+            "params": [
+              {
+                "name": "plugin_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the plugin."
+              }
+            ]
+          },
+          "docs": "Removes metadata for the specified plugin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

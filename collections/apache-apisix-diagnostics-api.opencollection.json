@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Diagnostics API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Diagnostics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX Trigger Garbage Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/v1/gc"
+          },
+          "docs": "Triggers a full garbage collection cycle in the Lua VM."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

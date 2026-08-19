@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apache APISIX Admin Consumer Groups Upstreams API",
+    "version": "3.14.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upstreams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apache APISIX List All Upstreams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams"
+          },
+          "docs": "Fetches a list of all configured upstreams."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new upstream with a server-generated ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Get an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ]
+          },
+          "docs": "Fetches the specified upstream by its ID."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Create or Update an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an upstream with the specified ID, or updates it if it already exists."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Patch an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates partial attributes of the specified upstream."
+        },
+        {
+          "info": {
+            "name": "Apache APISIX Delete an Upstream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://127.0.0.1:9180/apisix/admin/upstreams/:upstream_id",
+            "params": [
+              {
+                "name": "upstream_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the upstream."
+              }
+            ]
+          },
+          "docs": "Removes the specified upstream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
