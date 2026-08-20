@@ -38,6 +38,15 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apache-api
 tags:
   - Apache
   - API Gateway
+  - Cloud-Native
+  - Kubernetes
+  - Lua
+  - NGINX
+  - Open-Source
+  - Traffic Management
+tags_raw:
+  - Apache
+  - API Gateway
   - Cloud Native
   - Kubernetes
   - Lua
@@ -57,6 +66,10 @@ apis:
     It is built on NGINX for high performance with etcd for distributed configuration.
   humanURL: https://apisix.apache.org/
   tags:
+  - API Gateway
+  - Apache
+  - Cloud-Native
+  tags_raw:
   - API Gateway
   - Apache
   - Cloud Native
