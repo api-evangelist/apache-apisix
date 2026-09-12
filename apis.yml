@@ -335,6 +335,8 @@ apis:
   - type: Documentation
     url: https://apisix.apache.org/docs/apisix/control-api/
 common:
+  - type: Website
+    url: https://www.apache.org/
   - type: IssueTracker
     url: https://github.com/apache/apisix/issues
   - type: SecurityPolicy
