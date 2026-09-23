@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Plugin Configs API
+  title: Apache APISIX Admin Plugin Configs API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -112,14 +112,6 @@ paths:
         '404':
           description: Plugin config not found.
 components:
-  parameters:
-    PluginConfigId:
-      name: config_id
-      in: path
-      required: true
-      description: Unique identifier of the plugin config.
-      schema:
-        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -137,16 +129,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     PluginConfig:
       type: object
       description: A Plugin Config is a reusable set of plugin configurations that can be bound to routes.
@@ -162,6 +144,16 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -174,6 +166,14 @@ components:
         total:
           type: integer
           description: Total count of resources.
+  parameters:
+    PluginConfigId:
+      name: config_id
+      in: path
+      required: true
+      description: Unique identifier of the plugin config.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Health Check API
-  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  title: Apache APISIX Control Health Check API
+  description: The Apache APISIX Control API provides internal status and health check endpoints for monitoring and introspecting the running APISIX instance. By default, the Control API listens on port 9090 and is only accessible from localhost. It exposes endpoints for health checking, schema retrieval, and runtime diagnostics.
   version: 3.14.0
   contact:
     name: Apache APISIX
@@ -10,10 +10,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-- url: http://127.0.0.1:9180/apisix/admin
-  description: Default local Admin API server
-security:
-- apiKey: []
+- url: http://127.0.0.1:9090
+  description: Default local Control API server
 tags:
 - name: Health Check
   description: Monitor the health status of upstream nodes.
@@ -147,9 +145,3 @@ components:
                   timeout_failure:
                     type: integer
                     description: Number of timeout failures.
-  securitySchemes:
-    apiKey:
-      type: apiKey
-      in: header
-      name: X-API-KEY
-      description: Admin API key for authentication.

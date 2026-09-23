@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Global Rules API
+  title: Apache APISIX Admin Global Rules API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -112,14 +112,6 @@ paths:
         '404':
           description: Global rule not found.
 components:
-  parameters:
-    GlobalRuleId:
-      name: rule_id
-      in: path
-      required: true
-      description: Unique identifier of the global rule.
-      schema:
-        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -147,6 +139,13 @@ components:
         value:
           type: object
           description: The created resource configuration.
+    GlobalRule:
+      type: object
+      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
+      properties:
+        plugins:
+          type: object
+          description: Plugin configuration to apply globally.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -159,13 +158,14 @@ components:
         total:
           type: integer
           description: Total count of resources.
-    GlobalRule:
-      type: object
-      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
-      properties:
-        plugins:
-          type: object
-          description: Plugin configuration to apply globally.
+  parameters:
+    GlobalRuleId:
+      name: rule_id
+      in: path
+      required: true
+      description: Unique identifier of the global rule.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

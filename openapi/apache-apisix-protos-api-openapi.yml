@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Protos API
+  title: Apache APISIX Admin Protos API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -91,6 +91,14 @@ paths:
         '404':
           description: Proto not found.
 components:
+  parameters:
+    ProtoId:
+      name: proto_id
+      in: path
+      required: true
+      description: Unique identifier of the proto resource.
+      schema:
+        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -118,18 +126,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
     Proto:
       type: object
       description: A Proto resource stores Protocol Buffer definitions used by the grpc-transcode plugin.
@@ -142,14 +138,18 @@ components:
         content:
           type: string
           description: The Protocol Buffer definition content.
-  parameters:
-    ProtoId:
-      name: proto_id
-      in: path
-      required: true
-      description: Unique identifier of the proto resource.
-      schema:
-        type: string
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
   securitySchemes:
     apiKey:
       type: apiKey

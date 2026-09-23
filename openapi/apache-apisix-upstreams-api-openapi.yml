@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Upstreams API
+  title: Apache APISIX Admin Upstreams API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -150,16 +150,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     Timeout:
       type: object
       description: Timeout settings for upstream connections.
@@ -176,18 +166,16 @@ components:
           type: number
           default: 60
           description: Read timeout in seconds.
-    ResourceList:
+    ResourceCreated:
       type: object
-      description: Standard response wrapper for a list of resources.
+      description: Response wrapper for a newly created resource.
       properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
     Upstream:
       type: object
       description: An Upstream is a virtual host abstraction that performs load balancing on a given set of service nodes according to configured rules.
@@ -382,6 +370,18 @@ components:
             client_key:
               type: string
               description: Client private key for mTLS.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
   parameters:
     UpstreamId:
       name: upstream_id

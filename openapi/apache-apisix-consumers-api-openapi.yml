@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Consumers API
+  title: Apache APISIX Admin Consumers API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -207,31 +207,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    Credential:
-      type: object
-      description: A Credential contains authentication plugin configurations bound to a consumer.
-      properties:
-        desc:
-          type: string
-          description: Description of the credential.
-        plugins:
-          type: object
-          description: Authentication plugin configuration.
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Key-value pairs for categorization.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     Consumer:
       type: object
       description: A Consumer is an entity that consumes API services and is identified by a username.
@@ -255,6 +230,31 @@ components:
         group_id:
           type: string
           description: ID of a consumer group this consumer belongs to.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+    Credential:
+      type: object
+      description: A Credential contains authentication plugin configurations bound to a consumer.
+      properties:
+        desc:
+          type: string
+          description: Description of the credential.
+        plugins:
+          type: object
+          description: Authentication plugin configuration.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -268,18 +268,18 @@ components:
           type: integer
           description: Total count of resources.
   parameters:
-    ConsumerUsername:
-      name: username
-      in: path
-      required: true
-      description: Username of the consumer.
-      schema:
-        type: string
     CredentialId:
       name: credential_id
       in: path
       required: true
       description: Unique identifier of the credential.
+      schema:
+        type: string
+    ConsumerUsername:
+      name: username
+      in: path
+      required: true
+      description: Username of the consumer.
       schema:
         type: string
   securitySchemes:

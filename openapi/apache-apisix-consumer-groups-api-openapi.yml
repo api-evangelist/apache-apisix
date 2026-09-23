@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Apache APISIX Admin Consumer Groups API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
@@ -129,16 +129,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     ConsumerGroup:
       type: object
       description: A Consumer Group is a set of plugins that can be applied to multiple consumers rather than configuring each consumer individually.
@@ -154,6 +144,16 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.

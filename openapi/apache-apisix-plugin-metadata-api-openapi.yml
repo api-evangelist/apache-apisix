@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Plugin Metadata API
+  title: Apache APISIX Admin Plugin Metadata API
   description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
   version: 3.14.0
   contact:
@@ -78,14 +78,6 @@ paths:
         '404':
           description: Plugin metadata not found.
 components:
-  parameters:
-    PluginName:
-      name: plugin_name
-      in: path
-      required: true
-      description: Name of the plugin.
-      schema:
-        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -113,6 +105,14 @@ components:
         value:
           type: object
           description: The created resource configuration.
+  parameters:
+    PluginName:
+      name: plugin_name
+      in: path
+      required: true
+      description: Name of the plugin.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

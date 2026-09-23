@@ -1,7 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apache APISIX Admin Consumer Groups Schema API
-  description: The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.
+  title: Apache Apisix Schema API
   version: 3.14.0
   contact:
     name: Apache APISIX
@@ -9,11 +8,12 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Schema across 2 of this provider''s published API definitions: apache-apisix-admin-api-openapi.yml, apache-apisix-control-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://127.0.0.1:9180/apisix/admin
   description: Default local Admin API server
-security:
-- apiKey: []
+- url: http://127.0.0.1:9090
+  description: Default local Control API server
 tags:
 - name: Schema
   description: Validate resource configurations against APISIX schemas.
@@ -52,6 +52,11 @@ paths:
                   error_msg:
                     type: string
                     description: Validation error message.
+      security:
+      - apiKey: []
+    servers:
+    - url: http://127.0.0.1:9180/apisix/admin
+      description: Default local Admin API server
   /v1/schema:
     get:
       operationId: getSchema
@@ -73,6 +78,9 @@ paths:
                   plugins:
                     type: object
                     description: Schemas for all enabled plugins.
+    servers:
+    - url: http://127.0.0.1:9090
+      description: Default local Control API server
   /v1/schema/plugins/{plugin_name}:
     get:
       operationId: getPluginSchema
@@ -96,6 +104,9 @@ paths:
                 type: object
         '404':
           description: Plugin not found.
+    servers:
+    - url: http://127.0.0.1:9090
+      description: Default local Control API server
 components:
   securitySchemes:
     apiKey:
@@ -103,3 +114,6 @@ components:
       in: header
       name: X-API-KEY
       description: Admin API key for authentication.
+x-refined-from:
+- apache-apisix-admin-api-openapi.yml
+- apache-apisix-control-api-openapi.yml
