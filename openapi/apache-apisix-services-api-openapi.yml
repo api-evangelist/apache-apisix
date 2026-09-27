@@ -149,22 +149,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    Timeout:
-      type: object
-      description: Timeout settings for upstream connections.
-      properties:
-        connect:
-          type: number
-          default: 60
-          description: Connection timeout in seconds.
-        send:
-          type: number
-          default: 60
-          description: Send timeout in seconds.
-        read:
-          type: number
-          default: 60
-          description: Read timeout in seconds.
     Service:
       type: object
       description: A Service is an abstraction of an API and corresponds to an upstream service. It can be shared across routes.
@@ -196,6 +180,34 @@ components:
           items:
             type: string
           description: A list of hosts for the service.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+    Timeout:
+      type: object
+      description: Timeout settings for upstream connections.
+      properties:
+        connect:
+          type: number
+          default: 60
+          description: Connection timeout in seconds.
+        send:
+          type: number
+          default: 60
+          description: Send timeout in seconds.
+        read:
+          type: number
+          default: 60
+          description: Read timeout in seconds.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -400,18 +412,6 @@ components:
             client_key:
               type: string
               description: Client private key for mTLS.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
   parameters:
     ServiceId:
       name: service_id

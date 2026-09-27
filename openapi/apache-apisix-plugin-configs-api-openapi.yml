@@ -144,16 +144,6 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -166,6 +156,16 @@ components:
         total:
           type: integer
           description: Total count of resources.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
   parameters:
     PluginConfigId:
       name: config_id

@@ -129,23 +129,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
-    GlobalRule:
-      type: object
-      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
-      properties:
-        plugins:
-          type: object
-          description: Plugin configuration to apply globally.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -158,6 +141,23 @@ components:
         total:
           type: integer
           description: Total count of resources.
+    GlobalRule:
+      type: object
+      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
+      properties:
+        plugins:
+          type: object
+          description: Plugin configuration to apply globally.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
   parameters:
     GlobalRuleId:
       name: rule_id

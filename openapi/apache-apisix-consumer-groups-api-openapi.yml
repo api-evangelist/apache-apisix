@@ -129,6 +129,18 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
     ConsumerGroup:
       type: object
       description: A Consumer Group is a set of plugins that can be applied to multiple consumers rather than configuring each consumer individually.
@@ -154,18 +166,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
   parameters:
     ConsumerGroupId:
       name: group_id

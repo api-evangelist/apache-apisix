@@ -112,15 +112,23 @@ paths:
         '404':
           description: SSL certificate not found.
 components:
-  parameters:
-    SSLId:
-      name: ssl_id
-      in: path
-      required: true
-      description: Unique identifier of the SSL certificate resource.
-      schema:
-        type: string
   schemas:
+    ResourceResponse:
+      type: object
+      description: Standard response wrapper for a single resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the resource.
+        value:
+          type: object
+          description: The resource configuration.
+        modifiedIndex:
+          type: integer
+          description: The etcd modification index.
+        createdIndex:
+          type: integer
+          description: The etcd creation index.
     SSL:
       type: object
       description: An SSL resource stores SSL certificates and keys for HTTPS traffic.
@@ -180,32 +188,6 @@ components:
           - client
           default: server
           description: Identifies the type of certificate.
-    ResourceResponse:
-      type: object
-      description: Standard response wrapper for a single resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the resource.
-        value:
-          type: object
-          description: The resource configuration.
-        modifiedIndex:
-          type: integer
-          description: The etcd modification index.
-        createdIndex:
-          type: integer
-          description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -218,6 +200,24 @@ components:
         total:
           type: integer
           description: Total count of resources.
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
+  parameters:
+    SSLId:
+      name: ssl_id
+      in: path
+      required: true
+      description: Unique identifier of the SSL certificate resource.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

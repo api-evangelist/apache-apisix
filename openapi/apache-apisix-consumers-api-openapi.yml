@@ -230,16 +230,18 @@ components:
         group_id:
           type: string
           description: ID of a consumer group this consumer belongs to.
-    ResourceCreated:
+    ResourceList:
       type: object
-      description: Response wrapper for a newly created resource.
+      description: Standard response wrapper for a list of resources.
       properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
     Credential:
       type: object
       description: A Credential contains authentication plugin configurations bound to a consumer.
@@ -255,18 +257,16 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
-    ResourceList:
+    ResourceCreated:
       type: object
-      description: Standard response wrapper for a list of resources.
+      description: Response wrapper for a newly created resource.
       properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
   parameters:
     CredentialId:
       name: credential_id

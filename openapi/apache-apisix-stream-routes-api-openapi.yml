@@ -108,6 +108,34 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
+    Timeout:
+      type: object
+      description: Timeout settings for upstream connections.
+      properties:
+        connect:
+          type: number
+          default: 60
+          description: Connection timeout in seconds.
+        send:
+          type: number
+          default: 60
+          description: Send timeout in seconds.
+        read:
+          type: number
+          default: 60
+          description: Read timeout in seconds.
     StreamRoute:
       type: object
       description: A Stream Route is used for Layer 4 (TCP/UDP) traffic proxying.
@@ -135,22 +163,6 @@ components:
         upstream_id:
           type: string
           description: ID of an existing upstream to use.
-    Timeout:
-      type: object
-      description: Timeout settings for upstream connections.
-      properties:
-        connect:
-          type: number
-          default: 60
-          description: Connection timeout in seconds.
-        send:
-          type: number
-          default: 60
-          description: Send timeout in seconds.
-        read:
-          type: number
-          default: 60
-          description: Read timeout in seconds.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -355,18 +367,6 @@ components:
             client_key:
               type: string
               description: Client private key for mTLS.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
   parameters:
     StreamRouteId:
       name: route_id

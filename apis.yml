@@ -43,7 +43,7 @@ tags:
   - Kubernetes
   - Lua
   - NGINX
-  - Open-Source
+  - Open Source
   - Traffic Management
 tags_raw:
   - Apache
@@ -54,6 +54,7 @@ tags_raw:
   - NGINX
   - Open Source
   - Traffic Management
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/apis.yml
 created: '2026-03-18'
 modified: '2026-05-19'
