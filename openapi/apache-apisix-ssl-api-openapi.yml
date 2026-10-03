@@ -112,6 +112,14 @@ paths:
         '404':
           description: SSL certificate not found.
 components:
+  parameters:
+    SSLId:
+      name: ssl_id
+      in: path
+      required: true
+      description: Unique identifier of the SSL certificate resource.
+      schema:
+        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -129,6 +137,18 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
     SSL:
       type: object
       description: An SSL resource stores SSL certificates and keys for HTTPS traffic.
@@ -188,18 +208,6 @@ components:
           - client
           default: server
           description: Identifies the type of certificate.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -210,14 +218,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    SSLId:
-      name: ssl_id
-      in: path
-      required: true
-      description: Unique identifier of the SSL certificate resource.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

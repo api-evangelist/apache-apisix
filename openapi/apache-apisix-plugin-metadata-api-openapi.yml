@@ -79,6 +79,16 @@ paths:
           description: Plugin metadata not found.
 components:
   schemas:
+    ResourceCreated:
+      type: object
+      description: Response wrapper for a newly created resource.
+      properties:
+        key:
+          type: string
+          description: The etcd key path for the created resource.
+        value:
+          type: object
+          description: The created resource configuration.
     ResourceResponse:
       type: object
       description: Standard response wrapper for a single resource.
@@ -95,16 +105,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    ResourceCreated:
-      type: object
-      description: Response wrapper for a newly created resource.
-      properties:
-        key:
-          type: string
-          description: The etcd key path for the created resource.
-        value:
-          type: object
-          description: The created resource configuration.
   parameters:
     PluginName:
       name: plugin_name

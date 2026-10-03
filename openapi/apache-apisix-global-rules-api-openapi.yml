@@ -112,7 +112,22 @@ paths:
         '404':
           description: Global rule not found.
 components:
+  parameters:
+    GlobalRuleId:
+      name: rule_id
+      in: path
+      required: true
+      description: Unique identifier of the global rule.
+      schema:
+        type: string
   schemas:
+    GlobalRule:
+      type: object
+      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
+      properties:
+        plugins:
+          type: object
+          description: Plugin configuration to apply globally.
     ResourceResponse:
       type: object
       description: Standard response wrapper for a single resource.
@@ -141,13 +156,6 @@ components:
         total:
           type: integer
           description: Total count of resources.
-    GlobalRule:
-      type: object
-      description: A Global Rule applies plugin configurations to all requests processed by the APISIX instance.
-      properties:
-        plugins:
-          type: object
-          description: Plugin configuration to apply globally.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -158,14 +166,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    GlobalRuleId:
-      name: rule_id
-      in: path
-      required: true
-      description: Unique identifier of the global rule.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

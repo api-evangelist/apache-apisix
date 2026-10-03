@@ -134,6 +134,22 @@ paths:
           description: Upstream not found.
 components:
   schemas:
+    Timeout:
+      type: object
+      description: Timeout settings for upstream connections.
+      properties:
+        connect:
+          type: number
+          default: 60
+          description: Connection timeout in seconds.
+        send:
+          type: number
+          default: 60
+          description: Send timeout in seconds.
+        read:
+          type: number
+          default: 60
+          description: Read timeout in seconds.
     ResourceResponse:
       type: object
       description: Standard response wrapper for a single resource.
@@ -162,22 +178,6 @@ components:
         total:
           type: integer
           description: Total count of resources.
-    Timeout:
-      type: object
-      description: Timeout settings for upstream connections.
-      properties:
-        connect:
-          type: number
-          default: 60
-          description: Connection timeout in seconds.
-        send:
-          type: number
-          default: 60
-          description: Send timeout in seconds.
-        read:
-          type: number
-          default: 60
-          description: Read timeout in seconds.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.

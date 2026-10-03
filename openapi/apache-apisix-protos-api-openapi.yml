@@ -91,6 +91,14 @@ paths:
         '404':
           description: Proto not found.
 components:
+  parameters:
+    ProtoId:
+      name: proto_id
+      in: path
+      required: true
+      description: Unique identifier of the proto resource.
+      schema:
+        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -108,18 +116,6 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
-    Proto:
-      type: object
-      description: A Proto resource stores Protocol Buffer definitions used by the grpc-transcode plugin.
-      required:
-      - content
-      properties:
-        desc:
-          type: string
-          description: Description of the proto resource.
-        content:
-          type: string
-          description: The Protocol Buffer definition content.
     ResourceList:
       type: object
       description: Standard response wrapper for a list of resources.
@@ -132,6 +128,18 @@ components:
         total:
           type: integer
           description: Total count of resources.
+    Proto:
+      type: object
+      description: A Proto resource stores Protocol Buffer definitions used by the grpc-transcode plugin.
+      required:
+      - content
+      properties:
+        desc:
+          type: string
+          description: Description of the proto resource.
+        content:
+          type: string
+          description: The Protocol Buffer definition content.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -142,14 +150,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    ProtoId:
-      name: proto_id
-      in: path
-      required: true
-      description: Unique identifier of the proto resource.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey
