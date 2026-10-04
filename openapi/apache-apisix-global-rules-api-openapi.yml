@@ -112,14 +112,6 @@ paths:
         '404':
           description: Global rule not found.
 components:
-  parameters:
-    GlobalRuleId:
-      name: rule_id
-      in: path
-      required: true
-      description: Unique identifier of the global rule.
-      schema:
-        type: string
   schemas:
     GlobalRule:
       type: object
@@ -166,6 +158,14 @@ components:
         value:
           type: object
           description: The created resource configuration.
+  parameters:
+    GlobalRuleId:
+      name: rule_id
+      in: path
+      required: true
+      description: Unique identifier of the global rule.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

@@ -190,6 +190,21 @@ paths:
         '404':
           description: Credential not found.
 components:
+  parameters:
+    CredentialId:
+      name: credential_id
+      in: path
+      required: true
+      description: Unique identifier of the credential.
+      schema:
+        type: string
+    ConsumerUsername:
+      name: username
+      in: path
+      required: true
+      description: Username of the consumer.
+      schema:
+        type: string
   schemas:
     Consumer:
       type: object
@@ -214,21 +229,6 @@ components:
         group_id:
           type: string
           description: ID of a consumer group this consumer belongs to.
-    Credential:
-      type: object
-      description: A Credential contains authentication plugin configurations bound to a consumer.
-      properties:
-        desc:
-          type: string
-          description: Description of the credential.
-        plugins:
-          type: object
-          description: Authentication plugin configuration.
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Key-value pairs for categorization.
     ResourceResponse:
       type: object
       description: Standard response wrapper for a single resource.
@@ -267,21 +267,21 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    ConsumerUsername:
-      name: username
-      in: path
-      required: true
-      description: Username of the consumer.
-      schema:
-        type: string
-    CredentialId:
-      name: credential_id
-      in: path
-      required: true
-      description: Unique identifier of the credential.
-      schema:
-        type: string
+    Credential:
+      type: object
+      description: A Credential contains authentication plugin configurations bound to a consumer.
+      properties:
+        desc:
+          type: string
+          description: Description of the credential.
+        plugins:
+          type: object
+          description: Authentication plugin configuration.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Key-value pairs for categorization.
   securitySchemes:
     apiKey:
       type: apiKey

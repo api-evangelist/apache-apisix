@@ -112,6 +112,14 @@ paths:
         '404':
           description: Consumer group not found.
 components:
+  parameters:
+    ConsumerGroupId:
+      name: group_id
+      in: path
+      required: true
+      description: Unique identifier of the consumer group.
+      schema:
+        type: string
   schemas:
     ConsumerGroup:
       type: object
@@ -166,14 +174,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    ConsumerGroupId:
-      name: group_id
-      in: path
-      required: true
-      description: Unique identifier of the consumer group.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey
