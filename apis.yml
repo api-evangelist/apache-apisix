@@ -336,6 +336,12 @@ apis:
   - type: Documentation
     url: https://apisix.apache.org/docs/apisix/control-api/
 common:
+  - type: Plans
+    url: plans/apache-apisix-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/apache-apisix-rate-limits.yml
+  - type: FinOps
+    url: finops/apache-apisix-finops.yml
   - type: Website
     url: https://www.apache.org/
   - type: IssueTracker
