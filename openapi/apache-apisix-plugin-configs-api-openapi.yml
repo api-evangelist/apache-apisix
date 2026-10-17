@@ -112,6 +112,14 @@ paths:
         '404':
           description: Plugin config not found.
 components:
+  parameters:
+    PluginConfigId:
+      name: config_id
+      in: path
+      required: true
+      description: Unique identifier of the plugin config.
+      schema:
+        type: string
   schemas:
     ResourceResponse:
       type: object
@@ -129,6 +137,18 @@ components:
         createdIndex:
           type: integer
           description: The etcd creation index.
+    ResourceList:
+      type: object
+      description: Standard response wrapper for a list of resources.
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          description: Array of resource entries.
+        total:
+          type: integer
+          description: Total count of resources.
     PluginConfig:
       type: object
       description: A Plugin Config is a reusable set of plugin configurations that can be bound to routes.
@@ -144,18 +164,6 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
-    ResourceList:
-      type: object
-      description: Standard response wrapper for a list of resources.
-      properties:
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          description: Array of resource entries.
-        total:
-          type: integer
-          description: Total count of resources.
     ResourceCreated:
       type: object
       description: Response wrapper for a newly created resource.
@@ -166,14 +174,6 @@ components:
         value:
           type: object
           description: The created resource configuration.
-  parameters:
-    PluginConfigId:
-      name: config_id
-      in: path
-      required: true
-      description: Unique identifier of the plugin config.
-      schema:
-        type: string
   securitySchemes:
     apiKey:
       type: apiKey

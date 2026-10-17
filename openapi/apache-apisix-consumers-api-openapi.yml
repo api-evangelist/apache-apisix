@@ -190,21 +190,6 @@ paths:
         '404':
           description: Credential not found.
 components:
-  parameters:
-    CredentialId:
-      name: credential_id
-      in: path
-      required: true
-      description: Unique identifier of the credential.
-      schema:
-        type: string
-    ConsumerUsername:
-      name: username
-      in: path
-      required: true
-      description: Username of the consumer.
-      schema:
-        type: string
   schemas:
     Consumer:
       type: object
@@ -282,6 +267,21 @@ components:
           additionalProperties:
             type: string
           description: Key-value pairs for categorization.
+  parameters:
+    CredentialId:
+      name: credential_id
+      in: path
+      required: true
+      description: Unique identifier of the credential.
+      schema:
+        type: string
+    ConsumerUsername:
+      name: username
+      in: path
+      required: true
+      description: Username of the consumer.
+      schema:
+        type: string
   securitySchemes:
     apiKey:
       type: apiKey

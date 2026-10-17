@@ -328,22 +328,6 @@ components:
             client_key:
               type: string
               description: Client private key for mTLS.
-    Timeout:
-      type: object
-      description: Timeout settings for upstream connections.
-      properties:
-        connect:
-          type: number
-          default: 60
-          description: Connection timeout in seconds.
-        send:
-          type: number
-          default: 60
-          description: Send timeout in seconds.
-        read:
-          type: number
-          default: 60
-          description: Read timeout in seconds.
     ResourceResponse:
       type: object
       description: Standard response wrapper for a single resource.
@@ -382,6 +366,22 @@ components:
         value:
           type: object
           description: The created resource configuration.
+    Timeout:
+      type: object
+      description: Timeout settings for upstream connections.
+      properties:
+        connect:
+          type: number
+          default: 60
+          description: Connection timeout in seconds.
+        send:
+          type: number
+          default: 60
+          description: Send timeout in seconds.
+        read:
+          type: number
+          default: 60
+          description: Read timeout in seconds.
   parameters:
     UpstreamId:
       name: upstream_id
