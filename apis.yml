@@ -336,6 +336,8 @@ apis:
   - type: Documentation
     url: https://apisix.apache.org/docs/apisix/control-api/
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/apache-apisix/overview
   - type: Plans
     url: plans/apache-apisix-plans-pricing.yml
   - type: RateLimits
