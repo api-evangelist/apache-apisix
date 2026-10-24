@@ -1,119 +1,93 @@
 {
+  "info": {
+    "_postman_id": "e7d20ea0-c158-4684-8648-023cd815d50d",
+    "name": "Apache APISIX Control Diagnostics API",
+    "description": "The Apache APISIX Control API provides internal status and health check endpoints for monitoring and introspecting the running APISIX instance. By default, the Control API listens on port 9090 and is only accessible from localhost. It exposes endpoints for health checking, schema retrieval, and runtime diagnostics.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:55:03.000Z",
+    "updatedAt": "2026-10-22T01:55:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e7d20ea0-c158-4684-8648-023cd815d50d"
+  },
   "item": [
     {
-      "id": "bd2d1620-92a1-42a7-8719-4a5539198383",
-      "name": "Diagnostics",
-      "description": {
-        "content": "Runtime diagnostic operations.",
-        "type": "text/plain"
-      },
+      "name": "v1",
       "item": [
         {
-          "id": "7bca1fda-ea65-465d-9b0b-93a3c412e70e",
-          "name": "Apache APISIX Trigger Garbage Collection",
-          "request": {
-            "name": "Apache APISIX Trigger Garbage Collection",
-            "description": {
-              "content": "Triggers a full garbage collection cycle in the Lua VM.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "gc"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "gc",
+          "item": [
             {
-              "id": "39cb5f46-2dd6-48db-bc10-ca3fb3445511",
-              "name": "GC triggered successfully.",
-              "originalRequest": {
+              "name": "Apache APISIX Trigger Garbage Collection",
+              "id": "6cab7135-8759-4afd-9a41-a04e1e89b199",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
                 "url": {
-                  "path": [
-                    "v1",
-                    "gc"
-                  ],
+                  "raw": "{{baseUrl}}/v1/gc",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "v1",
+                    "gc"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
+                "description": "Triggers a full garbage collection cycle in the Lua VM."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "ade27e0d-adf4-4616-aca1-a6a1c12fd274",
+                  "name": "GC triggered successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/gc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "gc"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:03.000Z",
+                  "updatedAt": "2026-10-22T01:55:03.000Z",
+                  "uid": "35240-ade27e0d-adf4-4616-aca1-a6a1c12fd274"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-22T01:55:03.000Z",
+              "updatedAt": "2026-10-22T01:55:03.000Z",
+              "uid": "35240-6cab7135-8759-4afd-9a41-a04e1e89b199"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "984d0ca6-80b0-4d82-ba12-261f9486db46",
+          "createdAt": "2026-10-22T01:55:03.000Z",
+          "updatedAt": "2026-10-22T01:55:03.000Z",
+          "uid": "35240-984d0ca6-80b0-4d82-ba12-261f9486db46"
         }
       ],
-      "event": []
+      "id": "3abe68ec-edc7-43ef-88c8-210b37107141",
+      "createdAt": "2026-10-22T01:55:03.000Z",
+      "updatedAt": "2026-10-22T01:55:03.000Z",
+      "uid": "35240-3abe68ec-edc7-43ef-88c8-210b37107141"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9090"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "X-API-KEY"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "0b966825-7e66-42e6-b5f2-f804b802b536",
-    "name": "Apache APISIX Admin Consumer Groups Diagnostics API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

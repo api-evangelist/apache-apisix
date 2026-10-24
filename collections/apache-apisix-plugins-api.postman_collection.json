@@ -1,257 +1,246 @@
 {
+  "info": {
+    "_postman_id": "54a504cb-c9d7-4ce4-8006-3a2493957f4f",
+    "name": "Apache APISIX Admin Plugins API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:55:37.000Z",
+    "updatedAt": "2026-10-22T01:55:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-54a504cb-c9d7-4ce4-8006-3a2493957f4f"
+  },
   "item": [
     {
-      "id": "9e762d7e-09cb-4f4c-b425-18c6604078fd",
-      "name": "Plugins",
-      "description": {
-        "content": "Query available plugins and their schemas.",
-        "type": "text/plain"
-      },
+      "name": "plugins",
       "item": [
         {
-          "id": "efbf3898-3797-40e3-b34c-5b6c6bc08ed5",
+          "name": "{plugin_name}",
+          "item": [
+            {
+              "name": "Apache APISIX Get Plugin Schema",
+              "id": "e3c63bfe-49b4-4b60-8d01-cf98948f62a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/plugins/:plugin_name",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugins",
+                    ":plugin_name"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3ba1cb6a-92b2-48cc-92c0-09fe941506ee",
+                      "key": "plugin_name",
+                      "value": "<string>",
+                      "description": "(Required) Name of the plugin."
+                    }
+                  ]
+                },
+                "description": "Fetches the JSON Schema of the specified plugin."
+              },
+              "response": [
+                {
+                  "id": "86367a65-082c-47d6-863f-bd616bb0b734",
+                  "name": "Successful response with plugin JSON Schema.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugins/:plugin_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugins",
+                        ":plugin_name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "plugin_name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-22T01:55:37.000Z",
+                  "updatedAt": "2026-10-22T01:55:37.000Z",
+                  "uid": "35240-86367a65-082c-47d6-863f-bd616bb0b734"
+                },
+                {
+                  "id": "ceb59ea4-5ef0-4826-947c-9c2ffea4770d",
+                  "name": "Plugin not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugins/:plugin_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugins",
+                        ":plugin_name"
+                      ],
+                      "variable": [
+                        {
+                          "key": "plugin_name"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:37.000Z",
+                  "updatedAt": "2026-10-22T01:55:37.000Z",
+                  "uid": "35240-ceb59ea4-5ef0-4826-947c-9c2ffea4770d"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:37.000Z",
+              "updatedAt": "2026-10-22T01:55:37.000Z",
+              "uid": "35240-e3c63bfe-49b4-4b60-8d01-cf98948f62a3"
+            }
+          ],
+          "id": "6c8572c2-b6f8-4b23-a565-39d3ec2e5f59",
+          "createdAt": "2026-10-22T01:55:37.000Z",
+          "updatedAt": "2026-10-22T01:55:37.000Z",
+          "uid": "35240-6c8572c2-b6f8-4b23-a565-39d3ec2e5f59"
+        },
+        {
           "name": "Apache APISIX List All Plugins",
+          "id": "a590be24-307b-40a1-9268-d5e3697aa816",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Apache APISIX List All Plugins",
-            "description": {
-              "content": "Fetches a list of all available plugins on the APISIX instance.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/plugins?subsystem=stream",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "plugins"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Filter plugins by subsystem (http or stream).",
                   "key": "subsystem",
-                  "value": "<string>",
-                  "description": "Filter plugins by subsystem (http or stream)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f1783418-c83d-4ae9-aacd-4d6a2198e3d1",
-              "name": "Successful response with list of plugin names.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugins"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "subsystem",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  \"string\",\n  \"string\"\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7aabb5a7-1a46-4b9a-a132-657d1f4c9ad7",
-          "name": "Apache APISIX Get Plugin Schema",
-          "request": {
-            "name": "Apache APISIX Get Plugin Schema",
-            "description": {
-              "content": "Fetches the JSON Schema of the specified plugin.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "plugins",
-                ":plugin_name"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "plugin_name",
-                  "description": "(Required) Name of the plugin."
+                  "value": "stream"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all available plugins on the APISIX instance."
           },
           "response": [
             {
-              "id": "50dc6596-9870-4e5c-b611-3c1d8d3b3241",
-              "name": "Successful response with plugin JSON Schema.",
+              "id": "12bfd03d-d43e-4911-8856-1761e19fce23",
+              "name": "Successful response with list of plugin names.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugins",
-                    ":plugin_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "plugin_name",
-                      "description": "(Required) Name of the plugin."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/plugins?subsystem=stream",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugins"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter plugins by subsystem (http or stream).",
+                      "key": "subsystem",
+                      "value": "stream"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dd6e06e6-8d04-423a-8740-6c44be6c78ce",
-              "name": "Plugin not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugins",
-                    ":plugin_name"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "plugin_name",
-                      "description": "(Required) Name of the plugin."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "createdAt": "2026-10-22T01:55:37.000Z",
+              "updatedAt": "2026-10-22T01:55:37.000Z",
+              "uid": "35240-12bfd03d-d43e-4911-8856-1761e19fce23"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:55:37.000Z",
+          "updatedAt": "2026-10-22T01:55:37.000Z",
+          "uid": "35240-a590be24-307b-40a1-9268-d5e3697aa816"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "9374fc5f-f80f-4c7b-b514-b3d88429990e",
+      "createdAt": "2026-10-22T01:55:37.000Z",
+      "updatedAt": "2026-10-22T01:55:37.000Z",
+      "uid": "35240-9374fc5f-f80f-4c7b-b514-b3d88429990e"
     }
   ],
   "auth": {
@@ -259,25 +248,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "49591111-7a8d-4aa0-9a5a-7b219eab7f05",
-    "name": "Apache APISIX Admin Consumer Groups Plugins API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

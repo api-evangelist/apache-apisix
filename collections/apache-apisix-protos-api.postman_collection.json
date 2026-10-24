@@ -1,556 +1,523 @@
 {
+  "info": {
+    "_postman_id": "4c9cf770-fc69-4098-9921-de58c6e56da1",
+    "name": "Apache APISIX Admin Protos API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:55:42.000Z",
+    "updatedAt": "2026-10-22T01:55:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4c9cf770-fc69-4098-9921-de58c6e56da1"
+  },
   "item": [
     {
-      "id": "55a382e2-8ded-4042-a19e-caf1c1e4036d",
-      "name": "Protos",
-      "description": {
-        "content": "Manage Protocol Buffer definition resources.",
-        "type": "text/plain"
-      },
+      "name": "protos",
       "item": [
         {
-          "id": "6b614c4c-aff9-4720-9de0-237b71509dad",
-          "name": "Apache APISIX List All Protos",
-          "request": {
-            "name": "Apache APISIX List All Protos",
-            "description": {
-              "content": "Fetches a list of all configured Protocol Buffer definition resources.",
-              "type": "text/plain"
+          "name": "{proto_id}",
+          "item": [
+            {
+              "name": "Apache APISIX Get a Proto",
+              "id": "187838c2-5dda-4808-9fb6-6ffbda634c8c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/protos/:proto_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "protos",
+                    ":proto_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d8e6ff80-20a2-421f-b647-4612ca26472c",
+                      "key": "proto_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the proto resource."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified Protocol Buffer definition by its ID."
+              },
+              "response": [
+                {
+                  "id": "060781b1-163c-4d17-b8ab-d8d3698edb3b",
+                  "name": "Successful response with proto details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-060781b1-163c-4d17-b8ab-d8d3698edb3b"
+                },
+                {
+                  "id": "5e551e33-db9c-4b04-bd38-7232f3511cef",
+                  "name": "Proto not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-5e551e33-db9c-4b04-bd38-7232f3511cef"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:43.000Z",
+              "updatedAt": "2026-10-22T01:55:43.000Z",
+              "uid": "35240-187838c2-5dda-4808-9fb6-6ffbda634c8c"
             },
+            {
+              "name": "Apache APISIX Create or Update a Proto",
+              "id": "0ab30999-0037-459f-afa9-db5e59b494bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/protos/:proto_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "protos",
+                    ":proto_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8ddec87c-c2a7-4785-ba5c-930923c47cf5",
+                      "key": "proto_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the proto resource."
+                    }
+                  ]
+                },
+                "description": "Creates a proto with the specified ID, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "bd3076ba-5d98-48c8-9be9-6effac4015f7",
+                  "name": "Proto updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-bd3076ba-5d98-48c8-9be9-6effac4015f7"
+                },
+                {
+                  "id": "705d2fe2-bf5b-4def-a66d-4276f08988e6",
+                  "name": "Proto created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-705d2fe2-bf5b-4def-a66d-4276f08988e6"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:43.000Z",
+              "updatedAt": "2026-10-22T01:55:43.000Z",
+              "uid": "35240-0ab30999-0037-459f-afa9-db5e59b494bb"
+            },
+            {
+              "name": "Apache APISIX Delete a Proto",
+              "id": "b4fc83c5-4277-446e-a7af-d6ab86dcd5e1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/protos/:proto_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "protos",
+                    ":proto_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0c7af20b-b0de-43bf-b504-49429952d147",
+                      "key": "proto_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the proto resource."
+                    }
+                  ]
+                },
+                "description": "Removes the specified Protocol Buffer definition."
+              },
+              "response": [
+                {
+                  "id": "9f6ce4e6-d02c-497f-a86b-d399c9b71c9f",
+                  "name": "Proto deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-9f6ce4e6-d02c-497f-a86b-d399c9b71c9f"
+                },
+                {
+                  "id": "81aa6113-d729-4e30-98f9-accf9d898c84",
+                  "name": "Proto not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/protos/:proto_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "protos",
+                        ":proto_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "proto_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:43.000Z",
+                  "updatedAt": "2026-10-22T01:55:43.000Z",
+                  "uid": "35240-81aa6113-d729-4e30-98f9-accf9d898c84"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:43.000Z",
+              "updatedAt": "2026-10-22T01:55:43.000Z",
+              "uid": "35240-b4fc83c5-4277-446e-a7af-d6ab86dcd5e1"
+            }
+          ],
+          "id": "7704c09f-d0f5-4ac9-bedf-46dd60b9a35d",
+          "createdAt": "2026-10-22T01:55:43.000Z",
+          "updatedAt": "2026-10-22T01:55:43.000Z",
+          "uid": "35240-7704c09f-d0f5-4ac9-bedf-46dd60b9a35d"
+        },
+        {
+          "name": "Apache APISIX List All Protos",
+          "id": "2f9eceb5-73d5-43a4-b12d-fa040425dc59",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/protos",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "protos"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured Protocol Buffer definition resources."
           },
           "response": [
             {
-              "id": "b02e2153-303c-4289-b713-445b282919a4",
+              "id": "577375db-90c1-4e4f-a75a-c69e6180d5fe",
               "name": "Successful response with list of protos.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/protos",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "protos"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 222,\n      \"createdIndex\": 7133\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 1115,\n      \"createdIndex\": 908\n    }\n  ],\n  \"total\": 9113\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:55:43.000Z",
+              "updatedAt": "2026-10-22T01:55:43.000Z",
+              "uid": "35240-577375db-90c1-4e4f-a75a-c69e6180d5fe"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9b5a79ff-71d8-4be7-b6d9-b5fead86e858",
-          "name": "Apache APISIX Get a Proto",
-          "request": {
-            "name": "Apache APISIX Get a Proto",
-            "description": {
-              "content": "Fetches the specified Protocol Buffer definition by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "protos",
-                ":proto_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "proto_id",
-                  "description": "(Required) Unique identifier of the proto resource."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1d30408e-0e73-4038-91a2-3a86c302967d",
-              "name": "Successful response with proto details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6433,\n  \"createdIndex\": 7163\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2be855c0-2783-4711-9d79-8199cc4e1019",
-              "name": "Proto not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "91054068-0b03-4da4-860b-a16c320671a6",
-          "name": "Apache APISIX Create or Update a Proto",
-          "request": {
-            "name": "Apache APISIX Create or Update a Proto",
-            "description": {
-              "content": "Creates a proto with the specified ID, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "protos",
-                ":proto_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "proto_id",
-                  "description": "(Required) Unique identifier of the proto resource."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "dc8fbe2c-ebba-42c0-89fb-c9db624ae72d",
-              "name": "Proto updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6433,\n  \"createdIndex\": 7163\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d2b1343b-080e-42ee-b1c6-a7a52e1de9ba",
-              "name": "Proto created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"content\": \"<string>\",\n  \"desc\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7cb1fa0a-a8a2-4d17-bfa8-7c575e05fe0c",
-          "name": "Apache APISIX Delete a Proto",
-          "request": {
-            "name": "Apache APISIX Delete a Proto",
-            "description": {
-              "content": "Removes the specified Protocol Buffer definition.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "protos",
-                ":proto_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "proto_id",
-                  "description": "(Required) Unique identifier of the proto resource."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3b0b10f8-8120-41b8-bd44-a90319684f7b",
-              "name": "Proto deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c4fb719c-8960-43a2-a66f-6703a1a3aeb8",
-              "name": "Proto not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "protos",
-                    ":proto_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "proto_id",
-                      "description": "(Required) Unique identifier of the proto resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:55:43.000Z",
+          "updatedAt": "2026-10-22T01:55:43.000Z",
+          "uid": "35240-2f9eceb5-73d5-43a4-b12d-fa040425dc59"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "f7d2e8a9-504b-46bd-87ec-832d5c0fefe3",
+      "createdAt": "2026-10-22T01:55:43.000Z",
+      "updatedAt": "2026-10-22T01:55:43.000Z",
+      "uid": "35240-f7d2e8a9-504b-46bd-87ec-832d5c0fefe3"
     }
   ],
   "auth": {
@@ -558,25 +525,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d37c2bb5-58f4-45fb-9957-10ec714cf094",
-    "name": "Apache APISIX Admin Consumer Groups Protos API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

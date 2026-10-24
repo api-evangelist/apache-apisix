@@ -2,7 +2,8 @@
   "provider": "apache-apisix",
   "sources": [
     "_original/apache-apisix-admin-api-openapi.yml",
-    "_original/apache-apisix-control-api-openapi.yml"
+    "_original/apache-apisix-control-api-openapi.yml",
+    "_original/apache-apisix-openapi.json"
   ],
   "outputs": [
     "apache-apisix-consumer-groups-api-openapi.yml",
@@ -21,13 +22,15 @@
     "apache-apisix-upstreams-api-openapi.yml",
     "apache-apisix-diagnostics-api-openapi.yml",
     "apache-apisix-health-check-api-openapi.yml",
-    "apache-apisix-introspection-api-openapi.yml"
+    "apache-apisix-introspection-api-openapi.yml",
+    "apache-apisix-queues-api-openapi.yml",
+    "apache-apisix-status-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "apache-apisix-admin-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apache-apisix-admin-api-openapi.yml: tagged paths GET /services -> Services",
     "apache-apisix-admin-api-openapi.yml: tagged paths POST /services -> Services",
@@ -37,8 +40,9 @@
     "apache-apisix-admin-api-openapi.yml: tagged paths DELETE /services/{service_id} -> Services",
     "apache-apisix-admin-api-openapi.yml: declared missing tag: Services",
     "apache-apisix-control-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apache-apisix-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "tag 'Schema' spans 2 source specs (apache-apisix-admin-api-openapi.yml, apache-apisix-control-api-openapi.yml): per-path servers applied",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+2 apis, 20 total)"
   ],
   "skipped": [
     "apache-apisix-consumer-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",

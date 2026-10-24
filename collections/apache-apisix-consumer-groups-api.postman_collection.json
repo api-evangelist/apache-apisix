@@ -1,673 +1,639 @@
 {
+  "info": {
+    "_postman_id": "abce7b0f-6ddf-4bcc-a0b8-db662e5af415",
+    "name": "Apache APISIX Admin Consumer Groups API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:54:48.000Z",
+    "updatedAt": "2026-10-22T01:54:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-abce7b0f-6ddf-4bcc-a0b8-db662e5af415"
+  },
   "item": [
     {
-      "id": "c81143b7-ae50-4ed6-9bab-b3ebaefc5697",
-      "name": "Consumer Groups",
-      "description": {
-        "content": "Manage consumer groups for shared plugin configurations.",
-        "type": "text/plain"
-      },
+      "name": "consumer_groups",
       "item": [
         {
-          "id": "db65c6ec-31b7-4c73-bfa9-f417e117b8f7",
-          "name": "Apache APISIX List All Consumer Groups",
-          "request": {
-            "name": "Apache APISIX List All Consumer Groups",
-            "description": {
-              "content": "Fetches a list of all configured consumer groups.",
-              "type": "text/plain"
+          "name": "{group_id}",
+          "item": [
+            {
+              "name": "Apache APISIX Get a Consumer Group",
+              "id": "ef116278-5d26-44bc-ab7f-88dae7207e40",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer_groups",
+                    ":group_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2b7bd27d-be7f-4814-8944-ae4769aa1d1c",
+                      "key": "group_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the consumer group."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified consumer group by its ID."
+              },
+              "response": [
+                {
+                  "id": "51f7b8ae-a481-4f94-9a32-ea4245a8c98a",
+                  "name": "Successful response with consumer group details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-51f7b8ae-a481-4f94-9a32-ea4245a8c98a"
+                },
+                {
+                  "id": "8f482eaf-c728-4d9c-9ff1-287757a73733",
+                  "name": "Consumer group not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-8f482eaf-c728-4d9c-9ff1-287757a73733"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:49.000Z",
+              "updatedAt": "2026-10-22T01:54:49.000Z",
+              "uid": "35240-ef116278-5d26-44bc-ab7f-88dae7207e40"
             },
+            {
+              "name": "Apache APISIX Create or Update a Consumer Group",
+              "id": "aca023d5-5151-480b-a4f3-4ef024216de0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"Lorem_b\": \"<string>\",\n    \"aliquipe0b\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer_groups",
+                    ":group_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "82cb37bc-bb73-480d-80cf-40982adbdace",
+                      "key": "group_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the consumer group."
+                    }
+                  ]
+                },
+                "description": "Creates a consumer group with the specified ID, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "da1a4bcc-aacb-4256-b679-e28460d34e7a",
+                  "name": "Consumer group updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"Lorem_b\": \"<string>\",\n    \"aliquipe0b\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-da1a4bcc-aacb-4256-b679-e28460d34e7a"
+                },
+                {
+                  "id": "8b3fac63-4265-406e-9f71-e5ecc9f85eac",
+                  "name": "Consumer group created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"Lorem_b\": \"<string>\",\n    \"aliquipe0b\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-8b3fac63-4265-406e-9f71-e5ecc9f85eac"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:49.000Z",
+              "updatedAt": "2026-10-22T01:54:49.000Z",
+              "uid": "35240-aca023d5-5151-480b-a4f3-4ef024216de0"
+            },
+            {
+              "name": "Apache APISIX Patch a Consumer Group",
+              "id": "1206df20-b80c-4305-afec-fdf52d388450",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"Lorem_b\": \"<string>\",\n    \"aliquipe0b\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer_groups",
+                    ":group_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9dd94ae1-5bf3-40c7-b6b0-6b8ebadd871c",
+                      "key": "group_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the consumer group."
+                    }
+                  ]
+                },
+                "description": "Updates partial attributes of the specified consumer group."
+              },
+              "response": [
+                {
+                  "id": "225d5950-34d0-4915-b2f1-c86ab61b6a69",
+                  "name": "Consumer group patched successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"Lorem_b\": \"<string>\",\n    \"aliquipe0b\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-225d5950-34d0-4915-b2f1-c86ab61b6a69"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:49.000Z",
+              "updatedAt": "2026-10-22T01:54:49.000Z",
+              "uid": "35240-1206df20-b80c-4305-afec-fdf52d388450"
+            },
+            {
+              "name": "Apache APISIX Delete a Consumer Group",
+              "id": "40c82599-99c0-4d37-a291-9d34f0d76a0f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumer_groups",
+                    ":group_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "0b13c9df-00e7-4925-931d-b66b888178b4",
+                      "key": "group_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the consumer group."
+                    }
+                  ]
+                },
+                "description": "Removes the specified consumer group."
+              },
+              "response": [
+                {
+                  "id": "9888ef86-3628-44f9-87ed-6c27ad7d7fe5",
+                  "name": "Consumer group deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-9888ef86-3628-44f9-87ed-6c27ad7d7fe5"
+                },
+                {
+                  "id": "46145d38-f6d3-4a26-86f3-13e59434eac1",
+                  "name": "Consumer group not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumer_groups/:group_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumer_groups",
+                        ":group_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "group_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:49.000Z",
+                  "updatedAt": "2026-10-22T01:54:49.000Z",
+                  "uid": "35240-46145d38-f6d3-4a26-86f3-13e59434eac1"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:49.000Z",
+              "updatedAt": "2026-10-22T01:54:49.000Z",
+              "uid": "35240-40c82599-99c0-4d37-a291-9d34f0d76a0f"
+            }
+          ],
+          "id": "26903fe6-20e1-44e2-82a8-3f2da2c27ce9",
+          "createdAt": "2026-10-22T01:54:48.000Z",
+          "updatedAt": "2026-10-22T01:54:48.000Z",
+          "uid": "35240-26903fe6-20e1-44e2-82a8-3f2da2c27ce9"
+        },
+        {
+          "name": "Apache APISIX List All Consumer Groups",
+          "id": "b487d696-7885-45a4-9932-f37ff04694f8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/consumer_groups",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "consumer_groups"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured consumer groups."
           },
           "response": [
             {
-              "id": "2e6f23de-20e2-4c71-b8d1-afc1b90c3fea",
+              "id": "7784250c-aaad-4008-9b14-01254a1b42e0",
               "name": "Successful response with list of consumer groups.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/consumer_groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "consumer_groups"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 2714,\n      \"createdIndex\": 6143\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 8529,\n      \"createdIndex\": 206\n    }\n  ],\n  \"total\": 7681\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:54:49.000Z",
+              "updatedAt": "2026-10-22T01:54:49.000Z",
+              "uid": "35240-7784250c-aaad-4008-9b14-01254a1b42e0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1992956b-4126-4c28-9b54-c9bf26315323",
-          "name": "Apache APISIX Get a Consumer Group",
-          "request": {
-            "name": "Apache APISIX Get a Consumer Group",
-            "description": {
-              "content": "Fetches the specified consumer group by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumer_groups",
-                ":group_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "group_id",
-                  "description": "(Required) Unique identifier of the consumer group."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "26c3e4af-4496-453c-b25e-e1d01c539ae5",
-              "name": "Successful response with consumer group details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 8079,\n  \"createdIndex\": 9678\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a8f01e25-3524-4864-af72-17bf62bf1717",
-              "name": "Consumer group not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e42629a9-c6d0-4b41-a027-6d034a345dbe",
-          "name": "Apache APISIX Create or Update a Consumer Group",
-          "request": {
-            "name": "Apache APISIX Create or Update a Consumer Group",
-            "description": {
-              "content": "Creates a consumer group with the specified ID, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumer_groups",
-                ":group_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "group_id",
-                  "description": "(Required) Unique identifier of the consumer group."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "fe1f32eb-72c3-46ce-8ab4-721bb85afee6",
-              "name": "Consumer group updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 8079,\n  \"createdIndex\": 9678\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d467d72e-6989-480b-ad7f-693502a7e72c",
-              "name": "Consumer group created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d848ec07-ee66-49ee-bc20-2f61619781a9",
-          "name": "Apache APISIX Patch a Consumer Group",
-          "request": {
-            "name": "Apache APISIX Patch a Consumer Group",
-            "description": {
-              "content": "Updates partial attributes of the specified consumer group.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumer_groups",
-                ":group_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "group_id",
-                  "description": "(Required) Unique identifier of the consumer group."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "2f9a4c9d-ac10-4eb4-9395-e9f2d150ecc5",
-              "name": "Consumer group patched successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 8079,\n  \"createdIndex\": 9678\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "917289a2-a8d9-4b13-96e8-a3541c6c9836",
-          "name": "Apache APISIX Delete a Consumer Group",
-          "request": {
-            "name": "Apache APISIX Delete a Consumer Group",
-            "description": {
-              "content": "Removes the specified consumer group.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumer_groups",
-                ":group_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "group_id",
-                  "description": "(Required) Unique identifier of the consumer group."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "86204390-ac88-4e09-9ea8-2bb4ab435e45",
-              "name": "Consumer group deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0efc6c5f-f4fc-4ad2-8e52-b92f4ae57c66",
-              "name": "Consumer group not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumer_groups",
-                    ":group_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "group_id",
-                      "description": "(Required) Unique identifier of the consumer group."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:54:49.000Z",
+          "updatedAt": "2026-10-22T01:54:49.000Z",
+          "uid": "35240-b487d696-7885-45a4-9932-f37ff04694f8"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "1503f4ff-1884-4cc7-abb7-6002cfff6d02",
+      "createdAt": "2026-10-22T01:54:48.000Z",
+      "updatedAt": "2026-10-22T01:54:48.000Z",
+      "uid": "35240-1503f4ff-1884-4cc7-abb7-6002cfff6d02"
     }
   ],
   "auth": {
@@ -675,25 +641,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "652024f3-78e5-4d83-afed-33f7a510a7f1",
-    "name": "Apache APISIX Admin Consumer Groups API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

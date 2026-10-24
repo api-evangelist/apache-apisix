@@ -1,673 +1,639 @@
 {
+  "info": {
+    "_postman_id": "d9719788-01ca-4bc7-addd-02b1dc969ee0",
+    "name": "Apache APISIX Admin SSL API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:56:14.000Z",
+    "updatedAt": "2026-10-22T01:56:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d9719788-01ca-4bc7-addd-02b1dc969ee0"
+  },
   "item": [
     {
-      "id": "8425714f-ff0a-4209-840e-237269766ade",
-      "name": "SSL",
-      "description": {
-        "content": "Manage SSL/TLS certificate resources.",
-        "type": "text/plain"
-      },
+      "name": "ssls",
       "item": [
         {
-          "id": "780ac9b3-6274-4834-a67d-86a6a4761006",
-          "name": "Apache APISIX List All SSL Certificates",
-          "request": {
-            "name": "Apache APISIX List All SSL Certificates",
-            "description": {
-              "content": "Fetches a list of all configured SSL certificate resources.",
-              "type": "text/plain"
+          "name": "{ssl_id}",
+          "item": [
+            {
+              "name": "Apache APISIX Get an SSL Certificate",
+              "id": "9db3f9bb-9b12-41ec-ac53-d91cc121c8b2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ssls/:ssl_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssls",
+                    ":ssl_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9e33f5cf-61c2-42d0-996a-ba2805d9f747",
+                      "key": "ssl_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the SSL certificate resource."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified SSL certificate resource by its ID."
+              },
+              "response": [
+                {
+                  "id": "f87a5fa4-d6e8-43ff-b83a-5b3e2f10121e",
+                  "name": "Successful response with SSL certificate details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-f87a5fa4-d6e8-43ff-b83a-5b3e2f10121e"
+                },
+                {
+                  "id": "27d033d0-22b6-40c3-afc7-5247c330f6e5",
+                  "name": "SSL certificate not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-27d033d0-22b6-40c3-afc7-5247c330f6e5"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:15.000Z",
+              "updatedAt": "2026-10-22T01:56:15.000Z",
+              "uid": "35240-9db3f9bb-9b12-41ec-ac53-d91cc121c8b2"
             },
+            {
+              "name": "Apache APISIX Create or Update an SSL Certificate",
+              "id": "ad5e4ad6-9b59-41f6-9111-e67ef4db54a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"commodo8ad\": \"<string>\",\n    \"est__5e\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ssls/:ssl_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssls",
+                    ":ssl_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "bb725e2c-db7d-48d7-b74f-d25ace2ceba5",
+                      "key": "ssl_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the SSL certificate resource."
+                    }
+                  ]
+                },
+                "description": "Creates an SSL certificate with the specified ID, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "1e8cb67c-6079-4a08-b6a8-76934a6a694d",
+                  "name": "SSL certificate updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"commodo8ad\": \"<string>\",\n    \"est__5e\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-1e8cb67c-6079-4a08-b6a8-76934a6a694d"
+                },
+                {
+                  "id": "1d005f95-a14c-44c4-88e2-1cc14fe73fa6",
+                  "name": "SSL certificate created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"commodo8ad\": \"<string>\",\n    \"est__5e\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-1d005f95-a14c-44c4-88e2-1cc14fe73fa6"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:15.000Z",
+              "updatedAt": "2026-10-22T01:56:15.000Z",
+              "uid": "35240-ad5e4ad6-9b59-41f6-9111-e67ef4db54a3"
+            },
+            {
+              "name": "Apache APISIX Patch an SSL Certificate",
+              "id": "98520c76-b48e-4bec-9ee5-c4946aa05813",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"commodo8ad\": \"<string>\",\n    \"est__5e\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ssls/:ssl_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssls",
+                    ":ssl_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c6f3930d-0d35-41d6-98e9-10b25e9fbe09",
+                      "key": "ssl_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the SSL certificate resource."
+                    }
+                  ]
+                },
+                "description": "Updates partial attributes of the specified SSL certificate."
+              },
+              "response": [
+                {
+                  "id": "feb1baa8-6681-406c-b35c-9be246e3d97f",
+                  "name": "SSL certificate patched successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"commodo8ad\": \"<string>\",\n    \"est__5e\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-feb1baa8-6681-406c-b35c-9be246e3d97f"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:15.000Z",
+              "updatedAt": "2026-10-22T01:56:15.000Z",
+              "uid": "35240-98520c76-b48e-4bec-9ee5-c4946aa05813"
+            },
+            {
+              "name": "Apache APISIX Delete an SSL Certificate",
+              "id": "6615a61a-5613-40e4-aa6f-4be742bc4cb9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ssls/:ssl_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ssls",
+                    ":ssl_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4711a299-62e3-41bf-a8f2-b0ae3af50be0",
+                      "key": "ssl_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the SSL certificate resource."
+                    }
+                  ]
+                },
+                "description": "Removes the specified SSL certificate."
+              },
+              "response": [
+                {
+                  "id": "7a19c60b-cc5b-4ba8-a7c8-26184c106234",
+                  "name": "SSL certificate deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-7a19c60b-cc5b-4ba8-a7c8-26184c106234"
+                },
+                {
+                  "id": "d2ba4a1e-bff3-4818-b5fe-af3cc2710397",
+                  "name": "SSL certificate not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ssls/:ssl_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ssls",
+                        ":ssl_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "ssl_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:15.000Z",
+                  "updatedAt": "2026-10-22T01:56:15.000Z",
+                  "uid": "35240-d2ba4a1e-bff3-4818-b5fe-af3cc2710397"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:15.000Z",
+              "updatedAt": "2026-10-22T01:56:15.000Z",
+              "uid": "35240-6615a61a-5613-40e4-aa6f-4be742bc4cb9"
+            }
+          ],
+          "id": "e221421a-1739-4b82-bc5b-9b0fe4ac0ef2",
+          "createdAt": "2026-10-22T01:56:15.000Z",
+          "updatedAt": "2026-10-22T01:56:15.000Z",
+          "uid": "35240-e221421a-1739-4b82-bc5b-9b0fe4ac0ef2"
+        },
+        {
+          "name": "Apache APISIX List All SSL Certificates",
+          "id": "fb79f8a2-7f24-4466-ba26-2d8e28688c93",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/ssls",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "ssls"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured SSL certificate resources."
           },
           "response": [
             {
-              "id": "ae236f67-80ca-471b-b751-5953b249eca8",
+              "id": "ecdad1c1-d124-4021-b0f0-fc7ea27edfa5",
               "name": "Successful response with list of SSL certificates.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/ssls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "ssls"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 6209,\n      \"createdIndex\": 7284\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 726,\n      \"createdIndex\": 5819\n    }\n  ],\n  \"total\": 6585\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:56:15.000Z",
+              "updatedAt": "2026-10-22T01:56:15.000Z",
+              "uid": "35240-ecdad1c1-d124-4021-b0f0-fc7ea27edfa5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "43556c3b-086b-49df-8046-36fb2f59e214",
-          "name": "Apache APISIX Get an SSL Certificate",
-          "request": {
-            "name": "Apache APISIX Get an SSL Certificate",
-            "description": {
-              "content": "Fetches the specified SSL certificate resource by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ssls",
-                ":ssl_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ssl_id",
-                  "description": "(Required) Unique identifier of the SSL certificate resource."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3191ed2d-6bab-4a6e-9df7-ad6d87d37705",
-              "name": "Successful response with SSL certificate details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 882,\n  \"createdIndex\": 8113\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9655f43a-5bfc-4b55-a02a-5a5f1c566157",
-              "name": "SSL certificate not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "834f3f06-7532-49fc-b246-778e888a6d99",
-          "name": "Apache APISIX Create or Update an SSL Certificate",
-          "request": {
-            "name": "Apache APISIX Create or Update an SSL Certificate",
-            "description": {
-              "content": "Creates an SSL certificate with the specified ID, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ssls",
-                ":ssl_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ssl_id",
-                  "description": "(Required) Unique identifier of the SSL certificate resource."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "dde7df87-a387-44c2-9bd9-c82fbcea213f",
-              "name": "SSL certificate updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 882,\n  \"createdIndex\": 8113\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "09b6bfd6-9af9-43cf-be40-6d8fdb800d36",
-              "name": "SSL certificate created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "444e39b2-a4e8-4170-9798-b22ec8ed1887",
-          "name": "Apache APISIX Patch an SSL Certificate",
-          "request": {
-            "name": "Apache APISIX Patch an SSL Certificate",
-            "description": {
-              "content": "Updates partial attributes of the specified SSL certificate.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ssls",
-                ":ssl_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ssl_id",
-                  "description": "(Required) Unique identifier of the SSL certificate resource."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "8de4008c-bd0f-4ad2-8eba-b3a71b543b30",
-              "name": "SSL certificate patched successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"cert\": \"<string>\",\n  \"key\": \"<string>\",\n  \"snis\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"certs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keys\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"client\": {\n    \"ca\": \"<string>\",\n    \"depth\": 1\n  },\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"status\": 1,\n  \"type\": \"server\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 882,\n  \"createdIndex\": 8113\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c7640e37-55ca-456b-a8c9-42f4f7196049",
-          "name": "Apache APISIX Delete an SSL Certificate",
-          "request": {
-            "name": "Apache APISIX Delete an SSL Certificate",
-            "description": {
-              "content": "Removes the specified SSL certificate.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "ssls",
-                ":ssl_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ssl_id",
-                  "description": "(Required) Unique identifier of the SSL certificate resource."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e66bbdf1-72c1-4d08-a60d-ce2f88b60786",
-              "name": "SSL certificate deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "e09803b0-ff3d-4540-9dfe-83fe7bdc1e98",
-              "name": "SSL certificate not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "ssls",
-                    ":ssl_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "ssl_id",
-                      "description": "(Required) Unique identifier of the SSL certificate resource."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:56:15.000Z",
+          "updatedAt": "2026-10-22T01:56:15.000Z",
+          "uid": "35240-fb79f8a2-7f24-4466-ba26-2d8e28688c93"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "60d1eb59-62fc-48f2-a695-b6168f1223e5",
+      "createdAt": "2026-10-22T01:56:15.000Z",
+      "updatedAt": "2026-10-22T01:56:15.000Z",
+      "uid": "35240-60d1eb59-62fc-48f2-a695-b6168f1223e5"
     }
   ],
   "auth": {
@@ -675,25 +641,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "672bd651-57bf-4b0a-8311-e651aec3d3f4",
-    "name": "Apache APISIX Admin Consumer Groups SSL API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

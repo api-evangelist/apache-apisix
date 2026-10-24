@@ -1,556 +1,523 @@
 {
+  "info": {
+    "_postman_id": "383c75c9-a73d-4728-8471-afa2e97aa55a",
+    "name": "Apache APISIX Admin Stream Routes API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:56:23.000Z",
+    "updatedAt": "2026-10-22T01:56:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-383c75c9-a73d-4728-8471-afa2e97aa55a"
+  },
   "item": [
     {
-      "id": "32d3c902-dd8b-4e71-9864-4d60a0d811fe",
-      "name": "Stream Routes",
-      "description": {
-        "content": "Manage Layer 4 TCP/UDP stream routes.",
-        "type": "text/plain"
-      },
+      "name": "stream_routes",
       "item": [
         {
-          "id": "ad9cd576-6f1c-4c00-98e5-79d0fdb471a0",
-          "name": "Apache APISIX List All Stream Routes",
-          "request": {
-            "name": "Apache APISIX List All Stream Routes",
-            "description": {
-              "content": "Fetches a list of all configured stream (Layer 4) routes.",
-              "type": "text/plain"
+          "name": "{route_id}",
+          "item": [
+            {
+              "name": "Apache APISIX Get a Stream Route",
+              "id": "b608e82b-cbf2-4f8b-ba77-dfdd13029421",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/stream_routes/:route_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stream_routes",
+                    ":route_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "34b2bcc2-56c3-4512-8184-45056ed24253",
+                      "key": "route_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the stream route."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified stream route by its ID."
+              },
+              "response": [
+                {
+                  "id": "b62766d6-f99c-4a24-b4ee-e1fc47146bd1",
+                  "name": "Successful response with stream route details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-b62766d6-f99c-4a24-b4ee-e1fc47146bd1"
+                },
+                {
+                  "id": "c7a50a0b-b1f6-4579-bdca-26f01810d189",
+                  "name": "Stream route not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-c7a50a0b-b1f6-4579-bdca-26f01810d189"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:23.000Z",
+              "updatedAt": "2026-10-22T01:56:23.000Z",
+              "uid": "35240-b608e82b-cbf2-4f8b-ba77-dfdd13029421"
             },
+            {
+              "name": "Apache APISIX Create or Update a Stream Route",
+              "id": "87020021-ff0a-4190-a155-b8cf7d8c7a1d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": {},\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"quis1\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"ut_754\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stream_routes/:route_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stream_routes",
+                    ":route_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "92251332-2653-4816-99d3-5e7a5ec0246b",
+                      "key": "route_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the stream route."
+                    }
+                  ]
+                },
+                "description": "Creates a stream route with the specified ID, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "9e65009f-e7f8-4f55-8d2d-00490c2d9003",
+                  "name": "Stream route updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": {},\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"quis1\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"ut_754\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-9e65009f-e7f8-4f55-8d2d-00490c2d9003"
+                },
+                {
+                  "id": "9d68a44f-0827-4964-8993-aa177d2d785e",
+                  "name": "Stream route created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": {},\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"quis1\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"ut_754\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-9d68a44f-0827-4964-8993-aa177d2d785e"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:23.000Z",
+              "updatedAt": "2026-10-22T01:56:23.000Z",
+              "uid": "35240-87020021-ff0a-4190-a155-b8cf7d8c7a1d"
+            },
+            {
+              "name": "Apache APISIX Delete a Stream Route",
+              "id": "47c54cea-d869-4f68-82ab-584cedd015c8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/stream_routes/:route_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stream_routes",
+                    ":route_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a13e7498-230e-43fd-ad18-7d91f26b0a15",
+                      "key": "route_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the stream route."
+                    }
+                  ]
+                },
+                "description": "Removes the specified stream route."
+              },
+              "response": [
+                {
+                  "id": "3fd93f08-db3a-4074-8e7f-56b5c573b357",
+                  "name": "Stream route deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-3fd93f08-db3a-4074-8e7f-56b5c573b357"
+                },
+                {
+                  "id": "8eabba9d-73b0-4cd0-ab2d-5d08d607ada9",
+                  "name": "Stream route not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stream_routes/:route_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stream_routes",
+                        ":route_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "route_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:56:23.000Z",
+                  "updatedAt": "2026-10-22T01:56:23.000Z",
+                  "uid": "35240-8eabba9d-73b0-4cd0-ab2d-5d08d607ada9"
+                }
+              ],
+              "createdAt": "2026-10-22T01:56:23.000Z",
+              "updatedAt": "2026-10-22T01:56:23.000Z",
+              "uid": "35240-47c54cea-d869-4f68-82ab-584cedd015c8"
+            }
+          ],
+          "id": "4eb49443-1db9-4d0c-81bc-c3a646a96acd",
+          "createdAt": "2026-10-22T01:56:23.000Z",
+          "updatedAt": "2026-10-22T01:56:23.000Z",
+          "uid": "35240-4eb49443-1db9-4d0c-81bc-c3a646a96acd"
+        },
+        {
+          "name": "Apache APISIX List All Stream Routes",
+          "id": "e89852c7-12f1-42ae-b3b4-cef58dc9b83f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/stream_routes",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "stream_routes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured stream (Layer 4) routes."
           },
           "response": [
             {
-              "id": "7c10f9c9-c924-4156-993d-3685ae44abc9",
+              "id": "598a565a-f245-4364-a4b0-7fa52be28545",
               "name": "Successful response with list of stream routes.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/stream_routes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "stream_routes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 3974,\n      \"createdIndex\": 9128\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 9022,\n      \"createdIndex\": 8758\n    }\n  ],\n  \"total\": 5161\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:56:23.000Z",
+              "updatedAt": "2026-10-22T01:56:23.000Z",
+              "uid": "35240-598a565a-f245-4364-a4b0-7fa52be28545"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9d555486-2008-4d17-8c90-aa8ba7ce1d3c",
-          "name": "Apache APISIX Get a Stream Route",
-          "request": {
-            "name": "Apache APISIX Get a Stream Route",
-            "description": {
-              "content": "Fetches the specified stream route by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "stream_routes",
-                ":route_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "route_id",
-                  "description": "(Required) Unique identifier of the stream route."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b78a9d4d-d249-4166-abcc-e6d98a28b08d",
-              "name": "Successful response with stream route details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 9274,\n  \"createdIndex\": 8731\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "648123f6-1767-4850-b8a6-21bf8ee4c68c",
-              "name": "Stream route not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a14cabb0-880d-4815-b108-7e05689e4bb1",
-          "name": "Apache APISIX Create or Update a Stream Route",
-          "request": {
-            "name": "Apache APISIX Create or Update a Stream Route",
-            "description": {
-              "content": "Creates a stream route with the specified ID, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "stream_routes",
-                ":route_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "route_id",
-                  "description": "(Required) Unique identifier of the stream route."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"<string>\",\n    \"desc\": \"<string>\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\",\n      \"key_2\": \"<integer>\"\n    },\n    \"service_name\": \"<string>\",\n    \"discovery_type\": \"<string>\",\n    \"hash_on\": \"vars\",\n    \"key\": \"<string>\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": \"<integer>\",\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"interval\": \"<integer>\",\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"successes\": \"<integer>\"\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            \"<integer>\",\n            \"<integer>\"\n          ],\n          \"http_failures\": \"<integer>\",\n          \"tcp_failures\": \"<integer>\",\n          \"timeouts\": \"<integer>\"\n        }\n      }\n    },\n    \"retries\": \"<integer>\",\n    \"retry_timeout\": \"<number>\",\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"<string>\",\n      \"client_key\": \"<string>\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "02bcecee-dd8f-455a-b87c-6b5156949808",
-              "name": "Stream route updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 5658\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 6826,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 7723,\n          \"successes\": 4372\n        },\n        \"unhealthy\": {\n          \"interval\": 4563,\n          \"http_failures\": 6351,\n          \"tcp_failures\": 8969,\n          \"timeouts\": 991\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1932,\n            1426\n          ],\n          \"successes\": 652\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            2557,\n            49\n          ],\n          \"http_failures\": 6715,\n          \"tcp_failures\": 8742,\n          \"timeouts\": 4571\n        }\n      }\n    },\n    \"retries\": 461,\n    \"retry_timeout\": 2173.371366633231,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 9274,\n  \"createdIndex\": 8731\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "24521023-7f32-42b9-a09a-526220379cb9",
-              "name": "Stream route created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"remote_addr\": \"<string>\",\n  \"server_addr\": \"<string>\",\n  \"server_port\": \"<integer>\",\n  \"sni\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"upstream\": {\n    \"name\": \"string\",\n    \"desc\": \"string\",\n    \"type\": \"roundrobin\",\n    \"nodes\": {\n      \"key_0\": 5658\n    },\n    \"service_name\": \"string\",\n    \"discovery_type\": \"string\",\n    \"hash_on\": \"vars\",\n    \"key\": \"string\",\n    \"checks\": {\n      \"active\": {\n        \"type\": \"http\",\n        \"timeout\": 1,\n        \"http_path\": \"/\",\n        \"host\": \"string\",\n        \"port\": 6826,\n        \"https_verify_certificate\": true,\n        \"healthy\": {\n          \"interval\": 7723,\n          \"successes\": 4372\n        },\n        \"unhealthy\": {\n          \"interval\": 4563,\n          \"http_failures\": 6351,\n          \"tcp_failures\": 8969,\n          \"timeouts\": 991\n        }\n      },\n      \"passive\": {\n        \"type\": \"http\",\n        \"healthy\": {\n          \"http_statuses\": [\n            1932,\n            1426\n          ],\n          \"successes\": 652\n        },\n        \"unhealthy\": {\n          \"http_statuses\": [\n            2557,\n            49\n          ],\n          \"http_failures\": 6715,\n          \"tcp_failures\": 8742,\n          \"timeouts\": 4571\n        }\n      }\n    },\n    \"retries\": 461,\n    \"retry_timeout\": 2173.371366633231,\n    \"timeout\": {\n      \"connect\": 60,\n      \"send\": 60,\n      \"read\": 60\n    },\n    \"scheme\": \"http\",\n    \"pass_host\": \"pass\",\n    \"upstream_host\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"keepalive_pool\": {\n      \"size\": 320,\n      \"idle_timeout\": 60,\n      \"requests\": 1000\n    },\n    \"tls\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    }\n  },\n  \"upstream_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3db9c35b-7d0e-4f40-af52-b753a2c08491",
-          "name": "Apache APISIX Delete a Stream Route",
-          "request": {
-            "name": "Apache APISIX Delete a Stream Route",
-            "description": {
-              "content": "Removes the specified stream route.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "stream_routes",
-                ":route_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "route_id",
-                  "description": "(Required) Unique identifier of the stream route."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "490674d1-3aaf-48f6-ae0a-445f63cd000f",
-              "name": "Stream route deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d7d6a991-6163-4ab3-90d1-e8a8f7e709f5",
-              "name": "Stream route not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "stream_routes",
-                    ":route_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "route_id",
-                      "description": "(Required) Unique identifier of the stream route."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:56:23.000Z",
+          "updatedAt": "2026-10-22T01:56:23.000Z",
+          "uid": "35240-e89852c7-12f1-42ae-b3b4-cef58dc9b83f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "87888c76-267b-40cb-ab80-7446aecd4ab2",
+      "createdAt": "2026-10-22T01:56:23.000Z",
+      "updatedAt": "2026-10-22T01:56:23.000Z",
+      "uid": "35240-87888c76-267b-40cb-ab80-7446aecd4ab2"
     }
   ],
   "auth": {
@@ -558,25 +525,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d569793b-c75b-45fd-b018-477df26420a9",
-    "name": "Apache APISIX Admin Consumer Groups Stream Routes API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

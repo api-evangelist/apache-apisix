@@ -1,439 +1,415 @@
 {
+  "info": {
+    "_postman_id": "0fe26e47-bece-4cc3-91cd-88ffe9bb9b19",
+    "name": "Apache APISIX Control Introspection API",
+    "description": "The Apache APISIX Control API provides internal status and health check endpoints for monitoring and introspecting the running APISIX instance. By default, the Control API listens on port 9090 and is only accessible from localhost. It exposes endpoints for health checking, schema retrieval, and runtime diagnostics.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:55:19.000Z",
+    "updatedAt": "2026-10-22T01:55:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0fe26e47-bece-4cc3-91cd-88ffe9bb9b19"
+  },
   "item": [
     {
-      "id": "db9b8a22-16a8-4943-922a-24a9921f6220",
-      "name": "Introspection",
-      "description": {
-        "content": "Inspect the runtime configuration of the APISIX instance.",
-        "type": "text/plain"
-      },
+      "name": "v1",
       "item": [
         {
-          "id": "dba896a8-45c6-407e-8261-0a5774cdf9b6",
-          "name": "Apache APISIX Get All Configured Routes",
-          "request": {
-            "name": "Apache APISIX Get All Configured Routes",
-            "description": {
-              "content": "Returns a list of all routes with their complete runtime configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "routes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "routes",
+          "item": [
             {
-              "id": "b6100bf6-322d-4284-b9de-33bce760fba3",
-              "name": "Successful response with list of routes.",
-              "originalRequest": {
+              "name": "Apache APISIX Get All Configured Routes",
+              "id": "9cd9e3de-ac83-41c7-9a63-80ef152b9a53",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/v1/routes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "v1",
                     "routes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
+                "description": "Returns a list of all routes with their complete runtime configuration."
+              },
+              "response": [
+                {
+                  "id": "3ac03747-8d35-403e-9847-0037f7975714",
+                  "name": "Successful response with list of routes.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/routes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "routes"
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[]",
+                  "createdAt": "2026-10-22T01:55:20.000Z",
+                  "updatedAt": "2026-10-22T01:55:20.000Z",
+                  "uid": "35240-3ac03747-8d35-403e-9847-0037f7975714"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:20.000Z",
+              "updatedAt": "2026-10-22T01:55:20.000Z",
+              "uid": "35240-9cd9e3de-ac83-41c7-9a63-80ef152b9a53"
+            }
+          ],
+          "id": "4b4d39e8-564e-43b7-b6d4-ff3bd0a9f09d",
+          "createdAt": "2026-10-22T01:55:20.000Z",
+          "updatedAt": "2026-10-22T01:55:20.000Z",
+          "uid": "35240-4b4d39e8-564e-43b7-b6d4-ff3bd0a9f09d"
+        },
+        {
+          "name": "services",
+          "item": [
+            {
+              "name": "Apache APISIX Get All Configured Services",
+              "id": "9c9c7fdf-82cf-446b-8c6d-0e01eceac0ea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "41ce94a4-3673-43ad-b2b1-154211f8d557",
-          "name": "Apache APISIX Get All Configured Services",
-          "request": {
-            "name": "Apache APISIX Get All Configured Services",
-            "description": {
-              "content": "Returns a list of all services with their complete runtime configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "services"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "54863ef1-9855-4e31-90fd-375eeb17a428",
-              "name": "Successful response with list of services.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/v1/services",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "v1",
                     "services"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
+                "description": "Returns a list of all services with their complete runtime configuration."
+              },
+              "response": [
+                {
+                  "id": "11bc9912-9947-4f0e-bf85-8f5498833420",
+                  "name": "Successful response with list of services.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/services",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "services"
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[]",
+                  "createdAt": "2026-10-22T01:55:20.000Z",
+                  "updatedAt": "2026-10-22T01:55:20.000Z",
+                  "uid": "35240-11bc9912-9947-4f0e-bf85-8f5498833420"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:20.000Z",
+              "updatedAt": "2026-10-22T01:55:20.000Z",
+              "uid": "35240-9c9c7fdf-82cf-446b-8c6d-0e01eceac0ea"
+            }
+          ],
+          "id": "b323179c-e822-4dc1-8c4f-f9a1ad8f841a",
+          "createdAt": "2026-10-22T01:55:20.000Z",
+          "updatedAt": "2026-10-22T01:55:20.000Z",
+          "uid": "35240-b323179c-e822-4dc1-8c4f-f9a1ad8f841a"
+        },
+        {
+          "name": "upstreams",
+          "item": [
+            {
+              "name": "Apache APISIX Get All Configured Upstreams",
+              "id": "2cd0ddf3-1fd2-4d16-835d-0d5d27e2e39e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "63d45e23-fbb5-4428-9e40-7557ce93f568",
-          "name": "Apache APISIX Get All Configured Upstreams",
-          "request": {
-            "name": "Apache APISIX Get All Configured Upstreams",
-            "description": {
-              "content": "Returns a list of all upstreams with their complete runtime configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "upstreams"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fe124599-1df9-4978-941e-fde2e03ae4f4",
-              "name": "Successful response with list of upstreams.",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/v1/upstreams",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "v1",
                     "upstreams"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Returns a list of all upstreams with their complete runtime configuration."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "acb40786-87bb-461f-8429-c871528a59fa",
+                  "name": "Successful response with list of upstreams.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/upstreams",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "upstreams"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[]",
+                  "createdAt": "2026-10-22T01:55:20.000Z",
+                  "updatedAt": "2026-10-22T01:55:20.000Z",
+                  "uid": "35240-acb40786-87bb-461f-8429-c871528a59fa"
                 }
               ],
-              "body": "[]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:55:20.000Z",
+              "updatedAt": "2026-10-22T01:55:20.000Z",
+              "uid": "35240-2cd0ddf3-1fd2-4d16-835d-0d5d27e2e39e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ecd3d05a-d43c-4f14-96a1-0b89a50d9488",
+          "createdAt": "2026-10-22T01:55:20.000Z",
+          "updatedAt": "2026-10-22T01:55:20.000Z",
+          "uid": "35240-ecd3d05a-d43c-4f14-96a1-0b89a50d9488"
         },
         {
-          "id": "6021a90d-9eea-4e65-8e87-98a90e1119aa",
-          "name": "Apache APISIX Dump Service Discovery Nodes",
-          "request": {
-            "name": "Apache APISIX Dump Service Discovery Nodes",
-            "description": {
-              "content": "Returns the nodes discovered by the specified service discovery type.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "v1",
-                "discovery",
-                ":discovery_type",
-                "dump"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "discovery_type",
-                  "description": "(Required) The type of service discovery (e.g. dns, consul, nacos)."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "discovery",
+          "item": [
             {
-              "id": "8a9d207d-e7a0-4ad7-824a-42e2771ff94b",
-              "name": "Successful response with discovered nodes.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "discovery",
-                    ":discovery_type",
-                    "dump"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "discovery_type",
-                      "description": "(Required) The type of service discovery (e.g. dns, consul, nacos)."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{discovery_type}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "dump",
+                  "item": [
+                    {
+                      "name": "Apache APISIX Dump Service Discovery Nodes",
+                      "id": "f87ad169-7641-4710-ba9b-adb30631bdae",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/discovery/:discovery_type/dump",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "discovery",
+                            ":discovery_type",
+                            "dump"
+                          ],
+                          "variable": [
+                            {
+                              "id": "072f6d17-879f-4e2f-8d9a-681d46a796b0",
+                              "key": "discovery_type",
+                              "value": "<string>",
+                              "description": "(Required) The type of service discovery (e.g. dns, consul, nacos)."
+                            }
+                          ]
+                        },
+                        "description": "Returns the nodes discovered by the specified service discovery type."
+                      },
+                      "response": [
+                        {
+                          "id": "9b1dae94-b573-4d42-b5ff-a9d90f4db586",
+                          "name": "Successful response with discovered nodes.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/discovery/:discovery_type/dump",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "discovery",
+                                ":discovery_type",
+                                "dump"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "discovery_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T01:55:20.000Z",
+                          "updatedAt": "2026-10-22T01:55:20.000Z",
+                          "uid": "35240-9b1dae94-b573-4d42-b5ff-a9d90f4db586"
+                        },
+                        {
+                          "id": "fe701be7-7347-4a2b-8330-40ec8eedac1a",
+                          "name": "Discovery type not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/discovery/:discovery_type/dump",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "discovery",
+                                ":discovery_type",
+                                "dump"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "discovery_type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:55:20.000Z",
+                          "updatedAt": "2026-10-22T01:55:20.000Z",
+                          "uid": "35240-fe701be7-7347-4a2b-8330-40ec8eedac1a"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:55:20.000Z",
+                      "updatedAt": "2026-10-22T01:55:20.000Z",
+                      "uid": "35240-f87ad169-7641-4710-ba9b-adb30631bdae"
+                    }
+                  ],
+                  "id": "1c6b76f3-0e24-44d2-9317-0ae5c4b999d5",
+                  "createdAt": "2026-10-22T01:55:20.000Z",
+                  "updatedAt": "2026-10-22T01:55:20.000Z",
+                  "uid": "35240-1c6b76f3-0e24-44d2-9317-0ae5c4b999d5"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "73aac939-9008-49a6-b305-8762256d7cdc",
-              "name": "Discovery type not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "v1",
-                    "discovery",
-                    ":discovery_type",
-                    "dump"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "discovery_type",
-                      "description": "(Required) The type of service discovery (e.g. dns, consul, nacos)."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "1bd3e865-40cc-4beb-b403-761d4e84f5ef",
+              "createdAt": "2026-10-22T01:55:20.000Z",
+              "updatedAt": "2026-10-22T01:55:20.000Z",
+              "uid": "35240-1bd3e865-40cc-4beb-b403-761d4e84f5ef"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0352deb8-2327-45c8-9ccd-1bb7149d7b0e",
+          "createdAt": "2026-10-22T01:55:20.000Z",
+          "updatedAt": "2026-10-22T01:55:20.000Z",
+          "uid": "35240-0352deb8-2327-45c8-9ccd-1bb7149d7b0e"
         }
       ],
-      "event": []
+      "id": "0aa55a90-26a8-4989-855a-1b712d9d8b17",
+      "createdAt": "2026-10-22T01:55:20.000Z",
+      "updatedAt": "2026-10-22T01:55:20.000Z",
+      "uid": "35240-0aa55a90-26a8-4989-855a-1b712d9d8b17"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9090"
     }
-  ],
-  "auth": {
-    "type": "apikey",
-    "apikey": [
-      {
-        "key": "key",
-        "value": "X-API-KEY"
-      },
-      {
-        "key": "value",
-        "value": "{{apiKey}}"
-      },
-      {
-        "key": "in",
-        "value": "header"
-      }
-    ]
-  },
-  "info": {
-    "_postman_id": "8e5459a2-9f8c-474e-9727-b16760c6add2",
-    "name": "Apache APISIX Admin Consumer Groups Introspection API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

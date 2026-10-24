@@ -1,673 +1,639 @@
 {
+  "info": {
+    "_postman_id": "7eff29ee-e0bd-40f9-9282-aa3ebf87a2ec",
+    "name": "Apache APISIX Admin Plugin Configs API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:55:25.000Z",
+    "updatedAt": "2026-10-22T01:55:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7eff29ee-e0bd-40f9-9282-aa3ebf87a2ec"
+  },
   "item": [
     {
-      "id": "d9cc78c0-65fa-4fb7-b87b-2aa7d7102325",
-      "name": "Plugin Configs",
-      "description": {
-        "content": "Manage reusable plugin configuration sets.",
-        "type": "text/plain"
-      },
+      "name": "plugin_configs",
       "item": [
         {
-          "id": "04f27b60-b51e-414e-95f7-51c991d266e6",
-          "name": "Apache APISIX List All Plugin Configs",
-          "request": {
-            "name": "Apache APISIX List All Plugin Configs",
-            "description": {
-              "content": "Fetches a list of all configured plugin config resources.",
-              "type": "text/plain"
+          "name": "{config_id}",
+          "item": [
+            {
+              "name": "Apache APISIX Get a Plugin Config",
+              "id": "72e4a2b9-1a8e-4a08-ac31-cc913a665b14",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugin_configs",
+                    ":config_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b8d69521-24f7-401b-9c9a-c6961749b491",
+                      "key": "config_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the plugin config."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified plugin config by its ID."
+              },
+              "response": [
+                {
+                  "id": "ad80fd1f-f8d5-42e7-b979-94a620ad880b",
+                  "name": "Successful response with plugin config details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-ad80fd1f-f8d5-42e7-b979-94a620ad880b"
+                },
+                {
+                  "id": "2a19679c-cc99-40a5-829a-13d8c1b16e30",
+                  "name": "Plugin config not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-2a19679c-cc99-40a5-829a-13d8c1b16e30"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:26.000Z",
+              "updatedAt": "2026-10-22T01:55:26.000Z",
+              "uid": "35240-72e4a2b9-1a8e-4a08-ac31-cc913a665b14"
             },
+            {
+              "name": "Apache APISIX Create or Update a Plugin Config",
+              "id": "a2fbacf7-77ac-48d2-9c70-ddb256f06d6f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"eiusmod_b\": \"<string>\",\n    \"et_9_\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugin_configs",
+                    ":config_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9ffade14-ed04-494d-b77b-fd093e21ab66",
+                      "key": "config_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the plugin config."
+                    }
+                  ]
+                },
+                "description": "Creates a plugin config with the specified ID, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "09a580c8-d363-4078-a599-f133d8a094f5",
+                  "name": "Plugin config updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"eiusmod_b\": \"<string>\",\n    \"et_9_\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-09a580c8-d363-4078-a599-f133d8a094f5"
+                },
+                {
+                  "id": "bfcdcd39-0b4f-4c88-b7a9-9dde7a398d1b",
+                  "name": "Plugin config created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"eiusmod_b\": \"<string>\",\n    \"et_9_\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-bfcdcd39-0b4f-4c88-b7a9-9dde7a398d1b"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:26.000Z",
+              "updatedAt": "2026-10-22T01:55:26.000Z",
+              "uid": "35240-a2fbacf7-77ac-48d2-9c70-ddb256f06d6f"
+            },
+            {
+              "name": "Apache APISIX Patch a Plugin Config",
+              "id": "415a7fc9-7656-43c9-85a7-7406517de17b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"eiusmod_b\": \"<string>\",\n    \"et_9_\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugin_configs",
+                    ":config_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b256377c-ba40-48f3-bc7d-359a617e4adb",
+                      "key": "config_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the plugin config."
+                    }
+                  ]
+                },
+                "description": "Updates partial attributes of the specified plugin config."
+              },
+              "response": [
+                {
+                  "id": "370b680d-abbb-4cd4-a8e4-c9b3fc121b3c",
+                  "name": "Plugin config patched successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"eiusmod_b\": \"<string>\",\n    \"et_9_\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-370b680d-abbb-4cd4-a8e4-c9b3fc121b3c"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:26.000Z",
+              "updatedAt": "2026-10-22T01:55:26.000Z",
+              "uid": "35240-415a7fc9-7656-43c9-85a7-7406517de17b"
+            },
+            {
+              "name": "Apache APISIX Delete a Plugin Config",
+              "id": "8d72c5f4-a671-46a8-9543-98c951951ee4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "plugin_configs",
+                    ":config_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "010c484b-9b19-493c-bf45-b6310a6a87f6",
+                      "key": "config_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the plugin config."
+                    }
+                  ]
+                },
+                "description": "Removes the specified plugin config."
+              },
+              "response": [
+                {
+                  "id": "0f5aadb5-0364-4e79-92ec-d29506214bcb",
+                  "name": "Plugin config deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-0f5aadb5-0364-4e79-92ec-d29506214bcb"
+                },
+                {
+                  "id": "62807ad6-da08-4ee6-8113-8ff80f46215e",
+                  "name": "Plugin config not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/plugin_configs/:config_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "plugin_configs",
+                        ":config_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "config_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:55:26.000Z",
+                  "updatedAt": "2026-10-22T01:55:26.000Z",
+                  "uid": "35240-62807ad6-da08-4ee6-8113-8ff80f46215e"
+                }
+              ],
+              "createdAt": "2026-10-22T01:55:26.000Z",
+              "updatedAt": "2026-10-22T01:55:26.000Z",
+              "uid": "35240-8d72c5f4-a671-46a8-9543-98c951951ee4"
+            }
+          ],
+          "id": "b2261679-f929-4355-9644-94c956dd5aa8",
+          "createdAt": "2026-10-22T01:55:26.000Z",
+          "updatedAt": "2026-10-22T01:55:26.000Z",
+          "uid": "35240-b2261679-f929-4355-9644-94c956dd5aa8"
+        },
+        {
+          "name": "Apache APISIX List All Plugin Configs",
+          "id": "56ce82fe-b037-422c-9603-8e4d51595917",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/plugin_configs",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "plugin_configs"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured plugin config resources."
           },
           "response": [
             {
-              "id": "a4856554-bdaa-4b53-8501-1993e55ffebf",
+              "id": "e90ff63d-2e11-4300-9f0d-5e340edcc520",
               "name": "Successful response with list of plugin configs.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/plugin_configs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "plugin_configs"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 792,\n      \"createdIndex\": 9296\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 7730,\n      \"createdIndex\": 441\n    }\n  ],\n  \"total\": 3121\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:55:26.000Z",
+              "updatedAt": "2026-10-22T01:55:26.000Z",
+              "uid": "35240-e90ff63d-2e11-4300-9f0d-5e340edcc520"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8b8ca99c-4d32-4703-b0b3-42c38603d61a",
-          "name": "Apache APISIX Get a Plugin Config",
-          "request": {
-            "name": "Apache APISIX Get a Plugin Config",
-            "description": {
-              "content": "Fetches the specified plugin config by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "plugin_configs",
-                ":config_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "config_id",
-                  "description": "(Required) Unique identifier of the plugin config."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ab66276e-6874-42fc-ab76-e719438542df",
-              "name": "Successful response with plugin config details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 9587,\n  \"createdIndex\": 5754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0c56de5d-5d0a-494a-ba82-cf5c98db588d",
-              "name": "Plugin config not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "59c9da49-336d-4070-8de6-3c412f7a2040",
-          "name": "Apache APISIX Create or Update a Plugin Config",
-          "request": {
-            "name": "Apache APISIX Create or Update a Plugin Config",
-            "description": {
-              "content": "Creates a plugin config with the specified ID, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "plugin_configs",
-                ":config_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "config_id",
-                  "description": "(Required) Unique identifier of the plugin config."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f6f15985-c3a9-4954-8fb8-0ed9c6bf32a2",
-              "name": "Plugin config updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 9587,\n  \"createdIndex\": 5754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6d5e6701-0fe9-4454-9386-cbae844a6604",
-              "name": "Plugin config created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ef48e763-1198-4dee-80ad-6669863cf543",
-          "name": "Apache APISIX Patch a Plugin Config",
-          "request": {
-            "name": "Apache APISIX Patch a Plugin Config",
-            "description": {
-              "content": "Updates partial attributes of the specified plugin config.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "plugin_configs",
-                ":config_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "config_id",
-                  "description": "(Required) Unique identifier of the plugin config."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "0dd8097b-5ae5-4317-8c4c-1e82e87a6643",
-              "name": "Plugin config patched successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 9587,\n  \"createdIndex\": 5754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c62768d1-94f2-4980-82fe-2b1e0ff43a7e",
-          "name": "Apache APISIX Delete a Plugin Config",
-          "request": {
-            "name": "Apache APISIX Delete a Plugin Config",
-            "description": {
-              "content": "Removes the specified plugin config.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "plugin_configs",
-                ":config_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "config_id",
-                  "description": "(Required) Unique identifier of the plugin config."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "500a0d69-1e18-42dd-ae4b-efd82726a4e0",
-              "name": "Plugin config deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "50cb2fcf-7395-486c-85e4-677fd1aeb516",
-              "name": "Plugin config not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "plugin_configs",
-                    ":config_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "config_id",
-                      "description": "(Required) Unique identifier of the plugin config."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:55:26.000Z",
+          "updatedAt": "2026-10-22T01:55:26.000Z",
+          "uid": "35240-56ce82fe-b037-422c-9603-8e4d51595917"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "7fd9f1f6-5497-43a7-b314-65051ff54004",
+      "createdAt": "2026-10-22T01:55:26.000Z",
+      "updatedAt": "2026-10-22T01:55:26.000Z",
+      "uid": "35240-7fd9f1f6-5497-43a7-b314-65051ff54004"
     }
   ],
   "auth": {
@@ -675,25 +641,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "3126a647-adbe-4542-a204-6595b12795b8",
-    "name": "Apache APISIX Admin Consumer Groups Plugin Configs API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }

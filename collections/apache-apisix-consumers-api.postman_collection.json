@@ -1,1325 +1,1232 @@
 {
+  "info": {
+    "_postman_id": "d9b938f8-95d6-4757-a581-66b1d0ebf486",
+    "name": "Apache APISIX Admin Consumers API",
+    "description": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:54:55.000Z",
+    "updatedAt": "2026-10-22T01:54:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d9b938f8-95d6-4757-a581-66b1d0ebf486"
+  },
   "item": [
     {
-      "id": "37c9e747-eada-428e-89de-1bf1873fd7e9",
-      "name": "Consumers",
-      "description": {
-        "content": "Manage API consumers and their credentials.",
-        "type": "text/plain"
-      },
+      "name": "consumers",
       "item": [
         {
-          "id": "d832328c-03a9-4a97-93d7-68193201a10f",
-          "name": "Apache APISIX List All Consumers",
-          "request": {
-            "name": "Apache APISIX List All Consumers",
-            "description": {
-              "content": "Fetches a list of all configured consumers.",
-              "type": "text/plain"
+          "name": "{username}",
+          "item": [
+            {
+              "name": "credentials",
+              "item": [
+                {
+                  "name": "{credential_id}",
+                  "item": [
+                    {
+                      "name": "Apache APISIX Get a Consumer Credential",
+                      "id": "386af5d2-7247-4a18-b2bc-9893435b4d87",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "consumers",
+                            ":username",
+                            "credentials",
+                            ":credential_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "66bb40cb-4c87-4b5b-a8e8-2e73fa2f8a24",
+                              "key": "username",
+                              "value": "<string>",
+                              "description": "(Required) Username of the consumer."
+                            },
+                            {
+                              "id": "03e1a8fb-defc-43a6-907a-5dd9502527d7",
+                              "key": "credential_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the credential."
+                            }
+                          ]
+                        },
+                        "description": "Fetches a specific credential for the specified consumer."
+                      },
+                      "response": [
+                        {
+                          "id": "bf47e759-f09d-4608-91f3-db5fc516aa1e",
+                          "name": "Successful response with credential details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-bf47e759-f09d-4608-91f3-db5fc516aa1e"
+                        },
+                        {
+                          "id": "cf42ec42-e3e0-49db-aa59-bd8da61a2532",
+                          "name": "Credential not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-cf42ec42-e3e0-49db-aa59-bd8da61a2532"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:54:56.000Z",
+                      "updatedAt": "2026-10-22T01:54:56.000Z",
+                      "uid": "35240-386af5d2-7247-4a18-b2bc-9893435b4d87"
+                    },
+                    {
+                      "name": "Apache APISIX Create or Update a Consumer Credential",
+                      "id": "bbcee30a-6431-4c9f-9a88-a6e167f0225a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"elit_6\": \"<string>\",\n    \"sed_a9\": \"<string>\",\n    \"ullamco_6\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "consumers",
+                            ":username",
+                            "credentials",
+                            ":credential_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d04a9a45-a84b-42b2-a6b1-b328f15bfb69",
+                              "key": "username",
+                              "value": "<string>",
+                              "description": "(Required) Username of the consumer."
+                            },
+                            {
+                              "id": "107c9852-65d2-47a8-9cb0-8f0500cf4a20",
+                              "key": "credential_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the credential."
+                            }
+                          ]
+                        },
+                        "description": "Creates or updates a credential for the specified consumer."
+                      },
+                      "response": [
+                        {
+                          "id": "b4959fba-9855-4731-b973-192226770154",
+                          "name": "Credential updated successfully.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"elit_6\": \"<string>\",\n    \"sed_a9\": \"<string>\",\n    \"ullamco_6\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-b4959fba-9855-4731-b973-192226770154"
+                        },
+                        {
+                          "id": "6a96b911-6f6b-420a-ab62-217995e5ce34",
+                          "name": "Credential created successfully.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"elit_6\": \"<string>\",\n    \"sed_a9\": \"<string>\",\n    \"ullamco_6\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-6a96b911-6f6b-420a-ab62-217995e5ce34"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:54:56.000Z",
+                      "updatedAt": "2026-10-22T01:54:56.000Z",
+                      "uid": "35240-bbcee30a-6431-4c9f-9a88-a6e167f0225a"
+                    },
+                    {
+                      "name": "Apache APISIX Patch a Consumer Credential",
+                      "id": "5f0db064-b35b-422d-bc16-49f4d1d88a3b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"elit_6\": \"<string>\",\n    \"sed_a9\": \"<string>\",\n    \"ullamco_6\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "consumers",
+                            ":username",
+                            "credentials",
+                            ":credential_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c1ba2ada-12ee-42d1-ab17-335adf602458",
+                              "key": "username",
+                              "value": "<string>",
+                              "description": "(Required) Username of the consumer."
+                            },
+                            {
+                              "id": "6525281e-070b-45c8-b15c-30c3567fe7a8",
+                              "key": "credential_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the credential."
+                            }
+                          ]
+                        },
+                        "description": "Updates partial attributes of a credential for the specified consumer."
+                      },
+                      "response": [
+                        {
+                          "id": "972d5092-acb5-4cec-82ba-c9f180500173",
+                          "name": "Credential patched successfully.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"elit_6\": \"<string>\",\n    \"sed_a9\": \"<string>\",\n    \"ullamco_6\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-972d5092-acb5-4cec-82ba-c9f180500173"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:54:56.000Z",
+                      "updatedAt": "2026-10-22T01:54:56.000Z",
+                      "uid": "35240-5f0db064-b35b-422d-bc16-49f4d1d88a3b"
+                    },
+                    {
+                      "name": "Apache APISIX Delete a Consumer Credential",
+                      "id": "b30cbdcb-ff3b-48f4-a874-c19f8b0e53ba",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "consumers",
+                            ":username",
+                            "credentials",
+                            ":credential_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3d865ff3-1424-4a37-9bcc-27e04aac3810",
+                              "key": "username",
+                              "value": "<string>",
+                              "description": "(Required) Username of the consumer."
+                            },
+                            {
+                              "id": "b63fc5e2-ed5d-48b3-9722-94299fdd0fdd",
+                              "key": "credential_id",
+                              "value": "<string>",
+                              "description": "(Required) Unique identifier of the credential."
+                            }
+                          ]
+                        },
+                        "description": "Removes a specific credential for the specified consumer."
+                      },
+                      "response": [
+                        {
+                          "id": "54fe722f-0ef2-442f-8b58-b6ca25f390eb",
+                          "name": "Credential deleted successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-54fe722f-0ef2-442f-8b58-b6ca25f390eb"
+                        },
+                        {
+                          "id": "0410e094-0d52-465d-895b-223b7558c697",
+                          "name": "Credential not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-API-KEY",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/consumers/:username/credentials/:credential_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "consumers",
+                                ":username",
+                                "credentials",
+                                ":credential_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "username"
+                                },
+                                {
+                                  "key": "credential_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:54:56.000Z",
+                          "updatedAt": "2026-10-22T01:54:56.000Z",
+                          "uid": "35240-0410e094-0d52-465d-895b-223b7558c697"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:54:56.000Z",
+                      "updatedAt": "2026-10-22T01:54:56.000Z",
+                      "uid": "35240-b30cbdcb-ff3b-48f4-a874-c19f8b0e53ba"
+                    }
+                  ],
+                  "id": "763690cb-cb7c-451b-ab9c-28c392f322db",
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-763690cb-cb7c-451b-ab9c-28c392f322db"
+                },
+                {
+                  "name": "Apache APISIX List Consumer Credentials",
+                  "id": "b0ed77bc-24ba-483c-b64b-dc280eea41dc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username/credentials",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username",
+                        "credentials"
+                      ],
+                      "variable": [
+                        {
+                          "id": "54647928-8627-4b3a-87b1-3c7a50697ac0",
+                          "key": "username",
+                          "value": "<string>",
+                          "description": "(Required) Username of the consumer."
+                        }
+                      ]
+                    },
+                    "description": "Fetches all credentials for the specified consumer."
+                  },
+                  "response": [
+                    {
+                      "id": "5a4cf40b-1ea8-4995-89ff-868fa2c5f5a7",
+                      "name": "Successful response with list of credentials.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-API-KEY",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/consumers/:username/credentials",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "consumers",
+                            ":username",
+                            "credentials"
+                          ],
+                          "variable": [
+                            {
+                              "key": "username"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:54:56.000Z",
+                      "updatedAt": "2026-10-22T01:54:56.000Z",
+                      "uid": "35240-5a4cf40b-1ea8-4995-89ff-868fa2c5f5a7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-b0ed77bc-24ba-483c-b64b-dc280eea41dc"
+                }
+              ],
+              "id": "4fc31841-eb69-44cc-818f-3bb67fae2ed0",
+              "createdAt": "2026-10-22T01:54:56.000Z",
+              "updatedAt": "2026-10-22T01:54:56.000Z",
+              "uid": "35240-4fc31841-eb69-44cc-818f-3bb67fae2ed0"
             },
+            {
+              "name": "Apache APISIX Get a Consumer",
+              "id": "691edebf-bc0d-45a8-a7b7-5454531deed4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/consumers/:username",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumers",
+                    ":username"
+                  ],
+                  "variable": [
+                    {
+                      "id": "54cd737c-e0a4-489a-945b-fb49c1aa5bb6",
+                      "key": "username",
+                      "value": "<string>",
+                      "description": "(Required) Username of the consumer."
+                    }
+                  ]
+                },
+                "description": "Fetches the specified consumer by username."
+              },
+              "response": [
+                {
+                  "id": "f0322e51-fb2d-403a-a3c8-e669a7d69441",
+                  "name": "Successful response with consumer details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-f0322e51-fb2d-403a-a3c8-e669a7d69441"
+                },
+                {
+                  "id": "579bca29-ad5c-4bed-82e3-40934268721d",
+                  "name": "Consumer not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-579bca29-ad5c-4bed-82e3-40934268721d"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:56.000Z",
+              "updatedAt": "2026-10-22T01:54:56.000Z",
+              "uid": "35240-691edebf-bc0d-45a8-a7b7-5454531deed4"
+            },
+            {
+              "name": "Apache APISIX Create or Update a Consumer",
+              "id": "712de6b8-bcb5-436e-82c6-23d528718431",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"dolore37\": \"<string>\",\n    \"aute_f9_\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/consumers/:username",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumers",
+                    ":username"
+                  ],
+                  "variable": [
+                    {
+                      "id": "6574d5c1-dd2f-4b00-b2e6-bfc9751349b0",
+                      "key": "username",
+                      "value": "<string>",
+                      "description": "(Required) Username of the consumer."
+                    }
+                  ]
+                },
+                "description": "Creates a consumer with the specified username, or updates it if it already exists."
+              },
+              "response": [
+                {
+                  "id": "4283e249-1cd3-4d47-a8a1-167cdea0ea07",
+                  "name": "Consumer updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"dolore37\": \"<string>\",\n    \"aute_f9_\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {},\n  \"modifiedIndex\": \"<integer>\",\n  \"createdIndex\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-4283e249-1cd3-4d47-a8a1-167cdea0ea07"
+                },
+                {
+                  "id": "5c67b9b1-6e05-495c-b3d9-a0b741714bef",
+                  "name": "Consumer created successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": {},\n  \"labels\": {\n    \"dolore37\": \"<string>\",\n    \"aute_f9_\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"key\": \"<string>\",\n  \"value\": {}\n}",
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-5c67b9b1-6e05-495c-b3d9-a0b741714bef"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:56.000Z",
+              "updatedAt": "2026-10-22T01:54:56.000Z",
+              "uid": "35240-712de6b8-bcb5-436e-82c6-23d528718431"
+            },
+            {
+              "name": "Apache APISIX Delete a Consumer",
+              "id": "df7ef1e8-432e-4312-ac00-6e84d8f98774",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/consumers/:username",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "consumers",
+                    ":username"
+                  ],
+                  "variable": [
+                    {
+                      "id": "67396c3a-a829-4078-9cea-9829837c4d63",
+                      "key": "username",
+                      "value": "<string>",
+                      "description": "(Required) Username of the consumer."
+                    }
+                  ]
+                },
+                "description": "Removes the specified consumer."
+              },
+              "response": [
+                {
+                  "id": "d48a4ca5-158c-4518-8222-9ab65cfcdc5d",
+                  "name": "Consumer deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-d48a4ca5-158c-4518-8222-9ab65cfcdc5d"
+                },
+                {
+                  "id": "44904c05-093e-4078-b66c-ff4687c1d027",
+                  "name": "Consumer not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-KEY",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/consumers/:username",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "consumers",
+                        ":username"
+                      ],
+                      "variable": [
+                        {
+                          "key": "username"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T01:54:56.000Z",
+                  "updatedAt": "2026-10-22T01:54:56.000Z",
+                  "uid": "35240-44904c05-093e-4078-b66c-ff4687c1d027"
+                }
+              ],
+              "createdAt": "2026-10-22T01:54:56.000Z",
+              "updatedAt": "2026-10-22T01:54:56.000Z",
+              "uid": "35240-df7ef1e8-432e-4312-ac00-6e84d8f98774"
+            }
+          ],
+          "id": "3d095161-5acd-4c79-b347-b395893e8bbe",
+          "createdAt": "2026-10-22T01:54:56.000Z",
+          "updatedAt": "2026-10-22T01:54:56.000Z",
+          "uid": "35240-3d095161-5acd-4c79-b347-b395893e8bbe"
+        },
+        {
+          "name": "Apache APISIX List All Consumers",
+          "id": "ee51e25b-3d68-45b4-be20-f19ae13c36a0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/consumers",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "consumers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Fetches a list of all configured consumers."
           },
           "response": [
             {
-              "id": "0c90aed6-ed8c-4b21-b8b7-32927bade03e",
+              "id": "096946dd-5c8b-40b6-823e-cdb0e7665e1d",
               "name": "Successful response with list of consumers.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/consumers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "consumers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 1419,\n      \"createdIndex\": 1355\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 205,\n      \"createdIndex\": 6400\n    }\n  ],\n  \"total\": 2917\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"list\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {},\n      \"modifiedIndex\": \"<integer>\",\n      \"createdIndex\": \"<integer>\"\n    }\n  ],\n  \"total\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T01:54:56.000Z",
+              "updatedAt": "2026-10-22T01:54:56.000Z",
+              "uid": "35240-096946dd-5c8b-40b6-823e-cdb0e7665e1d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "44532f03-7d91-4b76-8e0a-1f63b6742496",
-          "name": "Apache APISIX Get a Consumer",
-          "request": {
-            "name": "Apache APISIX Get a Consumer",
-            "description": {
-              "content": "Fetches the specified consumer by username.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6087a461-8957-4d30-b494-ae4f0c248b10",
-              "name": "Successful response with consumer details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6928,\n  \"createdIndex\": 4099\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "07c8f747-2af0-4de4-b169-35e3fcc65588",
-              "name": "Consumer not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "564d5f9d-0a51-42b0-aa12-6843f24f0e68",
-          "name": "Apache APISIX Create or Update a Consumer",
-          "request": {
-            "name": "Apache APISIX Create or Update a Consumer",
-            "description": {
-              "content": "Creates a consumer with the specified username, or updates it if it already exists.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "4dc698f3-7a5f-4f36-b82d-6c4f3560f3fb",
-              "name": "Consumer updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6928,\n  \"createdIndex\": 4099\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8ae0bd2f-f90a-43e6-b241-ba8842016db6",
-              "name": "Consumer created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"username\": \"<string>\",\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\"\n  },\n  \"group_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "74671cfb-9dc2-4282-9041-0b7a7f5a20d5",
-          "name": "Apache APISIX Delete a Consumer",
-          "request": {
-            "name": "Apache APISIX Delete a Consumer",
-            "description": {
-              "content": "Removes the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c753518f-778b-4c2a-99cc-c42e58b1985d",
-              "name": "Consumer deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0c6f3632-5c60-4251-8bfd-4766386f9e7f",
-              "name": "Consumer not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9674efb2-403f-4b8c-a8ed-f6fe548bb7a7",
-          "name": "Apache APISIX List Consumer Credentials",
-          "request": {
-            "name": "Apache APISIX List Consumer Credentials",
-            "description": {
-              "content": "Fetches all credentials for the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username",
-                "credentials"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "741cdfad-33c9-4df2-93fb-c8dd205c872a",
-              "name": "Successful response with list of credentials.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"list\": [\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 1419,\n      \"createdIndex\": 1355\n    },\n    {\n      \"key\": \"string\",\n      \"value\": {},\n      \"modifiedIndex\": 205,\n      \"createdIndex\": 6400\n    }\n  ],\n  \"total\": 2917\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6d53c69a-9a78-465c-89ab-c54c0930c82d",
-          "name": "Apache APISIX Get a Consumer Credential",
-          "request": {
-            "name": "Apache APISIX Get a Consumer Credential",
-            "description": {
-              "content": "Fetches a specific credential for the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username",
-                "credentials",
-                ":credential_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "credential_id",
-                  "description": "(Required) Unique identifier of the credential."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5dbf3a1b-0f7a-4660-8c98-5d09866edc17",
-              "name": "Successful response with credential details.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6928,\n  \"createdIndex\": 4099\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "967800fe-ac32-48ef-ba6a-ba5e4f892d40",
-              "name": "Credential not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4c27185d-f97c-4a19-a274-f1387c413d91",
-          "name": "Apache APISIX Create or Update a Consumer Credential",
-          "request": {
-            "name": "Apache APISIX Create or Update a Consumer Credential",
-            "description": {
-              "content": "Creates or updates a credential for the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username",
-                "credentials",
-                ":credential_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "credential_id",
-                  "description": "(Required) Unique identifier of the credential."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f388021a-a5ae-4a10-bc88-97d6c7806c95",
-              "name": "Credential updated successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6928,\n  \"createdIndex\": 4099\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "404ea84a-f7bf-4d0f-9bd1-160ea9078593",
-              "name": "Credential created successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6731c075-2beb-47a9-8ab0-eb243ea4da7c",
-          "name": "Apache APISIX Patch a Consumer Credential",
-          "request": {
-            "name": "Apache APISIX Patch a Consumer Credential",
-            "description": {
-              "content": "Updates partial attributes of a credential for the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username",
-                "credentials",
-                ":credential_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "credential_id",
-                  "description": "(Required) Unique identifier of the credential."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PATCH",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "7224aaed-e10d-4102-b692-331307d7a68f",
-              "name": "Credential patched successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PATCH",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"desc\": \"<string>\",\n  \"plugins\": \"<object>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key\": \"string\",\n  \"value\": {},\n  \"modifiedIndex\": 6928,\n  \"createdIndex\": 4099\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "547ad94d-5c91-4322-bb49-3445226ebe7b",
-          "name": "Apache APISIX Delete a Consumer Credential",
-          "request": {
-            "name": "Apache APISIX Delete a Consumer Credential",
-            "description": {
-              "content": "Removes a specific credential for the specified consumer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "consumers",
-                ":username",
-                "credentials",
-                ":credential_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "username",
-                  "description": "(Required) Username of the consumer."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "credential_id",
-                  "description": "(Required) Unique identifier of the credential."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "99d84e1b-b279-48a5-a52d-0538efe9809a",
-              "name": "Credential deleted successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "6aace1fa-eb20-488a-8c5e-08725dad0bc4",
-              "name": "Credential not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "consumers",
-                    ":username",
-                    "credentials",
-                    ":credential_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "username",
-                      "description": "(Required) Username of the consumer."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "credential_id",
-                      "description": "(Required) Unique identifier of the credential."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-API-KEY",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T01:54:56.000Z",
+          "updatedAt": "2026-10-22T01:54:56.000Z",
+          "uid": "35240-ee51e25b-3d68-45b4-be20-f19ae13c36a0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "http://127.0.0.1:9180/apisix/admin",
-      "key": "baseUrl"
+      "id": "943a57bb-12e5-4fad-a957-4bb607515fc0",
+      "createdAt": "2026-10-22T01:54:56.000Z",
+      "updatedAt": "2026-10-22T01:54:56.000Z",
+      "uid": "35240-943a57bb-12e5-4fad-a957-4bb607515fc0"
     }
   ],
   "auth": {
@@ -1327,25 +1234,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-API-KEY"
+        "value": "X-API-KEY",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "f483e835-75fd-453f-8961-41bcaced8e1e",
-    "name": "Apache APISIX Admin Consumer Groups Consumers API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure your deployed Apache APISIX instance. It allows management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, secrets, and more. By default, the Admin API listens on port 9180 and requires API key authentication via the X-API-KEY header.\n\nContact Support:\n Name: Apache APISIX",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9180/apisix/admin"
     }
-  }
+  ]
 }
