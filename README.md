@@ -1,4 +1,4 @@
-# Apache APISIX (apache-apisix)
+# Apache APISIX
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,123 +66,221 @@
 
 Apache APISIX is a dynamic, real-time, high-performance cloud-native API gateway built on NGINX and etcd, developed by the Apache Software Foundation. It supports Lua and multi-language plugins for traffic management, authentication, observability, and security. APISIX provides a RESTful Admin API for dynamic configuration of routes, upstreams, services, consumers, SSL certificates, and plugins, and a Control API for health monitoring and schema introspection.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/apache-apisix/refs/heads/main/apis.yml)
+**Areas:** Apache · API Gateway · Cloud-Native · Kubernetes · Lua · NGINX · Open Source · Traffic Management
 
-## Scope
+## Apache APISIX on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Apache APISIX is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apache-apisix/](https://apis.io/providers/apache-apisix/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (18)
 
-- Apache
-- API Gateway
-- Cloud Native
-- Kubernetes
-- Lua
-- NGINX
-- Open Source
-- Traffic Management
+- [Apache APISIX Gateway](https://apis.io/apis/apache-apisix/apache-apisix-gateway/) — Apache APISIX provides rich traffic management features including load balancing, dynamic upstream configuration, canary releases, circuit breaking,…
+- [Apache APISIX Consumer Groups API](https://apis.io/apis/apache-apisix/apache-apisix-consumer-groups-api/) — Manage consumer groups for shared plugin configurations.
+- [Apache APISIX Consumers API](https://apis.io/apis/apache-apisix/apache-apisix-consumers-api/) — Manage API consumers and their credentials.
+- [Apache APISIX Diagnostics API](https://apis.io/apis/apache-apisix/apache-apisix-diagnostics-api/) — Runtime diagnostic operations.
+- [Apache APISIX Global Rules API](https://apis.io/apis/apache-apisix/apache-apisix-global-rules-api/) — Manage global plugin rules applied to all requests.
+- [Apache APISIX Health Check API](https://apis.io/apis/apache-apisix/apache-apisix-health-check-api/) — Monitor the health status of upstream nodes.
+- [Apache APISIX Introspection API](https://apis.io/apis/apache-apisix/apache-apisix-introspection-api/) — Inspect the runtime configuration of the APISIX instance.
+- [Apache APISIX Plugin Configs API](https://apis.io/apis/apache-apisix/apache-apisix-plugin-configs-api/) — Manage reusable plugin configuration sets.
+- [Apache APISIX Plugin Metadata API](https://apis.io/apis/apache-apisix/apache-apisix-plugin-metadata-api/) — Manage metadata for individual plugins.
+- [Apache APISIX Plugins API](https://apis.io/apis/apache-apisix/apache-apisix-plugins-api/) — Query available plugins and their schemas.
+- [Apache APISIX Protos API](https://apis.io/apis/apache-apisix/apache-apisix-protos-api/) — Manage Protocol Buffer definition resources.
+- [Apache APISIX Routes API](https://apis.io/apis/apache-apisix/apache-apisix-routes-api/) — Manage HTTP routes that define rules for matching client requests.
+- [Apache APISIX Schema API](https://apis.io/apis/apache-apisix/apache-apisix-schema-api/) — Validate resource configurations against APISIX schemas.
+- [Apache APISIX Secrets API](https://apis.io/apis/apache-apisix/apache-apisix-secrets-api/) — Manage secrets from external secret managers.
+- [Apache APISIX Services API](https://apis.io/apis/apache-apisix/apache-apisix-services-api/) — The Services API from Apache APISIX — 2 operation(s) for services.
+- [Apache APISIX SSL API](https://apis.io/apis/apache-apisix/apache-apisix-ssl-api/) — Manage SSL/TLS certificate resources.
+- [Apache APISIX Stream Routes API](https://apis.io/apis/apache-apisix/apache-apisix-stream-routes-api/) — Manage Layer 4 TCP/UDP stream routes.
+- [Apache APISIX Upstreams API](https://apis.io/apis/apache-apisix/apache-apisix-upstreams-api/) — Manage upstream backend service definitions with load balancing.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-18
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Apache APISIX Gateway
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Apache APISIX provides rich traffic management features including load balancing, dynamic upstream configuration, canary releases, circuit breaking, authentication, observability plugins, and more. It is built on NGINX for high performance with etcd for distributed configuration.
+- [Apache Apisix Agentic Access](https://apis.io/agentic-access/apache-apisix/apache-apisix-agentic-access/)
 
-- **Human URL:** [https://apisix.apache.org/](https://apisix.apache.org/)
+#### JSON Schema (10)
 
-#### Tags
+The data models the API reads and writes.
 
-- API Gateway
-- Apache
-- Cloud Native
+- [Apache APISIX Consumer](https://apis.io/schemas/apache-apisix/consumer/)
+- [Apache APISIX Consumer Group](https://apis.io/schemas/apache-apisix/consumer-group/)
+- [Apache APISIX Global Rule](https://apis.io/schemas/apache-apisix/global-rule/)
+- [Apache APISIX Plugin Config](https://apis.io/schemas/apache-apisix/plugin-config/)
+- [Apache APISIX Route](https://apis.io/schemas/apache-apisix/route/)
+- [Apache APISIX Secret](https://apis.io/schemas/apache-apisix/secret/)
+- [Apache APISIX Service](https://apis.io/schemas/apache-apisix/service/)
+- [Apache APISIX SSL](https://apis.io/schemas/apache-apisix/ssl/)
+- [Apache APISIX Stream Route](https://apis.io/schemas/apache-apisix/stream-route/)
+- [Apache APISIX Upstream](https://apis.io/schemas/apache-apisix/upstream/)
 
-#### Properties
+#### JSON Structure (10)
 
-- [Documentation](https://apisix.apache.org/docs/apisix/getting-started/)
-- [Getting Started](https://apisix.apache.org/docs/apisix/getting-started/README/)
-- [Postman Collection](collections/apache-apisix-admin-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apache-apisix-admin-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/apache-apisix-control-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apache-apisix-control-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Apache APISIX Admin API
+- [Consumer Group Structure](https://apis.io/json-structure/apache-apisix/consumer-group-structure/)
+- [Consumer Structure](https://apis.io/json-structure/apache-apisix/consumer-structure/)
+- [Global Rule Structure](https://apis.io/json-structure/apache-apisix/global-rule-structure/)
+- [Plugin Config Structure](https://apis.io/json-structure/apache-apisix/plugin-config-structure/)
+- [Route Structure](https://apis.io/json-structure/apache-apisix/route-structure/)
+- [Secret Structure](https://apis.io/json-structure/apache-apisix/secret-structure/)
+- [Service Structure](https://apis.io/json-structure/apache-apisix/service-structure/)
+- [Ssl Structure](https://apis.io/json-structure/apache-apisix/ssl-structure/)
+- [Stream Route Structure](https://apis.io/json-structure/apache-apisix/stream-route-structure/)
+- [Upstream Structure](https://apis.io/json-structure/apache-apisix/upstream-structure/)
 
-The Apache APISIX Admin API provides a RESTful interface to dynamically control and configure a running APISIX instance. It supports management of routes, services, upstreams, consumers, SSL certificates, global rules, plugin configurations, consumer groups, and secrets, and listens by default on port 9180 with API key authentication.
+#### JSON-LD (1)
 
-- **Human URL:** [https://apisix.apache.org/docs/apisix/admin-api/](https://apisix.apache.org/docs/apisix/admin-api/)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Apache Apisix Context](https://apis.io/jsonld/apache-apisix/apache-apisix-context/)
 
-- Admin
-- Configuration
-- Management
-- REST
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://apisix.apache.org/docs/apisix/admin-api/)
-- [OpenAPI](openapi/apache-apisix-admin-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apache-apisix-admin-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apache-apisix-admin-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://apisix.apache.org/docs/apisix/admin-api/#using-the-admin-api)
+- [Apache Apisix Vocabulary](https://apis.io/vocabularies/apache-apisix/apache-apisix-vocabulary/)
 
-### Apache APISIX Control API
+#### Examples (10)
 
-The Apache APISIX Control API provides internal status and health check endpoints for monitoring and introspecting a running APISIX instance. It listens by default on port 9090, is accessible only from localhost, and exposes endpoints for health checking, schema retrieval, and runtime diagnostics.
+Example requests and responses.
 
-- **Human URL:** [https://apisix.apache.org/docs/apisix/control-api/](https://apisix.apache.org/docs/apisix/control-api/)
+- [Consumer Example](https://apis.io/examples/apache-apisix/consumer-example/)
+- [Consumer Group Example](https://apis.io/examples/apache-apisix/consumer-group-example/)
+- [Global Rule Example](https://apis.io/examples/apache-apisix/global-rule-example/)
+- [Plugin Config Example](https://apis.io/examples/apache-apisix/plugin-config-example/)
+- [Route Example](https://apis.io/examples/apache-apisix/route-example/)
+- [Secret Example](https://apis.io/examples/apache-apisix/secret-example/)
+- [Service Example](https://apis.io/examples/apache-apisix/service-example/)
+- [Ssl Example](https://apis.io/examples/apache-apisix/ssl-example/)
+- [Stream Route Example](https://apis.io/examples/apache-apisix/stream-route-example/)
+- [Upstream Example](https://apis.io/examples/apache-apisix/upstream-example/)
 
-#### Tags
+#### Collections (19)
 
-- Control
-- Health Check
-- Monitoring
-- Observability
+Postman and Open Collection request collections.
 
-#### Properties
+- [Apache APISIX Admin API](https://apis.io/collections/apache-apisix/open-apache-apisix-admin-api/)
+- [Apache APISIX Admin Consumer Groups API](https://apis.io/collections/apache-apisix/open-apache-apisix-consumer-groups-api/)
+- [Apache APISIX Admin Consumer Groups Consumers API](https://apis.io/collections/apache-apisix/open-apache-apisix-consumers-api/)
+- [Apache APISIX Control API](https://apis.io/collections/apache-apisix/open-apache-apisix-control-api/)
+- [Apache APISIX Admin Consumer Groups Diagnostics API](https://apis.io/collections/apache-apisix/open-apache-apisix-diagnostics-api/)
+- [Apache APISIX Admin Consumer Groups Global Rules API](https://apis.io/collections/apache-apisix/open-apache-apisix-global-rules-api/)
+- [Apache APISIX Admin Consumer Groups Health Check API](https://apis.io/collections/apache-apisix/open-apache-apisix-health-check-api/)
+- [Apache APISIX Admin Consumer Groups Introspection API](https://apis.io/collections/apache-apisix/open-apache-apisix-introspection-api/)
+- [Apache APISIX Admin Consumer Groups Plugin Configs API](https://apis.io/collections/apache-apisix/open-apache-apisix-plugin-configs-api/)
+- [Apache APISIX Admin Consumer Groups Plugin Metadata API](https://apis.io/collections/apache-apisix/open-apache-apisix-plugin-metadata-api/)
+- [Apache APISIX Admin Consumer Groups Plugins API](https://apis.io/collections/apache-apisix/open-apache-apisix-plugins-api/)
+- [Apache APISIX Admin Consumer Groups Protos API](https://apis.io/collections/apache-apisix/open-apache-apisix-protos-api/)
+- [Apache APISIX Admin Consumer Groups Routes API](https://apis.io/collections/apache-apisix/open-apache-apisix-routes-api/)
+- [Apache APISIX Admin Consumer Groups Schema API](https://apis.io/collections/apache-apisix/open-apache-apisix-schema-api/)
+- [Apache APISIX Admin Consumer Groups Secrets API](https://apis.io/collections/apache-apisix/open-apache-apisix-secrets-api/)
+- [Apache APISIX Admin Consumer Groups Services API](https://apis.io/collections/apache-apisix/open-apache-apisix-services-api/)
+- [Apache APISIX Admin Consumer Groups SSL API](https://apis.io/collections/apache-apisix/open-apache-apisix-ssl-api/)
+- [Apache APISIX Admin Consumer Groups Stream Routes API](https://apis.io/collections/apache-apisix/open-apache-apisix-stream-routes-api/)
+- [Apache APISIX Admin Consumer Groups Upstreams API](https://apis.io/collections/apache-apisix/open-apache-apisix-upstreams-api/)
 
-- [Documentation](https://apisix.apache.org/docs/apisix/control-api/)
-- [OpenAPI](openapi/apache-apisix-control-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apache-apisix-control-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apache-apisix-control-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-## Common Properties
+Spectral rulesets for the provider's contracts.
 
-- [LinkedIn](https://www.linkedin.com/company/apache-apisix)
-- [GitHub Organization](https://github.com/apache)
-- [GitHub Repository](https://github.com/apache/apisix)
+- [Apache APISIX — jsonschema rules](https://apis.io/rules/apache-apisix/apache-apisix-jsonschema-spectral-rules/)
+- [Apache APISIX API Rules](https://apis.io/rules/apache-apisix/apache-apisix-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apache Apisix Authentication](https://apis.io/security/apache-apisix/apache-apisix-authentication/)
+- [Apache Apisix Domain Security](https://apis.io/security/apache-apisix/apache-apisix-domain-security/)
+- [Apache Apisix Vulnerability Disclosure](https://apis.io/security/apache-apisix/apache-apisix-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apache Apisix Plans Pricing](https://apis.io/plans/apache-apisix/apache-apisix-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apache Apisix Rate Limits](https://apis.io/rate-limits/apache-apisix/apache-apisix-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apache Apisix Finops](https://apis.io/finops/apache-apisix/apache-apisix-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.apache.org/)
 - [Documentation](https://apisix.apache.org/docs/)
-- [Getting Started](https://apisix.apache.org/docs/apisix/getting-started/)
-- [Blog](https://apisix.apache.org/blog/)
-- [Changelog](https://github.com/apache/apisix/releases)
+- [Getting started](https://apisix.apache.org/docs/apisix/getting-started/)
 - [Support](https://apisix.apache.org/docs/general/community/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/apache-apisix)
-- [JSON Schema](json-schema/route.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/upstream.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/service.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/consumer.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/ssl.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/global-rule.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/plugin-config.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/consumer-group.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/stream-route.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/secret.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/apache-apisix-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/apache-apisix-spectral-rules.yml)
-- [Vocabulary](vocabulary/apache-apisix-vocabulary.yaml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
+- [Changelog](https://github.com/apache/apisix/releases)
+- [Blog](https://apisix.apache.org/blog/)
+- [Security](https://www.apache.org/security/)
+- [GitHub](https://github.com/apache)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 47.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 56.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 41.7 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apache-apisix/](https://apis.io/providers/apache-apisix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Apache APISIX: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apache-apisix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
